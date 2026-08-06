@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vance &amp; Rowe — Injury Law, Houston</title>
+<meta name="description" content="A two-partner injury practice in Houston. Free consultation, no fee unless we recover, and a partner on your file from day one.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   VANCE & ROWE
+   Thesis: injury firms all advertise the same way — a giant
+   settlement number and a man in a suit with folded arms.
+   Deliberately none of that here. No fabricated case results
+   (they're bar-regulated and, on a spec build, dishonest).
+   The signature is instead the first-48-hours timeline: the
+   part the client is actually frightened about.
+   ============================================================ */
+:root{
+  --ink:#14171B;
+  --ink-soft:#333A42;
+  --parchment:#F4F1EA;
+  --parchment-2:#EAE5DA;
+  --oxblood:#7A2E2E;
+  --oxblood-lit:#9C4040;
+  --walnut:#6B5744;
+  --grey:#5E6570;
+  --hair:rgba(20,23,27,.15);
+
+  --display:"Newsreader",Georgia,serif;
+  --text:"Source Sans 3",-apple-system,Arial,sans-serif;
+
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;
+  --s6:32px;--s7:48px;--s8:64px;--s9:96px;--s10:128px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0;background:var(--parchment);color:var(--ink);
+  font-family:var(--text);font-size:17.5px;line-height:1.68;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--oxblood);outline-offset:3px}
+.shell{width:100%;max-width:1140px;margin-inline:auto;padding-inline:var(--s5)}
+.narrow{max-width:740px}
+
+h1,h2,h3{font-family:var(--display);font-weight:300;letter-spacing:-.01em;line-height:1.08;margin:0}
+.kick{
+  font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--oxblood);margin:0 0 var(--s5)
+}
+.lede{max-width:54ch;color:var(--grey);margin:0}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:54px;padding:var(--s3) var(--s7);
+  font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid var(--ink);cursor:pointer;
+  transition:background-color .3s var(--ease),color .3s var(--ease),transform .3s var(--ease);
+}
+.btn-fill{background:var(--oxblood);border-color:var(--oxblood);color:var(--parchment)}
+.btn-fill:hover{background:var(--ink);border-color:var(--ink);transform:translateY(-2px)}
+.btn-line{background:transparent;color:var(--ink)}
+.btn-line:hover{background:var(--ink);color:var(--parchment);transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+
+.flag{margin:0;padding:var(--s2) var(--s5);background:var(--ink);color:var(--parchment-2);
+  font-size:.72rem;text-align:center;letter-spacing:.04em}
+
+/* ---- Header ---- */
+.top{position:sticky;top:0;z-index:50;background:rgba(244,241,234,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--hair)}
+.top .shell{display:flex;align-items:center;justify-content:space-between;gap:var(--s5);padding-block:var(--s4)}
+.mark{font-family:var(--display);font-size:1.4rem;letter-spacing:.01em}
+.mark i{font-style:italic;color:var(--oxblood)}
+.top nav{display:flex;gap:var(--s6);font-size:.86rem}
+.top nav a{padding-block:var(--s3);border-bottom:1px solid transparent;transition:border-color .25s var(--ease)}
+.top nav a:hover{border-bottom-color:var(--oxblood)}
+
+/* ---- Hero ---- */
+.hero{position:relative;isolation:isolate;padding-block:var(--s10) var(--s9);overflow:hidden}
+.hero-media{position:absolute;inset:0;z-index:-1}
+.hero-media img{width:100%;height:100%;object-fit:cover;filter:sepia(.18) saturate(.85)}
+.hero-media::after{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,rgba(244,241,234,.97) 0%,rgba(244,241,234,.9) 44%,rgba(244,241,234,.5) 74%,rgba(244,241,234,.2) 100%);
+}
+.hero h1{font-size:clamp(2.6rem,6.6vw,4.7rem);max-width:17ch}
+.hero h1 em{font-style:italic;color:var(--oxblood)}
+.hero .lede{margin:var(--s6) 0 var(--s7);font-size:1.08rem;color:var(--ink-soft)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:var(--s3)}
+.creds{
+  display:flex;flex-wrap:wrap;gap:var(--s3) var(--s7);
+  margin:var(--s8) 0 0;padding-top:var(--s4);border-top:1px solid var(--hair);
+  list-style:none;font-size:.86rem;color:var(--ink-soft)
+}
+.creds li{display:flex;align-items:center;gap:var(--s2)}
+.creds b{font-family:var(--display);color:var(--oxblood);font-weight:400;font-size:1.05rem}
+
+/* ---- First 48 hours: signature ---- */
+.first{padding-block:var(--s9);border-top:1px solid var(--hair)}
+.first-head{max-width:660px;margin-bottom:var(--s8)}
+.first-head h2{font-size:clamp(2.1rem,5vw,3.4rem);margin-bottom:var(--s4)}
+.first-head h2 em{font-style:italic;color:var(--oxblood)}
+.steps{margin:0;padding:0;list-style:none;counter-reset:step}
+.step{
+  display:grid;grid-template-columns:8.5rem 1fr;gap:var(--s6);
+  padding-block:var(--s6);border-top:1px solid var(--hair)
+}
+.step:last-child{border-bottom:1px solid var(--hair)}
+.step-when{
+  font-family:var(--display);font-size:1.5rem;color:var(--oxblood);line-height:1.1
+}
+.step-when small{
+  display:block;font-family:var(--text);font-size:.68rem;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--grey);margin-top:var(--s2)
+}
+.step h3{font-family:var(--text);font-size:1.1rem;font-weight:600;margin-bottom:var(--s2)}
+.step p{margin:0;color:var(--grey);font-size:1rem}
+.first-note{margin:var(--s6) 0 0;font-size:.86rem;color:var(--grey);max-width:70ch}
+
+/* ---- Fee ---- */
+.fee{background:var(--parchment-2);padding-block:var(--s9)}
+.fee-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s8)}
+.fee h2{font-size:clamp(2rem,4.6vw,3.1rem);max-width:14ch;margin-bottom:var(--s5)}
+.fee h2 em{font-style:italic;color:var(--oxblood)}
+.terms{margin:0;padding:0;list-style:none}
+.term{padding-block:var(--s5);border-top:1px solid var(--hair)}
+.term h3{font-family:var(--text);font-size:1.02rem;font-weight:600;margin-bottom:var(--s2)}
+.term p{margin:0;color:var(--grey);font-size:.97rem}
+
+/* ---- Contact ---- */
+.contact{padding-block:var(--s9)}
+.contact-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:var(--s8);align-items:start}
+.contact h2{font-size:clamp(2.1rem,5vw,3.4rem);margin-bottom:var(--s5)}
+.contact h2 em{font-style:italic;color:var(--oxblood)}
+.contact .lede{margin-bottom:var(--s6)}
+.facts{margin:0}
+.facts div{display:flex;justify-content:space-between;gap:var(--s5);padding-block:var(--s4);border-top:1px solid var(--hair)}
+.facts dt{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--grey)}
+.facts dd{margin:0;text-align:right}
+
+/* ---- Footer ---- */
+.foot{border-top:1px solid var(--hair);padding-block:var(--s7)}
+.foot p{margin:0 0 var(--s2);font-size:.9rem;color:var(--grey)}
+.foot .fine{font-size:.78rem}
+
+@media (max-width:920px){
+  .fee-grid,.contact-grid{grid-template-columns:1fr;gap:var(--s7)}
+}
+@media (max-width:720px){ .top nav{display:none} }
+@media (max-width:620px){
+  body{font-size:16.5px}
+  :root{--s9:64px;--s10:80px}
+  .hero h1{font-size:clamp(2.1rem,9.5vw,3rem)}
+  .hero-cta .btn{flex:1 1 100%}
+  .step{grid-template-columns:1fr;gap:var(--s3)}
+  .facts div{flex-direction:column;gap:2px}
+  .facts dd{text-align:left}
+  .facts a{display:inline-block;padding-block:var(--s3)}
+}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms !important}}
+</style>
+</head>
+<body>
+
+<p class="flag">Portfolio concept — Vance &amp; Rowe is a fictional firm created to demonstrate design work. Not a real law practice.</p>
+
+<header class="top">
+  <div class="shell">
+    <a class="mark" href="#top">Vance <i>&amp;</i> Rowe</a>
+    <nav aria-label="Primary">
+      <a href="#first">First 48 hours</a>
+      <a href="#fee">Our fee</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn-fill" href="#contact" style="min-height:46px;padding-inline:var(--s5)">Free consult</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-media" aria-hidden="true">
+      <img src="assets/hero.jpg" alt="" width="1920" height="1080" fetchpriority="high">
+    </div>
+    <div class="shell">
+      <p class="kick">Injury &amp; wrongful death · Houston</p>
+      <h1>Two partners. <em>Forty files.</em> Not four hundred.</h1>
+      <p class="lede">
+        Most injury firms run on volume, and your case gets a case manager you've never met.
+        We cap our caseload instead, so a partner reads every file — including yours.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-fill" href="#contact">Free consultation</a>
+        <a class="btn btn-line" href="#first">What happens first</a>
+      </div>
+      <ul class="creds">
+        <li><b>0</b> Fee unless we recover</li>
+        <li><b>40</b> Open files, capped</li>
+        <li><b>24h</b> Callback, always</li>
+        <li><b>2</b> Partners, both licensed in Texas</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="first" id="first">
+    <div class="shell">
+      <div class="first-head">
+        <p class="kick">The first 48 hours</p>
+        <h2>The part nobody explains <em>while you're frightened.</em></h2>
+        <p class="lede">
+          What you do in the two days after an accident shapes everything that follows. This
+          holds true whether or not you ever call us.
+        </p>
+      </div>
+      <ol class="steps">
+        <li class="step">
+          <div class="step-when">Hour 0–2<small>At the scene</small></div>
+          <div>
+            <h3>Get seen, and get it written down</h3>
+            <p>Medical attention first, always. A gap between the accident and the first medical record is the single most common thing used to reduce a claim later.</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-when">Hour 2–12<small>Before anything is moved</small></div>
+          <div>
+            <h3>Photograph everything</h3>
+            <p>Vehicles, the road, signage, your injuries, the weather. Scenes are cleared and vehicles are repaired far sooner than people expect.</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-when">Hour 12–24<small>When the phone rings</small></div>
+          <div>
+            <h3>Do not give a recorded statement</h3>
+            <p>The other driver's insurer will call quickly and sound helpful. You are not obliged to give them a recorded account, and it is rarely in your interest to do so unadvised.</p>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-when">Hour 24–48<small>Before you sign</small></div>
+          <div>
+            <h3>Have someone read the release</h3>
+            <p>An early cheque usually comes attached to a release of all future claims — including for injuries that have not shown up yet. Have it read first.</p>
+          </div>
+        </li>
+      </ol>
+      <p class="first-note">
+        <strong>Demo note:</strong> general information for a portfolio concept, not legal advice, and
+        no attorney–client relationship is created by reading it. A real firm's site must also comply
+        with its state bar's advertising rules — which is exactly why there are no settlement figures
+        or case results anywhere on this page.
+      </p>
+    </div>
+  </section>
+
+  <section class="fee" id="fee">
+    <div class="shell fee-grid">
+      <div>
+        <p class="kick">Our fee</p>
+        <h2>You pay us <em>out of the recovery.</em></h2>
+        <p class="lede">
+          If there is no recovery there is no fee. Written plainly here because the fee
+          agreement is the thing clients least often read and most often regret.
+        </p>
+      </div>
+      <ul class="terms">
+        <li class="term">
+          <h3>Contingency, stated up front</h3>
+          <p>The percentage is set out in writing before you sign, and it does not change because the file got harder.</p>
+        </li>
+        <li class="term">
+          <h3>Case costs explained separately</h3>
+          <p>Filing fees, records and experts are itemised. You see the running total, not a single deduction at the end.</p>
+        </li>
+        <li class="term">
+          <h3>No fee if we do not recover</h3>
+          <p>If the case resolves with nothing, you owe us nothing — including the costs we have already advanced.</p>
+        </li>
+        <li class="term">
+          <h3>You decide whether to settle</h3>
+          <p>Every offer comes to you with our recommendation and our reasoning. The decision stays yours.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="shell contact-grid">
+      <div>
+        <p class="kick">Contact</p>
+        <h2>Tell us what happened.</h2>
+        <p class="lede">
+          A partner returns every call within a day. The first conversation costs nothing, and
+          if the case isn't one for us we will say so and point you somewhere better.
+        </p>
+        <a class="btn btn-fill" href="tel:+17135550173">Call (713) 555-0173</a>
+      </div>
+      <dl class="facts">
+        <div><dt>Office</dt><dd>Downtown Houston</dd></div>
+        <div><dt>Phone</dt><dd><a href="tel:+17135550173">(713) 555-0173</a></dd></div>
+        <div><dt>Consultation</dt><dd>Free · no obligation</dd></div>
+        <div><dt>Languages</dt><dd>English &amp; Spanish</dd></div>
+      </dl>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="shell">
+    <p><strong>Vance &amp; Rowe</strong> — injury and wrongful death, Houston, Texas.</p>
+    <p class="fine">
+      Portfolio concept. Fictional firm, AI-generated photography. Nothing here is legal advice and no
+      attorney–client relationship is created. A live site would require bar-compliant advertising
+      disclosures and a named responsible attorney.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

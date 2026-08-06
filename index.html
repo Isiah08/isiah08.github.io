@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selected Work — Website Design for Local Business</title>
+<meta name="description" content="Five website concepts across home services, aesthetics, hospitality and professional services.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0C0D0F;--panel:#141619;--panel-lit:#1C1F23;
+  --fg:#F2F0EC;--mid:#A2A8AF;--dim:#666C74;
+  --hair:rgba(242,240,236,.12);
+  --display:"Instrument Serif",Georgia,serif;
+  --text:"Inter Tight",-apple-system,Arial,sans-serif;
+  --s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;
+  --s7:48px;--s8:64px;--s9:96px;--s10:128px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--text);
+  font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+.shell{width:100%;max-width:1180px;margin-inline:auto;padding-inline:var(--s5)}
+
+h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.02em;line-height:1.03;margin:0}
+.kick{font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin:0 0 var(--s5)}
+.lede{max-width:56ch;color:var(--mid);margin:0}
+
+.masthead{padding-block:var(--s9) var(--s8);border-bottom:1px solid var(--hair)}
+.masthead h1{font-size:clamp(2.6rem,7vw,5rem);max-width:18ch}
+.masthead h1 em{font-style:italic;color:var(--mid)}
+.masthead .lede{margin-top:var(--s6);font-size:1.06rem}
+
+.grid{padding-block:var(--s8) var(--s10);display:grid;gap:var(--s6)}
+.card{
+  display:grid;grid-template-columns:1.15fr 1fr;gap:0;
+  background:var(--panel);border:1px solid var(--hair);overflow:hidden;
+  transition:transform .35s var(--ease),border-color .35s var(--ease);
+}
+.card:hover{transform:translateY(-4px);border-color:rgba(242,240,236,.28)}
+.card:nth-child(even){grid-template-columns:1fr 1.15fr}
+.card:nth-child(even) .card-media{order:-1}
+.card-media{overflow:hidden;background:var(--panel-lit)}
+.card-media img{width:100%;height:100%;min-height:300px;object-fit:cover;
+  transition:transform .6s var(--ease)}
+.card:hover .card-media img{transform:scale(1.03)}
+.card-body{padding:clamp(var(--s6),4vw,var(--s8));display:flex;flex-direction:column;justify-content:center}
+.card-cat{font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin:0 0 var(--s4)}
+.card-body h2{font-size:clamp(1.7rem,3.2vw,2.4rem);margin-bottom:var(--s4)}
+.card-body p{margin:0 0 var(--s5);color:var(--mid);font-size:.98rem}
+.tags{display:flex;flex-wrap:wrap;gap:var(--s2);margin:0 0 var(--s6);padding:0;list-style:none}
+.tags li{font-size:.74rem;color:var(--mid);border:1px solid var(--hair);padding:3px var(--s3);border-radius:999px}
+.go{display:inline-flex;align-items:center;gap:var(--s2);min-height:44px;
+  font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  border-bottom:1px solid var(--hair);align-self:flex-start;
+  transition:border-color .25s var(--ease),gap .25s var(--ease)}
+.card:hover .go{border-bottom-color:var(--fg);gap:var(--s4)}
+
+.note{padding-block:var(--s8);border-top:1px solid var(--hair)}
+.note p{margin:0 0 var(--s3);color:var(--mid);font-size:.94rem;max-width:70ch}
+.note .fine{color:var(--dim);font-size:.84rem}
+
+@media (max-width:900px){
+  .card,.card:nth-child(even){grid-template-columns:1fr}
+  .card:nth-child(even) .card-media{order:0}
+  .card-media img{min-height:220px}
+}
+@media (max-width:620px){
+  body{font-size:16px}
+  :root{--s9:64px;--s10:80px}
+  .masthead h1{font-size:clamp(2.1rem,10vw,3rem)}
+}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms !important}}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="shell">
+    <p class="kick">Selected work</p>
+    <h1>Websites for businesses that <em>sell something real.</em></h1>
+    <p class="lede">
+      Five concepts across home services, aesthetics, hospitality and professional services.
+      Each one is built around whatever that trade actually sells on — a price list, a claim
+      deadline, a short menu — rather than the same layout with a new logo dropped in.
+    </p>
+  </div>
+</header>
+
+<main class="shell grid">
+
+  <article class="card">
+    <div class="card-media"><img src="gulf-coast-exterior/assets/hero.jpg" alt="A driveway mid-pressure-wash with a hard edge between clean and dirty concrete" loading="lazy"></div>
+    <div class="card-body">
+      <p class="card-cat">Home services · Pressure washing</p>
+      <h2>Gulf Coast Exterior Co.</h2>
+      <p>This trade sells one thing: the hard edge between filthy and clean. So the hero headline sits inside a cleaned stripe cut through grimy concrete, and the page publishes per-square-foot rates instead of hiding behind "call for quote".</p>
+      <ul class="tags"><li>Published pricing</li><li>Light / industrial</li><li>Archivo Black + Public Sans</li></ul>
+      <a class="go" href="gulf-coast-exterior/index.html">View concept →</a>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-media"><img src="lumen-aesthetics/assets/hero.jpg" alt="A calm treatment room in soft daylight with a sage chair" loading="lazy"></div>
+    <div class="card-body">
+      <p class="card-cat">Aesthetics · Med spa</p>
+      <h2>Lumen Aesthetics</h2>
+      <p>Every med spa site shouts — gold foil, before/after grids, pastel cards. This one whispers. Treatments are set as a printed book index with leader dots and ranged-right pricing, and the palette is sage and porcelain rather than the usual cream and terracotta.</p>
+      <ul class="tags"><li>Index as interface</li><li>Editorial / quiet</li><li>Fraunces + Karla</li></ul>
+      <a class="go" href="lumen-aesthetics/index.html">View concept →</a>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-media"><img src="ironhide-roofing/assets/hero.jpg" alt="Roofers laying charcoal shingles under a clearing storm sky" loading="lazy"></div>
+    <div class="card-body">
+      <p class="card-cat">Home services · Storm restoration</p>
+      <h2>Ironhide Roofing</h2>
+      <p>Roofing isn't sold on beauty, it's sold on a clock — the window to file a storm claim. Almost every competitor buries that. Here it's the spine of the page: a four-stage claim timeline running from date of loss to the policy deadline.</p>
+      <ul class="tags"><li>Deadline as structure</li><li>Heavy / industrial</li><li>Saira Condensed + IBM Plex</li></ul>
+      <a class="go" href="ironhide-roofing/index.html">View concept →</a>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-media"><img src="hearth-and-hollow/assets/hero.jpg" alt="A charred bone-in ribeye on cast iron with embers behind" loading="lazy"></div>
+    <div class="card-body">
+      <p class="card-cat">Hospitality · Steakhouse</p>
+      <h2>Hearth &amp; Hollow</h2>
+      <p>Restaurants always open with a slideshow of food. This one opens with the menu, typeset as a letterpress card — because a fourteen-table room with one seating a night is arguing from its menu, not its photography. The single plate is demoted below the fold.</p>
+      <ul class="tags"><li>Menu as hero</li><li>Warm dark / editorial</li><li>Bodoni Moda + Jost</li></ul>
+      <a class="go" href="hearth-and-hollow/index.html">View concept →</a>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-media"><img src="vance-and-rowe/assets/hero.jpg" alt="A quiet walnut law library lit by a single brass lamp" loading="lazy"></div>
+    <div class="card-body">
+      <p class="card-cat">Professional services · Injury law</p>
+      <h2>Vance &amp; Rowe</h2>
+      <p>No giant settlement figure, no partner with folded arms. The signature is a first-48-hours timeline — the part a frightened client actually needs — and there are deliberately no case results anywhere, because those are bar-regulated and fabricating them on a spec build would be dishonest.</p>
+      <ul class="tags"><li>Timeline as signature</li><li>Parchment / restrained</li><li>Newsreader + Source Sans 3</li></ul>
+      <a class="go" href="vance-and-rowe/index.html">View concept →</a>
+    </div>
+  </article>
+
+</main>
+
+<section class="note">
+  <div class="shell">
+    <p><strong>About these five.</strong> All are concept work for fictional businesses, built to demonstrate range. Every page carries a banner saying so. Pricing, menus and timelines are placeholders and are labelled on each page.</p>
+    <p class="fine">Photography is AI-generated. Regulated categories (medical, legal, insurance) carry the disclosures a live build would need.</p>
+  </div>
+</section>
+
+</body>
+</html>

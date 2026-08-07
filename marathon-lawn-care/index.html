@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marathon Lawn Care &amp; Services — North Austin</title>
+<meta name="description" content="Marathon Lawn Care &amp; Services — recurring lawn maintenance, cleanups and sod across North Austin. 5.0 stars from 81 Google reviews. Call (512) 589-8363.">
+<link rel="canonical" href="https://isiahbuilds.com/marathon-lawn-care/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://isiahbuilds.com/marathon-lawn-care/">
+<meta property="og:title" content="Marathon Lawn Care &amp; Services — North Austin">
+<meta property="og:description" content="Recurring lawn maintenance, cleanups and sod across North Austin. 5.0 stars from 81 Google reviews.">
+<meta property="og:image" content="https://isiahbuilds.com/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1F3326">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   MARATHON LAWN CARE — North Austin
+   Concept built from their public Google listing.
+
+   Thesis: 81 reviews and not one of them raves about grass. They
+   rave about Zach TELLING THEM WHEN HE'S COMING. In a trade whose
+   defining sin is the guy who doesn't show up, reliability is the
+   product. So the page leads with the schedule, not the lawn.
+
+   Signature: mower stripes. Alternating tonal bands set the whole
+   page rhythm — the one visual every homeowner already reads as
+   "professionally cut".
+   ============================================================ */
+:root{
+  --turf:#1F3326; --turf-2:#2C4633; --turf-3:#38573F;
+  --cut:#8FAD६E;              /* overridden below — see --cut */
+  --cut:#8FAD6E;
+  --cut-pale:#C3D4A8;
+  --bone:#F5F3ED; --bone-2:#EBE8DE; --bone-3:#DFDBCE;
+  --ink:#16201A; --slate:#5C685F; --slate-2:#8A9389;
+  --sun:#D9903C;
+  --line:rgba(22,32,26,.14); --line-2:rgba(22,32,26,.26);
+  --display:"Bricolage Grotesque",system-ui,sans-serif;
+  --text:"Instrument Sans",-apple-system,Arial,sans-serif;
+  --s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;
+  --s7:48px;--s8:64px;--s9:96px;--s10:128px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bone);color:var(--ink);
+  font-family:var(--text);font-size:17px;line-height:1.62;
+  -webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--turf);outline-offset:3px}
+.shell{width:100%;max-width:1140px;margin-inline:auto;padding-inline:var(--s5)}
+
+h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-.02em;line-height:1.03;margin:0}
+.kick{margin:0 0 var(--s4);font-size:.72rem;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--turf-3)}
+.lede{max-width:52ch;color:var(--slate);margin:0}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);
+  min-height:56px;padding:var(--s3) var(--s7);
+  font-family:var(--text);font-size:.92rem;font-weight:600;letter-spacing:.02em;
+  border:2px solid var(--turf);border-radius:3px;cursor:pointer;
+  transition:transform .2s var(--ease),background-color .2s var(--ease),color .2s var(--ease)}
+.btn-fill{background:var(--turf);color:var(--bone)}
+.btn-fill:hover{background:var(--turf-3);border-color:var(--turf-3);transform:translateY(-2px)}
+.btn-line{background:transparent;color:var(--turf)}
+.btn-line:hover{background:var(--turf);color:var(--bone);transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+
+.flag{margin:0;padding:var(--s2) var(--s5);background:var(--ink);color:var(--bone-3);
+  font-size:.74rem;text-align:center;letter-spacing:.02em}
+.flag a{text-decoration:underline;text-underline-offset:2px}
+
+/* ---- Header ---- */
+.top{position:sticky;top:0;z-index:60;background:rgba(245,243,237,.94);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .shell{display:flex;align-items:center;justify-content:space-between;gap:var(--s5);
+  padding-block:var(--s4)}
+.mark{display:flex;flex-direction:column;line-height:1.05}
+.mark b{font-family:var(--display);font-weight:800;font-size:1.2rem;letter-spacing:-.01em}
+.mark span{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--slate-2)}
+.top nav{display:flex;gap:var(--s6);font-size:.9rem;color:var(--slate)}
+.top nav a{display:inline-flex;align-items:center;min-height:44px}
+.top nav a:hover{color:var(--turf)}
+.top .btn{min-height:46px;padding-inline:var(--s5);font-size:.86rem}
+
+/* ---- Hero: the stripes are the layout ---- */
+.hero{position:relative;overflow:hidden;padding-block:var(--s9) 0}
+/* mower stripes — alternating tonal bands, angled like a real cut */
+.hero::before{
+  content:"";position:absolute;inset:-20% -10%;z-index:0;pointer-events:none;
+  background:repeating-linear-gradient(102deg,
+    var(--bone-2) 0 46px, var(--bone) 46px 92px);
+  opacity:.85;
+  mask-image:linear-gradient(180deg,black,transparent 88%);
+}
+.hero .shell{position:relative;z-index:1}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+  gap:var(--s8);align-items:center}
+.hero h1{font-size:clamp(2.5rem,6.2vw,4.5rem);max-width:15ch}
+.hero h1 em{font-style:normal;color:var(--turf-3);
+  background:linear-gradient(180deg,transparent 62%,var(--cut-pale) 62%)}
+.hero .lede{margin:var(--s5) 0 var(--s6);font-size:1.08rem}
+.hero-cta{display:flex;flex-wrap:wrap;gap:var(--s3)}
+
+/* the proof block — 81 reviews is the whole argument */
+.proof{display:flex;align-items:center;gap:var(--s5);flex-wrap:wrap;
+  margin-top:var(--s7);padding-top:var(--s5);border-top:2px solid var(--line-2)}
+.proof-score{display:flex;align-items:baseline;gap:var(--s2)}
+.proof-score b{font-family:var(--display);font-weight:800;font-size:2.6rem;line-height:1}
+.stars{color:var(--sun);font-size:1rem;letter-spacing:2px}
+.proof-note{font-size:.9rem;color:var(--slate)}
+.proof-note b{color:var(--ink)}
+
+.hero-media{position:relative;border-radius:4px;overflow:hidden;
+  box-shadow:0 28px 60px -28px rgba(22,32,26,.5)}
+.hero-media img{width:100%;aspect-ratio:4/3;object-fit:cover}
+
+/* ---- The schedule promise: the actual differentiator ---- */
+.promise{margin-top:var(--s9);background:var(--turf);color:var(--bone)}
+.promise .shell{padding-block:var(--s9)}
+.promise-head{max-width:640px;margin-bottom:var(--s7)}
+.promise .kick{color:var(--cut-pale)}
+.promise h2{font-size:clamp(2rem,4.6vw,3.2rem);margin-bottom:var(--s4)}
+.promise .lede{color:var(--cut-pale)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  border:1px solid rgba(245,243,237,.2);border-radius:3px;overflow:hidden}
+.step{padding:var(--s6) var(--s5);border-right:1px solid rgba(245,243,237,.2)}
+.step:last-child{border-right:0}
+.step-n{font-family:var(--display);font-weight:800;font-size:.8rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--cut);margin:0 0 var(--s4)}
+.step h3{font-size:1.2rem;margin-bottom:var(--s3)}
+.step p{margin:0;color:var(--cut-pale);font-size:.96rem}
+
+/* ---- Services ---- */
+.svc{padding-block:var(--s9)}
+.svc-head{max-width:620px;margin-bottom:var(--s7)}
+.svc-head h2{font-size:clamp(2rem,4.6vw,3.1rem);margin-bottom:var(--s4)}
+.svc-list{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s4)}
+.svc-item{padding:var(--s6);background:var(--bone-2);border-radius:3px;
+  border-left:5px solid var(--turf-3);transition:transform .25s var(--ease)}
+.svc-item:hover{transform:translateX(4px)}
+.svc-item h3{font-size:1.15rem;margin-bottom:var(--s3)}
+.svc-item p{margin:0;color:var(--slate);font-size:.96rem}
+.svc-note{margin:var(--s6) 0 0;font-size:.88rem;color:var(--slate-2);max-width:64ch}
+
+/* ---- Reviews ---- */
+.words{padding-bottom:var(--s9)}
+.words-head{display:flex;justify-content:space-between;align-items:flex-end;
+  gap:var(--s5);flex-wrap:wrap;margin-bottom:var(--s6);
+  padding-top:var(--s8);border-top:1px solid var(--line)}
+.words-head h2{font-size:clamp(1.9rem,4.2vw,2.9rem)}
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4)}
+.quote{padding:var(--s6);background:var(--bone-2);border-radius:3px}
+.quote .stars{display:block;margin-bottom:var(--s4)}
+.quote p{margin:0 0 var(--s4);font-size:1rem}
+.quote cite{font-style:normal;font-size:.78rem;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--slate-2)}
+
+/* ---- Area + contact ---- */
+.close-sec{background:var(--bone-2);padding-block:var(--s9)}
+.close-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s8)}
+.close-grid h2{font-size:clamp(1.9rem,4.4vw,2.9rem);margin-bottom:var(--s4)}
+.chips{display:flex;flex-wrap:wrap;gap:var(--s2);margin:var(--s5) 0 0;padding:0;list-style:none}
+.chips li{padding:var(--s2) var(--s4);background:var(--bone);border:1px solid var(--line);
+  border-radius:999px;font-size:.86rem;color:var(--slate)}
+.facts{margin:0}
+.facts>div{display:flex;justify-content:space-between;gap:var(--s5);
+  padding-block:var(--s4);border-top:1px solid var(--line)}
+.facts dt{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--slate-2)}
+.facts dd{margin:0;text-align:right;font-weight:500}
+.facts a{border-bottom:2px solid var(--cut)}
+.hours-row{display:flex;justify-content:space-between;padding-block:var(--s2);font-size:.94rem}
+.hours-row.closed{color:var(--slate-2)}
+
+.foot{padding-block:var(--s7);border-top:1px solid var(--line)}
+.foot p{margin:0 0 var(--s2);font-size:.9rem;color:var(--slate)}
+.foot .fine{font-size:.78rem;color:var(--slate-2)}
+
+/* ---- Sticky call bar: this is a phone business ---- */
+.callbar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:none;
+  padding:var(--s3) var(--s4);background:var(--turf);
+  box-shadow:0 -6px 20px rgba(22,32,26,.28)}
+.callbar a{display:flex;align-items:center;justify-content:center;gap:var(--s2);
+  min-height:52px;color:var(--bone);font-family:var(--display);
+  font-weight:700;font-size:1.05rem;letter-spacing:.01em}
+
+@media (max-width:960px){
+  .hero-grid,.close-grid{grid-template-columns:minmax(0,1fr);gap:var(--s7)}
+  .steps{grid-template-columns:1fr}
+  .step{border-right:0;border-bottom:1px solid rgba(245,243,237,.2)}
+  .step:last-child{border-bottom:0}
+  .quotes{grid-template-columns:1fr}
+  .svc-list{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .top nav{display:none}
+  .top .btn{display:none}
+  .callbar{display:block}
+  body{padding-bottom:76px}
+}
+@media (max-width:620px){
+  body{font-size:16px}
+  :root{--s9:64px;--s10:80px}
+  .hero h1{font-size:clamp(2.1rem,9.4vw,3rem)}
+  .hero-cta .btn{flex:1 1 100%}
+  .facts>div{flex-direction:column;gap:2px}
+  .facts dd{text-align:left}
+}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms !important}}
+</style>
+</head>
+<body>
+
+<p class="flag">
+  Website concept built for Marathon Lawn Care by <a href="https://isiahbuilds.com">isiahbuilds.com</a>
+  &mdash; not an official site. Details taken from their public Google listing.
+</p>
+
+<header class="top">
+  <div class="shell">
+    <a class="mark" href="#top">
+      <b>MARATHON</b>
+      <span>Lawn Care &amp; Services</span>
+    </a>
+    <nav aria-label="Primary">
+      <a href="#promise">How it works</a>
+      <a href="#services">Services</a>
+      <a href="#area">Service area</a>
+    </nav>
+    <a class="btn btn-fill" href="tel:+15125898363">(512) 589-8363</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="shell">
+      <div class="hero-grid">
+        <div>
+          <p class="kick">North Austin &middot; Family run</p>
+          <h1>You'll know exactly <em>when we're coming.</em></h1>
+          <p class="lede">
+            Recurring lawn maintenance, seasonal cleanups and sod across North Austin.
+            Same crew every visit, a heads-up before we show, and a price that doesn't
+            move after we've started.
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-fill" href="tel:+15125898363">Call (512) 589-8363</a>
+            <a class="btn btn-line" href="#services">See services</a>
+          </div>
+          <div class="proof">
+            <div class="proof-score">
+              <b>5.0</b>
+              <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            </div>
+            <p class="proof-note"><b>81 Google reviews.</b> Not one under five stars.</p>
+          </div>
+        </div>
+        <figure class="hero-media">
+          <img src="assets/hero.jpg" alt="A freshly mown North Austin lawn with clean mower stripes at golden hour" width="1600" height="1200" fetchpriority="high">
+        </figure>
+      </div>
+    </div>
+
+    <section class="promise" id="promise">
+      <div class="shell">
+        <div class="promise-head">
+          <p class="kick">Why people stay</p>
+          <h2>The hard part of lawn care isn't the lawn.</h2>
+          <p class="lede">
+            It's the guy who says Tuesday and turns up Friday, or not at all. Read our
+            reviews and you'll notice people talk less about the grass than about knowing
+            when we'll be there. That's on purpose.
+          </p>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <p class="step-n">Before</p>
+            <h3>You get told</h3>
+            <p>A message before your service day, every time. No wondering whether this is the week.</p>
+          </div>
+          <div class="step">
+            <p class="step-n">During</p>
+            <h3>Same crew</h3>
+            <p>The people who cut your yard last time cut it this time. They already know the gate code and the sprinkler heads.</p>
+          </div>
+          <div class="step">
+            <p class="step-n">After</p>
+            <h3>Nothing left behind</h3>
+            <p>Edges cut, clippings blown off the drive and walkways, gate shut. The yard looks finished, not just mown.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <section class="svc" id="services">
+    <div class="shell">
+      <div class="svc-head">
+        <p class="kick">Services</p>
+        <h2>Recurring care, and the big jobs in between.</h2>
+        <p class="lede">
+          Most customers are on a regular schedule. Everything else gets quoted per
+          property before any work starts.
+        </p>
+      </div>
+      <div class="svc-list">
+        <div class="svc-item">
+          <h3>Recurring lawn maintenance</h3>
+          <p>Weekly or biweekly mow, edge, trim and blow. The schedule that keeps a yard looking the same all summer instead of sawtoothing between visits.</p>
+        </div>
+        <div class="svc-item">
+          <h3>Seasonal cleanups</h3>
+          <p>Spring and fall resets — beds cleared, leaves out, shrubs cut back, everything hauled off. The visit that makes the recurring ones easy.</p>
+        </div>
+        <div class="svc-item">
+          <h3>Sod installation</h3>
+          <p>Dead patches or a whole yard. Old turf out, soil prepped, new sod laid and watered in, with a schedule for keeping it alive through a Texas August.</p>
+        </div>
+        <div class="svc-item">
+          <h3>Rental &amp; multi-property</h3>
+          <p>Several addresses on one schedule and one invoice. Landlords and property managers are a good share of the book.</p>
+        </div>
+      </div>
+      <p class="svc-note">
+        <strong>Demo note for Zach:</strong> these are inferred from your Google reviews.
+        Send me your real service list and pricing and I'll swap them in.
+      </p>
+    </div>
+  </section>
+
+  <section class="words">
+    <div class="shell">
+      <div class="words-head">
+        <div>
+          <p class="kick">In their words</p>
+          <h2>81 reviews. Five stars.</h2>
+        </div>
+        <p class="lede" style="max-width:36ch">
+          Real reviews from the Google listing &mdash; shortened, not reworded.
+        </p>
+      </div>
+      <div class="quotes">
+        <blockquote class="quote">
+          <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <p>&ldquo;I used to have the ugliest yard on the block. Now I'm easily a top 3 contender.&rdquo;</p>
+          <cite>Google review</cite>
+        </blockquote>
+        <blockquote class="quote">
+          <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <p>&ldquo;Zach and the team are always friendly, accommodating, professional, and do excellent work at a fair price.&rdquo;</p>
+          <cite>Google review</cite>
+        </blockquote>
+        <blockquote class="quote">
+          <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <p>&ldquo;Very thorough, courteous, efficient, and professional &hellip; great at communicating when they will be coming by.&rdquo;</p>
+          <cite>Google review</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="close-sec" id="area">
+    <div class="shell close-grid">
+      <div>
+        <p class="kick">Service area</p>
+        <h2>North Austin and just past it.</h2>
+        <p class="lede">
+          Based off Everest Lane in 78727. If you're near any of these, you're in the
+          route &mdash; if you're not sure, call and ask.
+        </p>
+        <ul class="chips">
+          <li>Milwood</li><li>Wells Branch</li><li>Anderson Mill</li>
+          <li>Balcones Woods</li><li>Jollyville</li><li>Northwest Hills</li>
+          <li>Round Rock</li><li>Pflugerville</li>
+        </ul>
+        <p class="svc-note" style="margin-top:var(--s5)">
+          <strong>Demo note:</strong> neighbourhoods inferred from your address &mdash; confirm your real route.
+        </p>
+      </div>
+      <div>
+        <p class="kick">Get on the schedule</p>
+        <h2>Call and we'll come look.</h2>
+        <dl class="facts">
+          <div><dt>Phone</dt><dd><a href="tel:+15125898363">(512) 589-8363</a></dd></div>
+          <div><dt>Based in</dt><dd>Everest Ln, Austin TX 78727</dd></div>
+          <div><dt>Rating</dt><dd>5.0 &#9733; &middot; 81 Google reviews</dd></div>
+        </dl>
+        <div style="margin-top:var(--s5);padding-top:var(--s4);border-top:1px solid var(--line)">
+          <div class="hours-row"><span>Monday &ndash; Friday</span><span>8:00 AM &ndash; 6:00 PM</span></div>
+          <div class="hours-row closed"><span>Saturday &ndash; Sunday</span><span>Closed</span></div>
+        </div>
+        <a class="btn btn-fill" href="tel:+15125898363" style="margin-top:var(--s6);width:100%">Call (512) 589-8363</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="shell">
+    <p><strong>Marathon Lawn Care &amp; Services LLC</strong> &mdash; North Austin, Texas.</p>
+    <p class="fine">
+      Website concept by <a href="https://isiahbuilds.com" style="text-decoration:underline">isiahbuilds.com</a>.
+      Not an official site. Business details and reviews are from the public Google listing.
+    </p>
+  </div>
+</footer>
+
+<div class="callbar">
+  <a href="tel:+15125898363">Call (512) 589-8363</a>
+</div>
+
+</body>
+</html>

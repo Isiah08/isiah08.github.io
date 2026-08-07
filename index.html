@@ -3,16 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Selected Work — Website Design for Local Business</title>
-<meta name="description" content="Five website concepts across home services, aesthetics, hospitality and professional services.">
+<title>Isiah Builds — Websites for Local Businesses That Actually Sell</title>
+<meta name="description" content="Five local businesses get a custom website free — you own it outright, I get an honest review and the before/after. Austin based, working everywhere.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* ============================================================
+   ISIAH BUILDS — business page.
+   Skeleton adapted from the sitesbynjabulo playbook (hero promise
+   → proof → pain → why → process → FAQ → apply). Two deliberate
+   departures: the offer is a free founding-client build (buying
+   proof, per the Hormozi proof playbook), and there are NO
+   testimonials — fabricating them would poison the one asset this
+   whole strategy exists to create. The five concepts carry proof
+   until real client results replace them.
+   ============================================================ */
 :root{
   --bg:#0C0D0F;--panel:#141619;--panel-lit:#1C1F23;
   --fg:#F2F0EC;--mid:#A2A8AF;--dim:#666C74;
-  --hair:rgba(242,240,236,.12);
+  --accent:#E4B15A;          /* brass — one warm accent, used sparingly */
+  --accent-deep:#B8853A;
+  --hair:rgba(242,240,236,.12);--hair-strong:rgba(242,240,236,.26);
   --display:"Instrument Serif",Georgia,serif;
   --text:"Inter Tight",-apple-system,Arial,sans-serif;
   --s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;
@@ -24,35 +36,93 @@ body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--text);
   font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%;height:auto}
 a{color:inherit;text-decoration:none}
-:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .shell{width:100%;max-width:1180px;margin-inline:auto;padding-inline:var(--s5)}
 
 h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.02em;line-height:1.03;margin:0}
-.kick{font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin:0 0 var(--s5)}
+.kick{font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin:0 0 var(--s5)}
 .lede{max-width:56ch;color:var(--mid);margin:0}
+em{font-style:italic}
 
-.masthead{padding-block:var(--s9) var(--s8);border-bottom:1px solid var(--hair)}
-.masthead h1{font-size:clamp(2.6rem,7vw,5rem);max-width:18ch}
-.masthead h1 em{font-style:italic;color:var(--mid)}
-.masthead .lede{margin-top:var(--s6);font-size:1.06rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;
+  padding:var(--s3) var(--s7);font-size:.8rem;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;border:1px solid var(--hair-strong);border-radius:2px;cursor:pointer;
+  transition:transform .25s var(--ease),background-color .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease)}
+.btn-fill{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.btn-fill:hover{background:var(--accent);border-color:var(--accent);transform:translateY(-2px)}
+.btn-line{background:transparent;color:var(--fg)}
+.btn-line:hover{border-color:var(--fg);transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
 
-.grid{padding-block:var(--s8) var(--s10);display:grid;gap:var(--s6)}
-.card{
-  display:grid;grid-template-columns:1.15fr 1fr;gap:0;
-  background:var(--panel);border:1px solid var(--hair);overflow:hidden;
-  transition:transform .35s var(--ease),border-color .35s var(--ease);
-}
-.card:hover{transform:translateY(-4px);border-color:rgba(242,240,236,.28)}
+/* ---- Masthead ---- */
+.top{position:sticky;top:0;z-index:80;background:rgba(12,13,15,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--hair)}
+.top .shell{display:flex;align-items:center;justify-content:space-between;gap:var(--s5);padding-block:var(--s4)}
+.mark{font-family:var(--display);font-size:1.35rem;display:inline-flex;align-items:center;min-height:44px}
+.mark i{font-style:italic;color:var(--accent)}
+.top nav{display:flex;gap:var(--s6);font-size:.85rem;color:var(--mid)}
+.top nav a{display:inline-flex;align-items:center;min-height:44px;transition:color .2s var(--ease)}
+.top nav a:hover{color:var(--fg)}
+.top .btn{min-height:44px;padding-inline:var(--s5)}
+
+/* ---- Hero ---- */
+.hero{padding-block:var(--s10) var(--s9);border-bottom:1px solid var(--hair)}
+.hero-badge{display:inline-flex;align-items:center;gap:var(--s2);margin:0 0 var(--s5);
+  padding:var(--s2) var(--s4);border:1px solid var(--hair-strong);border-radius:999px;
+  font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mid)}
+.hero-badge i{width:7px;height:7px;border-radius:50%;background:var(--accent);font-style:normal}
+.hero h1{font-size:clamp(2.7rem,6.8vw,5.2rem);max-width:20ch}
+.hero h1 em{color:var(--accent)}
+.hero .lede{margin:var(--s6) 0 var(--s7);font-size:1.1rem}
+.hero-cta{display:flex;flex-wrap:wrap;gap:var(--s3);margin-bottom:var(--s8)}
+.creds{display:flex;flex-wrap:wrap;gap:var(--s3) var(--s7);margin:0;padding:var(--s4) 0 0;
+  border-top:1px solid var(--hair);list-style:none;font-size:.84rem;color:var(--mid)}
+.creds li{display:inline-flex;align-items:center;gap:var(--s2)}
+.creds b{color:var(--accent);font-family:var(--display);font-weight:400;font-size:1.05rem}
+
+/* ---- The offer: build-first ---- */
+.offer{padding-block:var(--s9);border-bottom:1px solid var(--hair)}
+.offer-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s8);align-items:start}
+.offer h2{font-size:clamp(2.1rem,4.8vw,3.4rem)}
+.offer h2 em{color:var(--accent)}
+.offer .lede{margin-top:var(--s5)}
+.offer-steps{margin:0;padding:0;list-style:none;counter-reset:o}
+.offer-step{position:relative;padding:var(--s5) 0 var(--s5) var(--s8);border-top:1px solid var(--hair)}
+.offer-step::before{counter-increment:o;content:counter(o);
+  position:absolute;left:0;top:var(--s5);
+  font-family:var(--display);font-size:1.5rem;color:var(--accent)}
+.offer-step h3{font-family:var(--text);font-size:1.05rem;font-weight:600;margin-bottom:var(--s2)}
+.offer-step p{margin:0;color:var(--mid);font-size:.96rem}
+
+/* ---- Pain ---- */
+.pain{padding-block:var(--s9);border-bottom:1px solid var(--hair)}
+.pain-head{max-width:640px;margin-bottom:var(--s7)}
+.pain-head h2{font-size:clamp(2rem,4.4vw,3.1rem);margin-bottom:var(--s4)}
+.pain-list{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s3);margin:0;padding:0;list-style:none}
+.pain-list li{display:flex;gap:var(--s3);padding:var(--s4) var(--s5);
+  background:var(--panel);border:1px solid var(--hair);border-radius:3px;
+  font-size:.96rem;color:var(--mid)}
+.pain-list li::before{content:"✕";color:var(--accent);font-weight:600}
+
+/* ---- Work (the proof) ---- */
+.work{padding-block:var(--s9);border-bottom:1px solid var(--hair)}
+.work-head{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--s5);flex-wrap:wrap;margin-bottom:var(--s7)}
+.work-head h2{font-size:clamp(2.1rem,4.8vw,3.4rem)}
+.work-head h2 em{color:var(--mid)}
+.work-head .lede{max-width:44ch}
+.grid{display:grid;gap:var(--s6)}
+.card{display:grid;grid-template-columns:1.15fr 1fr;background:var(--panel);
+  border:1px solid var(--hair);overflow:hidden;
+  transition:transform .35s var(--ease),border-color .35s var(--ease)}
+.card:hover{transform:translateY(-4px);border-color:var(--hair-strong)}
 .card:nth-child(even){grid-template-columns:1fr 1.15fr}
 .card:nth-child(even) .card-media{order:-1}
 .card-media{overflow:hidden;background:var(--panel-lit)}
-.card-media img{width:100%;height:100%;min-height:300px;object-fit:cover;
-  transition:transform .6s var(--ease)}
+.card-media img{width:100%;height:100%;min-height:280px;object-fit:cover;transition:transform .6s var(--ease)}
 .card:hover .card-media img{transform:scale(1.03)}
 .card-body{padding:clamp(var(--s6),4vw,var(--s8));display:flex;flex-direction:column;justify-content:center}
 .card-cat{font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin:0 0 var(--s4)}
-.card-body h2{font-size:clamp(1.7rem,3.2vw,2.4rem);margin-bottom:var(--s4)}
-.card-body p{margin:0 0 var(--s5);color:var(--mid);font-size:.98rem}
+.card-body h3{font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:var(--s4)}
+.card-body p{margin:0 0 var(--s5);color:var(--mid);font-size:.97rem}
 .tags{display:flex;flex-wrap:wrap;gap:var(--s2);margin:0 0 var(--s6);padding:0;list-style:none}
 .tags li{font-size:.74rem;color:var(--mid);border:1px solid var(--hair);padding:3px var(--s3);border-radius:999px}
 .go{display:inline-flex;align-items:center;gap:var(--s2);min-height:44px;
@@ -60,103 +130,342 @@ h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.02em;line-h
   border-bottom:1px solid var(--hair);align-self:flex-start;
   transition:border-color .25s var(--ease),gap .25s var(--ease)}
 .card:hover .go{border-bottom-color:var(--fg);gap:var(--s4)}
+.work-note{margin:var(--s6) 0 0;font-size:.88rem;color:var(--dim);max-width:70ch}
 
-.note{padding-block:var(--s8);border-top:1px solid var(--hair)}
-.note p{margin:0 0 var(--s3);color:var(--mid);font-size:.94rem;max-width:70ch}
-.note .fine{color:var(--dim);font-size:.84rem}
+/* ---- Why ---- */
+.why{padding-block:var(--s9);border-bottom:1px solid var(--hair)}
+.why-head{max-width:680px;margin-bottom:var(--s7)}
+.why-head h2{font-size:clamp(2rem,4.6vw,3.2rem);margin-bottom:var(--s4)}
+.why-head h2 em{color:var(--accent)}
+.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s5)}
+.why-cell{padding:var(--s6);background:var(--panel);border:1px solid var(--hair);border-radius:3px}
+.why-cell h3{font-family:var(--text);font-size:1.05rem;font-weight:600;margin-bottom:var(--s3)}
+.why-cell p{margin:0;color:var(--mid);font-size:.96rem}
 
-@media (max-width:900px){
+/* ---- FAQ ---- */
+.faq{padding-block:var(--s9);border-bottom:1px solid var(--hair)}
+.faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:var(--s8);align-items:start}
+.faq h2{font-size:clamp(2rem,4.6vw,3.2rem)}
+.faq h2 em{color:var(--mid)}
+.faq-list{margin:0}
+.qa{border-top:1px solid var(--hair)}
+.qa summary{display:flex;justify-content:space-between;align-items:center;gap:var(--s5);
+  padding:var(--s5) 0;font-weight:600;font-size:1.02rem;cursor:pointer;list-style:none;min-height:44px}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:"+";font-family:var(--display);font-size:1.5rem;color:var(--accent);
+  transition:transform .3s var(--ease)}
+.qa[open] summary::after{transform:rotate(45deg)}
+.qa p{margin:0 0 var(--s5);color:var(--mid);max-width:60ch}
+
+/* ---- Apply ---- */
+.apply{padding-block:var(--s10)}
+.apply-inner{text-align:center;max-width:720px;margin-inline:auto}
+.apply h2{font-size:clamp(2.3rem,5.6vw,4rem)}
+.apply h2 em{color:var(--accent)}
+.apply .lede{margin:var(--s5) auto var(--s7)}
+.apply-cta{display:flex;justify-content:center;flex-wrap:wrap;gap:var(--s3)}
+.qualify{display:grid;gap:var(--s2);max-width:520px;margin:var(--s8) auto 0;padding:var(--s5) 0 0;
+  border-top:1px solid var(--hair);list-style:none;text-align:left;font-size:.94rem;color:var(--mid)}
+.qualify li{display:flex;gap:var(--s3)}
+.qualify b{color:var(--accent);font-family:var(--display);font-weight:400;font-size:1.05rem;flex:0 0 2.4rem}
+.apply-alt{margin:var(--s6) 0 0;font-size:.9rem;color:var(--dim)}
+.apply-alt a{display:inline-flex;align-items:center;min-height:44px;color:var(--mid);border-bottom:1px solid var(--hair-strong)}
+.apply-alt a:hover{color:var(--fg);border-bottom-color:var(--fg)}
+
+/* ---- Footer ---- */
+.foot{border-top:1px solid var(--hair);padding-block:var(--s7)}
+.foot-grid{display:flex;justify-content:space-between;gap:var(--s5);flex-wrap:wrap;align-items:center}
+.foot p{margin:0;font-size:.88rem;color:var(--mid)}
+.foot .fine{color:var(--dim);font-size:.78rem;margin-top:var(--s2)}
+.foot-links{display:flex;gap:var(--s5);font-size:.85rem;color:var(--mid)}
+.foot-links a{display:inline-flex;align-items:center;min-height:44px}
+.foot-links a:hover{color:var(--fg)}
+
+@media (max-width:940px){
+  .offer-grid,.faq-grid{grid-template-columns:1fr;gap:var(--s6)}
   .card,.card:nth-child(even){grid-template-columns:1fr}
   .card:nth-child(even) .card-media{order:0}
   .card-media img{min-height:220px}
+  .pain-list,.why-grid{grid-template-columns:1fr}
 }
+@media (max-width:720px){ .top nav{display:none} }
 @media (max-width:620px){
   body{font-size:16px}
-  :root{--s9:64px;--s10:80px}
-  .masthead h1{font-size:clamp(2.1rem,10vw,3rem)}
+  :root{--s9:64px;--s10:88px}
+  .hero h1{font-size:clamp(2.2rem,9.6vw,3.1rem)}
+  .hero-cta .btn,.apply-cta .btn{flex:1 1 100%}
 }
 @media (prefers-reduced-motion:reduce){*{transition-duration:.01ms !important}}
 </style>
 </head>
 <body>
 
-<header class="masthead">
+<header class="top">
   <div class="shell">
-    <p class="kick">Selected work · Austin, TX</p>
-    <h1>Websites for businesses that <em>sell something real.</em></h1>
-    <p class="lede">
-      Five concepts across home services, aesthetics, hospitality and professional services.
-      Each one is built around whatever that trade actually sells on — a price list, a claim
-      deadline, a short menu — rather than the same layout with a new logo dropped in.
-    </p>
+    <a class="mark" href="#top">Isiah<i> Builds</i></a>
+    <nav aria-label="Primary">
+      <a href="#offer">How it works</a>
+      <a href="#work">The work</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-fill" href="#apply">Start a build</a>
   </div>
 </header>
 
-<main class="shell grid">
+<main id="top">
 
-  <article class="card">
-    <div class="card-media"><img src="hill-country-exterior/assets/hero.jpg" alt="A driveway mid-pressure-wash with a hard edge between clean and dirty concrete" loading="lazy"></div>
-    <div class="card-body">
-      <p class="card-cat">Home services · Pressure washing</p>
-      <h2>Hill Country Exterior Co.</h2>
-      <p>Built like the trades sites that actually convert: the quote form lives inside a split-screen hero next to full-height photographic proof, a sticky call bar owns mobile, and per-square-foot rates are published instead of hidden behind “call for quote”.</p>
-      <ul class="tags"><li>Hero quote form</li><li>Split-screen</li><li>Clash Display + Archivo</li></ul>
-      <a class="go" href="hill-country-exterior/index.html">View concept →</a>
+  <section class="hero">
+    <div class="shell">
+      <p class="hero-badge"><i></i>Founding client offer · 5 spots · ATX based, working everywhere</p>
+      <h1>I'm building 5 local businesses a website. <em>Free.</em></h1>
+      <p class="lede">
+        Not a trial and not a template — a real custom site like the five below, launched on
+        your domain, that you own outright. The build costs you nothing. What I want instead is
+        an honest review and the right to post the before/after. I'd rather earn five real case
+        studies than ask you to gamble on a stranger's promises.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-fill" href="#apply">Start a build</a>
+        <a class="btn btn-line" href="#work">See the work</a>
+      </div>
+      <ul class="creds">
+        <li><b>$0</b> for the build — you own it</li>
+        <li><b>Days</b> not months to launch</li>
+        <li><b>5</b> spots, then it's paid</li>
+        <li><b>1</b> builder, start to finish</li>
+      </ul>
     </div>
-  </article>
+  </section>
 
-  <article class="card">
-    <div class="card-media"><img src="lumen-aesthetics/assets/hero.jpg" alt="A calm treatment room in soft daylight with a sage chair" loading="lazy"></div>
-    <div class="card-body">
-      <p class="card-cat">Aesthetics · Med spa</p>
-      <h2>Lumen Aesthetics</h2>
-      <p>Every med spa site shouts. This one is a quiet curated shop: an arch-cropped hero, a slow ticker, and treatments on a horizontally browsed shelf with plain pricing — sage and porcelain, not the usual cream and terracotta.</p>
-      <ul class="tags"><li>Arch imagery</li><li>Treatment shelf</li><li>Gambetta + Switzer</li></ul>
-      <a class="go" href="lumen-aesthetics/index.html">View concept →</a>
+  <section class="offer" id="offer">
+    <div class="shell offer-grid">
+      <div>
+        <p class="kick">The deal</p>
+        <h2>Free is the strategy, <em>not the bait.</em></h2>
+        <p class="lede">
+          I could tell you my sites get results, or I could go prove it on yours. Five founding
+          businesses get the full build free; I get results worth showing the next hundred.
+          After these five it's paid work — so right now the trade is lopsided in your favour.
+        </p>
+      </div>
+      <ol class="offer-steps">
+        <li class="offer-step">
+          <h3>Tell me about the business</h3>
+          <p>A quick call or a DM. What you do, where you work, how customers reach you today. Fifteen minutes covers it.</p>
+        </li>
+        <li class="offer-step">
+          <h3>I build it — free, and first</h3>
+          <p>Within days you get a live link to your real website: your name, your services, your city. Not a mockup, not an invoice.</p>
+        </li>
+        <li class="offer-step">
+          <h3>We launch on your domain</h3>
+          <p>Real photos, real pricing, booking wired up. You own the domain, the files and the accounts — all of it. Not for you? Walk away, you've spent fifteen minutes.</p>
+        </li>
+        <li class="offer-step">
+          <h3>The trade, in plain terms</h3>
+          <p>Once it's live and working: an honest review, and permission to post the before/after. That's the whole price. And when you're ready to grow past the website — ads, content, more bookings — I'll already know your business inside out.</p>
+        </li>
+      </ol>
     </div>
-  </article>
+  </section>
 
-  <article class="card">
-    <div class="card-media"><img src="ironhide-roofing/assets/hero.jpg" alt="Roofers laying charcoal shingles under a clearing storm sky" loading="lazy"></div>
-    <div class="card-body">
-      <p class="card-cat">Home services · Storm restoration</p>
-      <h2>Ironhide Roofing</h2>
-      <p>Roofing is sold on a clock, so the claim window is a filmstrip you drag through — date of loss to policy deadline. Proof strip above the fold, sticky emergency bar on mobile, stencil-crate display type.</p>
-      <ul class="tags"><li>Filmstrip timeline</li><li>Proof above fold</li><li>Tanker + Ranade</li></ul>
-      <a class="go" href="ironhide-roofing/index.html">View concept →</a>
+  <section class="pain">
+    <div class="shell">
+      <div class="pain-head">
+        <p class="kick">Sound familiar?</p>
+        <h2>The website is the one thing<br>you keep putting off.</h2>
+        <p class="lede">These are the exact things owners tell me. If any of them stings, that's the fixable part.</p>
+      </div>
+      <ul class="pain-list">
+        <li>Customers text "how much?" because your prices are nowhere</li>
+        <li>Your only web presence is an Instagram bio or a Linktree</li>
+        <li>The site you paid for years ago embarrasses you now</li>
+        <li>People find you on Google and have no way to book</li>
+        <li>A freelancer took the deposit and disappeared</li>
+        <li>You know it costs you jobs — you just haven't had time</li>
+      </ul>
     </div>
-  </article>
+  </section>
 
-  <article class="card">
-    <div class="card-media"><img src="hearth-and-hollow/assets/hero.jpg" alt="A charred bone-in ribeye on cast iron with embers behind" loading="lazy"></div>
-    <div class="card-body">
-      <p class="card-cat">Hospitality · Steakhouse</p>
-      <h2>Hearth &amp; Hollow</h2>
-      <p>Built on the fine-dining pattern: a full-viewport photographic opening, then one centered editorial column read like a printed tasting menu — numbered chapters, no sticky header, no cards, prices set under the dish names.</p>
-      <ul class="tags"><li>Centered chapters</li><li>No chrome</li><li>Zodiak + General Sans</li></ul>
-      <a class="go" href="hearth-and-hollow/index.html">View concept →</a>
-    </div>
-  </article>
+  <section class="work" id="work">
+    <div class="shell">
+      <div class="work-head">
+        <div>
+          <p class="kick">The work</p>
+          <h2>Five niches. <em>Five different sites.</em></h2>
+        </div>
+        <p class="lede">
+          Each one is built around what that trade actually sells on — a price list, a claim
+          deadline, a short menu — not one template with a new logo dropped in.
+        </p>
+      </div>
 
-  <article class="card">
-    <div class="card-media"><img src="vance-and-rowe/assets/hero.jpg" alt="A quiet walnut law library lit by a single brass lamp" loading="lazy"></div>
-    <div class="card-body">
-      <p class="card-cat">Professional services · Injury law</p>
-      <h2>Vance &amp; Rowe</h2>
-      <p>No hero image at all — a fixed sidebar rail with the phone number beside a scrolling typographic argument, forest green on ivory. The signature is a first-48-hours timeline, and there are deliberately no case results: those are bar-regulated, and inventing them on spec would be dishonest.</p>
-      <ul class="tags"><li>Sidebar rail</li><li>No hero image</li><li>Sentient + Supreme</li></ul>
-      <a class="go" href="vance-and-rowe/index.html">View concept →</a>
+      <div class="grid">
+        <article class="card">
+          <div class="card-media"><img src="hill-country-exterior/assets/hero.jpg" alt="A driveway mid-pressure-wash with a hard edge between clean and dirty concrete" loading="lazy"></div>
+          <div class="card-body">
+            <p class="card-cat">Home services · Pressure washing</p>
+            <h3>Hill Country Exterior Co.</h3>
+            <p>Built like the trades sites that actually convert: the quote form lives inside a split-screen hero, a sticky call bar owns mobile, and per-square-foot rates are published instead of hidden behind “call for quote”.</p>
+            <ul class="tags"><li>Hero quote form</li><li>Split-screen</li><li>Clash Display + Archivo</li></ul>
+            <a class="go" href="hill-country-exterior/index.html">View site →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-media"><img src="lumen-aesthetics/assets/hero.jpg" alt="A calm treatment room in soft daylight with a sage chair" loading="lazy"></div>
+          <div class="card-body">
+            <p class="card-cat">Aesthetics · Med spa</p>
+            <h3>Lumen Aesthetics</h3>
+            <p>Every med spa site shouts. This one is a quiet curated shop: an arch-cropped hero, a slow ticker, and treatments on a horizontally browsed shelf with plain pricing.</p>
+            <ul class="tags"><li>Arch imagery</li><li>Treatment shelf</li><li>Gambetta + Switzer</li></ul>
+            <a class="go" href="lumen-aesthetics/index.html">View site →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-media"><img src="ironhide-roofing/assets/hero.jpg" alt="Roofers laying charcoal shingles under a clearing storm sky" loading="lazy"></div>
+          <div class="card-body">
+            <p class="card-cat">Home services · Storm restoration</p>
+            <h3>Ironhide Roofing</h3>
+            <p>Roofing is sold on a clock, so the claim window is a filmstrip you drag through — date of loss to policy deadline. Proof strip above the fold, sticky emergency bar on mobile.</p>
+            <ul class="tags"><li>Filmstrip timeline</li><li>Proof above fold</li><li>Tanker + Ranade</li></ul>
+            <a class="go" href="ironhide-roofing/index.html">View site →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-media"><img src="hearth-and-hollow/assets/hero.jpg" alt="A charred bone-in ribeye on cast iron with embers behind" loading="lazy"></div>
+          <div class="card-body">
+            <p class="card-cat">Hospitality · Steakhouse</p>
+            <h3>Hearth &amp; Hollow</h3>
+            <p>Built on the fine-dining pattern: a full-viewport photographic opening, then one centered editorial column read like a printed tasting menu — no sticky header, no cards.</p>
+            <ul class="tags"><li>Centered chapters</li><li>No chrome</li><li>Zodiak + General Sans</li></ul>
+            <a class="go" href="hearth-and-hollow/index.html">View site →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-media"><img src="vance-and-rowe/assets/hero.jpg" alt="A quiet walnut law library lit by a single brass lamp" loading="lazy"></div>
+          <div class="card-body">
+            <p class="card-cat">Professional services · Injury law</p>
+            <h3>Vance &amp; Rowe</h3>
+            <p>No hero image at all — a fixed sidebar rail with the phone number beside a scrolling typographic argument. Deliberately no invented case results: those are bar-regulated.</p>
+            <ul class="tags"><li>Sidebar rail</li><li>No hero image</li><li>Sentient + Supreme</li></ul>
+            <a class="go" href="vance-and-rowe/index.html">View site →</a>
+          </div>
+        </article>
+      </div>
+
+      <p class="work-note">
+        Honest label: these five are concept builds for fictional businesses, made to show range —
+        and every one says so on its own page. Client builds with real results will replace them
+        here as they ship. That's the build-first offer working in public.
+      </p>
     </div>
-  </article>
+  </section>
+
+  <section class="why">
+    <div class="shell">
+      <div class="why-head">
+        <p class="kick">Why me</p>
+        <h2>Most designers sell you <em>a look.</em><br>I'm selling a phone that rings.</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-cell">
+          <h3>Built to convert, not decorate</h3>
+          <p>Every section exists to move a visitor toward calling or booking. Published prices, forms where thumbs are, one dominant action per page.</p>
+        </div>
+        <div class="why-cell">
+          <h3>Your trade, not a template</h3>
+          <p>A roofer sells urgency, a restaurant sells a menu, a clinic sells trust. The structure changes per business — scroll the five above if you don't believe me.</p>
+        </div>
+        <div class="why-cell">
+          <h3>Fast because it's my whole stack</h3>
+          <p>No agency layers, no project managers, no six-week discovery phase. You talk to the person building it, and it ships in days.</p>
+        </div>
+        <div class="why-cell">
+          <h3>Honest by default</h3>
+          <p>No invented reviews, no fake counters, no claims I can't back. Your site gets the same treatment — real numbers or none.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <div class="shell faq-grid">
+      <div>
+        <p class="kick">FAQ</p>
+        <h2>Fair <em>questions.</em></h2>
+      </div>
+      <div class="faq-list">
+        <details class="qa">
+          <summary>Free? What does it actually cost me?</summary>
+          <p>The build is free for the five founding businesses. Your only genuine cost is the domain — about $12 a year, in your name — since hosting for a site like this is free. Once the five spots are gone, the same build is a flat quoted rate.</p>
+        </details>
+        <details class="qa">
+          <summary>How fast is "fast"?</summary>
+          <p>The first working version of your site typically lands in days, not weeks — that's the version you judge before paying. Going live after that is usually within the week, mostly depending on how quickly your photos and details come through.</p>
+        </details>
+        <details class="qa">
+          <summary>Okay — what's the catch?</summary>
+          <p>Stated up front: an honest review once it's live, and permission to post the before/after as a case study. That's it. Five real results are worth more to me right now than five invoices, and you're the one who ends up with a website out of that maths.</p>
+        </details>
+        <details class="qa">
+          <summary>Do you handle hosting and the domain?</summary>
+          <p>Yes — I set up hosting, connect your domain, and wire up booking (cal.com, Square, whatever you already use). You own everything: the domain, the files, the accounts.</p>
+        </details>
+        <details class="qa">
+          <summary>What happens after launch?</summary>
+          <p>Edits are free for the first month. After that, small changes are cheap and quoted per request. And if you want help turning the site into actual bookings — ads, content, follow-up — that's the direction I'm building toward, and founding clients get first refusal.</p>
+        </details>
+        <details class="qa">
+          <summary>Can you redesign my existing site?</summary>
+          <p>That's most of what I do. Send me the link — the before/after is usually the easiest sales pitch I have.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="apply" id="apply">
+    <div class="shell apply-inner">
+      <p class="kick">Start a build</p>
+      <h2>Five spots. <em>Then it's paid.</em></h2>
+      <p class="lede">
+        Fifteen minutes about your business, then I start building. You'll be judging a working
+        link within days — not a proposal, not a mood board, not an invoice.
+      </p>
+      <div class="apply-cta">
+        <a class="btn btn-fill" href="https://cal.com/isiah2007" rel="noopener">Book a 15-min call</a>
+        <a class="btn btn-line" href="https://instagram.com/isiahbuilds" rel="noopener">DM me on Instagram</a>
+      </div>
+      <ul class="qualify">
+        <li><b>Yes</b> if you're an operating business with real customers today</li>
+        <li><b>Yes</b> if you can get me your photos and details inside a week</li>
+        <li><b>Yes</b> if you'll leave an honest review when it's live — good or bad</li>
+        <li><b>No</b> if it's an idea you haven't started yet</li>
+      </ul>
+      <p class="apply-alt">
+        Prefer to look around first? <a href="#work">The five builds are right here.</a>
+      </p>
+    </div>
+  </section>
 
 </main>
 
-<section class="note">
-  <div class="shell">
-    <p><strong>About these five.</strong> All are concept work for fictional businesses, built to demonstrate range. Every page carries a banner saying so. Pricing, menus and timelines are placeholders and are labelled on each page.</p>
-    <p class="fine">Photography is AI-generated. Regulated categories (medical, legal, insurance) carry the disclosures a live build would need.</p>
+<footer class="foot">
+  <div class="shell foot-grid">
+    <div>
+      <p><strong>Isiah Builds</strong> — websites for local businesses. Austin, TX · working everywhere.</p>
+      <p class="fine">Concept work labeled as such. No fabricated reviews or results — here or on your site.</p>
+    </div>
+    <div class="foot-links">
+      <a href="https://instagram.com/isiahbuilds" rel="noopener">Instagram</a>
+      <a href="https://cal.com/isiah2007" rel="noopener">Book a call</a>
+      <a href="#top">Top</a>
+    </div>
   </div>
-</section>
+</footer>
 
 </body>
 </html>

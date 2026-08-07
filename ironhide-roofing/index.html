@@ -5,170 +5,137 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ironhide Roofing — Storm Damage &amp; Replacement, Austin</title>
 <meta name="description" content="Storm damage inspection, insurance claim support and full roof replacement across Greater Austin. Free inspection, deadline-aware claim handling.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=tanker@400&f[]=ranade@400,500,600,700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   IRONHIDE ROOFING
-   Thesis: roofing is not sold on beauty, it is sold on a clock.
-   After a storm the homeowner has a limited window to file, and
-   almost every roofing site buries that. So the signature here
-   is the claim clock — a stepped timeline with real deadlines,
-   built as the spine of the page rather than a footnote.
+   IRONHIDE — rebuilt on the converting-restoration pattern:
+   proof strip ABOVE the fold, a sticky emergency bar, and the
+   claim clock as a horizontally scrolling filmstrip you drag
+   through (scroll-snap), because a deadline is a line, not a
+   grid. Tanker gives it a stencil-crate voice no other page
+   in this portfolio has.
    ============================================================ */
 :root{
-  --bitumen:#121417;
-  --pitch:#1A1D21;
-  --pitch-lit:#23272C;
-  --galv:#A6ADB4;
-  --steel:#6E767E;
-  --chalk:#EDEFF1;
-  --hazard:#E8B627;
-  --hazard-deep:#B88C11;
-  --hair:rgba(237,239,241,.13);
-  --hair-hot:rgba(232,182,39,.4);
-
-  --display:"Saira Condensed",Impact,sans-serif;
-  --text:"IBM Plex Sans",-apple-system,Arial,sans-serif;
-
-  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;
-  --s6:32px;--s7:48px;--s8:64px;--s9:96px;--s10:128px;
+  --tar:#141518;--iron:#1C1E22;--iron-lit:#26292E;
+  --zinc:#AEB4BA;--bolt:#71787F;--chalk:#F0F1F2;
+  --hazard:#E8B627;--hazard-deep:#B88C11;--rust:#C4502E;
+  --hair:rgba(240,241,242,.13);
+  --display:"Tanker",Impact,sans-serif;
+  --text:"Ranade",-apple-system,Arial,sans-serif;
+  --s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;
+  --s7:48px;--s8:64px;--s9:96px;
   --ease:cubic-bezier(.22,1,.36,1);
 }
 *,*::before,*::after{box-sizing:border-box}
-body{
-  margin:0;background:var(--bitumen);color:var(--chalk);
+body{margin:0;background:var(--tar);color:var(--chalk);
   font-family:var(--text);font-size:17px;line-height:1.62;
-  -webkit-font-smoothing:antialiased;
-}
+  -webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%;height:auto}
 a{color:inherit;text-decoration:none}
 :focus-visible{outline:3px solid var(--hazard);outline-offset:2px}
-.shell{width:100%;max-width:1200px;margin-inline:auto;padding-inline:var(--s5)}
+.shell{width:100%;max-width:1160px;margin-inline:auto;padding-inline:var(--s5)}
 
-h1,h2,h3{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.005em;line-height:.96;margin:0}
-.kick{
-  display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--bitumen);background:var(--hazard);padding:var(--s1) var(--s3);margin:0 0 var(--s5)
-}
-.lede{max-width:50ch;color:var(--galv);margin:0}
-
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  min-height:54px;padding:var(--s3) var(--s6);
-  font-family:var(--display);font-size:1rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-  border:2px solid var(--hazard);border-radius:1px;cursor:pointer;
-  transition:transform .2s var(--ease),background-color .2s var(--ease),color .2s var(--ease);
-}
-.btn-fill{background:var(--hazard);color:var(--bitumen)}
-.btn-fill:hover{background:var(--hazard-deep);border-color:var(--hazard-deep);transform:translateY(-2px)}
-.btn-line{background:transparent;color:var(--chalk);border-color:var(--steel)}
-.btn-line:hover{border-color:var(--chalk);transform:translateY(-2px)}
-.btn:active{transform:translateY(0)}
-
-.flag{margin:0;padding:var(--s2) var(--s5);background:var(--pitch-lit);color:var(--galv);
+.flag{margin:0;padding:var(--s2) var(--s5);background:var(--iron-lit);color:var(--zinc);
   font-size:.72rem;text-align:center;letter-spacing:.04em}
 
-/* ---- Header ---- */
-.top{position:sticky;top:0;z-index:50;background:rgba(18,20,23,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--hair)}
-.top .shell{display:flex;align-items:center;justify-content:space-between;gap:var(--s5);padding-block:var(--s3)}
-.mark{font-family:var(--display);font-size:1.5rem;font-weight:800;letter-spacing:.02em}
-.mark span{color:var(--hazard)}
-.top nav{display:flex;gap:var(--s6);font-size:.86rem;font-weight:500}
-.top nav a{padding-block:var(--s3)}
-.top nav a:hover{color:var(--hazard)}
+/* ---- Proof strip: FIRST thing on the page, before any pitch ---- */
+.proofstrip{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--s2) var(--s7);
+  padding:var(--s3) var(--s5);background:var(--hazard);color:var(--tar);
+  font-size:.8rem;font-weight:600;letter-spacing:.02em}
+.proofstrip b{font-weight:700}
 
 /* ---- Hero ---- */
-.hero{position:relative;isolation:isolate;padding-block:var(--s10) var(--s9);overflow:hidden}
+.hero{position:relative;isolation:isolate;padding:var(--s9) 0 var(--s8);overflow:hidden}
 .hero-media{position:absolute;inset:0;z-index:-1}
 .hero-media img{width:100%;height:100%;object-fit:cover}
-.hero-media::after{
-  content:"";position:absolute;inset:0;
-  background:
-    linear-gradient(90deg,rgba(18,20,23,.95) 0%,rgba(18,20,23,.78) 42%,rgba(18,20,23,.2) 78%,transparent 100%),
-    linear-gradient(0deg,rgba(18,20,23,.9),rgba(18,20,23,.25) 60%);
-}
-.hero h1{font-size:clamp(2.8rem,8.4vw,6rem);max-width:15ch}
+.hero-media::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(20,21,24,.96) 0%,rgba(20,21,24,.8) 44%,rgba(20,21,24,.25) 80%),
+             linear-gradient(0deg,rgba(20,21,24,.94),rgba(20,21,24,.2) 55%)}
+.mark{font-family:var(--display);font-size:1.5rem;letter-spacing:.04em;margin:0 0 var(--s8)}
+.mark span{color:var(--hazard)}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(2.7rem,7.6vw,5.6rem);
+  line-height:.98;letter-spacing:.01em;text-transform:uppercase;max-width:16ch;margin:0 0 var(--s5)}
 .hero h1 span{color:var(--hazard)}
-.hero .lede{margin:var(--s5) 0 var(--s6);font-size:1.08rem}
+.hero .lede{max-width:50ch;color:var(--zinc);margin:0 0 var(--s6)}
 .hero-cta{display:flex;flex-wrap:wrap;gap:var(--s3)}
-.creds{
-  display:flex;flex-wrap:wrap;gap:var(--s3) var(--s7);
-  margin:var(--s8) 0 0;padding-top:var(--s4);border-top:1px solid var(--hair);
-  list-style:none;font-size:.84rem;color:var(--galv)
-}
-.creds li{display:flex;align-items:center;gap:var(--s2)}
-.creds b{font-family:var(--display);font-size:1.1rem;color:var(--hazard)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;
+  padding:var(--s3) var(--s6);font-family:var(--display);font-size:1.02rem;letter-spacing:.05em;
+  text-transform:uppercase;border:2px solid var(--hazard);border-radius:2px;cursor:pointer;
+  transition:transform .2s var(--ease),background-color .2s var(--ease)}
+.btn-fill{background:var(--hazard);color:var(--tar)}
+.btn-fill:hover{background:var(--hazard-deep);border-color:var(--hazard-deep);transform:translateY(-2px)}
+.btn-line{background:transparent;color:var(--chalk);border-color:var(--bolt)}
+.btn-line:hover{border-color:var(--chalk);transform:translateY(-2px)}
 
-/* ---- The claim clock: signature ---- */
-.clock{padding-block:var(--s9);border-top:1px solid var(--hair)}
-.clock-head{max-width:640px;margin-bottom:var(--s8)}
-.clock-head h2{font-size:clamp(2.2rem,5.2vw,3.6rem);margin-bottom:var(--s4)}
+/* ---- The clock: horizontal filmstrip, scroll-snap ---- */
+.clock{padding:var(--s9) 0;border-top:1px solid var(--hair)}
+.clock-head{max-width:660px;margin-bottom:var(--s6)}
+.kick{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--tar);background:var(--hazard);
+  padding:var(--s2) var(--s3);margin:0 0 var(--s5)}
+.clock-head h2{font-family:var(--display);font-weight:400;font-size:clamp(2.1rem,5vw,3.6rem);
+  text-transform:uppercase;line-height:1;margin:0 0 var(--s4)}
 .clock-head h2 span{color:var(--hazard)}
-.track{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--hair)}
-.tick{
-  position:relative;padding:var(--s6) var(--s5);
-  border-right:1px solid var(--hair);background:var(--pitch);
-  transition:background-color .3s var(--ease)
-}
-.tick:last-child{border-right:0}
-.tick:hover{background:var(--pitch-lit)}
-.tick-when{
-  font-family:var(--display);font-size:2.3rem;font-weight:800;line-height:1;
-  color:var(--hazard);margin-bottom:var(--s2)
-}
-.tick-when small{display:block;font-family:var(--text);font-size:.72rem;font-weight:500;
-  letter-spacing:.16em;text-transform:uppercase;color:var(--steel);margin-top:var(--s2)}
-.tick h3{font-size:1.15rem;margin:var(--s4) 0 var(--s2)}
-.tick p{margin:0;font-size:.93rem;color:var(--galv)}
-.tick-urgent{background:var(--pitch-lit);box-shadow:inset 0 3px 0 var(--hazard)}
-.clock-note{margin:var(--s5) 0 0;font-size:.86rem;color:var(--steel);max-width:64ch}
+.clock-head p{max-width:52ch;color:var(--zinc);margin:0}
+.strip-hint{font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--hazard);
+  margin:0 0 var(--s4)}
+.strip{display:flex;gap:var(--s4);overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:var(--s2) max(var(--s5),calc((100vw - 1160px)/2 + var(--s5))) var(--s5);
+  scrollbar-width:thin}
+.frame-card{flex:0 0 min(340px,82vw);scroll-snap-align:start;
+  background:var(--iron);border:1px solid var(--hair);border-radius:4px;
+  padding:var(--s6) var(--s5);position:relative}
+.frame-card.urgent{box-shadow:inset 0 4px 0 var(--hazard);background:var(--iron-lit)}
+.f-when{font-family:var(--display);font-size:2.4rem;line-height:1;color:var(--hazard);margin:0}
+.f-tag{display:block;font-size:.7rem;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--bolt);margin:var(--s2) 0 var(--s5)}
+.frame-card h3{font-family:var(--display);font-weight:400;font-size:1.3rem;
+  text-transform:uppercase;margin:0 0 var(--s2)}
+.frame-card p{margin:0;font-size:.93rem;color:var(--zinc)}
+.clock-note{margin:var(--s4) 0 0;font-size:.85rem;color:var(--bolt);max-width:66ch}
 
-/* ---- Scope ---- */
-.scope{padding-block:var(--s9);border-top:1px solid var(--hair)}
-.scope-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:var(--s8)}
-.scope h2{font-size:clamp(2rem,4.8vw,3.2rem);margin-bottom:var(--s4)}
+/* ---- Scope: plain two-column ---- */
+.scope{padding:var(--s9) 0;border-top:1px solid var(--hair)}
+.scope-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:var(--s8)}
+.scope h2{font-family:var(--display);font-weight:400;font-size:clamp(1.9rem,4.4vw,3rem);
+  text-transform:uppercase;line-height:1.02;margin:0 0 var(--s4)}
+.scope .lede{color:var(--zinc);margin:0}
 .rows{margin:0;padding:0;list-style:none}
-.row{display:grid;grid-template-columns:3.4rem 1fr;gap:var(--s5);padding-block:var(--s5);border-top:1px solid var(--hair)}
+.row{padding:var(--s5) 0;border-top:1px solid var(--hair)}
 .row:last-child{border-bottom:1px solid var(--hair)}
-.row-n{font-family:var(--display);font-size:1.4rem;color:var(--steel)}
-.row h3{font-family:var(--text);font-size:1.05rem;font-weight:600;text-transform:none;letter-spacing:0;margin-bottom:var(--s2)}
-.row p{margin:0;color:var(--galv);font-size:.95rem}
+.row h3{font-size:1.05rem;font-weight:700;margin:0 0 var(--s2)}
+.row p{margin:0;color:var(--zinc);font-size:.95rem}
 
-/* ---- Call band ---- */
-.band{background:var(--hazard);color:var(--bitumen);padding-block:var(--s9)}
-.band-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:var(--s8);align-items:center}
-.band h2{font-size:clamp(2.2rem,5.4vw,3.6rem);max-width:16ch;margin-bottom:var(--s4)}
-.band p{max-width:46ch;margin:0 0 var(--s6);color:rgba(18,20,23,.78)}
-.band .btn{background:var(--bitumen);color:var(--hazard);border-color:var(--bitumen)}
-.band .btn:hover{background:#000;border-color:#000}
+/* ---- Close ---- */
+.close{background:var(--hazard);color:var(--tar);padding:var(--s9) 0}
+.close-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:var(--s8);align-items:center}
+.close h2{font-family:var(--display);font-weight:400;font-size:clamp(2.1rem,5.2vw,3.6rem);
+  text-transform:uppercase;line-height:1;max-width:16ch;margin:0 0 var(--s4)}
+.close p{max-width:46ch;margin:0 0 var(--s6);color:rgba(20,21,24,.75)}
+.close .btn{background:var(--tar);color:var(--hazard);border-color:var(--tar)}
+.close .btn:hover{background:#000;border-color:#000}
 .facts{margin:0}
-.facts div{display:flex;justify-content:space-between;gap:var(--s4);padding-block:var(--s3);border-top:1px solid rgba(18,20,23,.28)}
-.facts dt{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(18,20,23,.65)}
-.facts dd{margin:0;font-weight:600;text-align:right}
+.facts div{display:flex;justify-content:space-between;gap:var(--s4);
+  padding:var(--s3) 0;border-top:1px solid rgba(20,21,24,.3)}
+.facts dt{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(20,21,24,.6)}
+.facts dd{margin:0;font-weight:700;text-align:right}
 
-/* ---- Footer ---- */
-.foot{padding-block:var(--s7);border-top:1px solid var(--hair)}
-.foot p{margin:0 0 var(--s2);font-size:.9rem;color:var(--galv)}
-.foot .fine{font-size:.78rem;color:var(--steel)}
+.foot{padding:var(--s7) 0 calc(var(--s7) + 70px);border-top:1px solid var(--hair)}
+.foot p{margin:0 0 var(--s2);font-size:.88rem;color:var(--zinc)}
+.foot .fine{font-size:.76rem;color:var(--bolt)}
 
-@media (max-width:1000px){
-  .track{grid-template-columns:repeat(2,1fr)}
-  .tick{border-bottom:1px solid var(--hair)}
-  .tick:nth-child(2n){border-right:0}
-  .tick:nth-child(n+3){border-bottom:0}
-  .scope-grid,.band-grid{grid-template-columns:1fr;gap:var(--s7)}
-}
-@media (max-width:720px){ .top nav{display:none} }
+/* ---- Sticky emergency bar (mobile) ---- */
+.embar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;background:var(--rust);color:#fff}
+.embar a{display:flex;align-items:center;justify-content:center;gap:var(--s3);
+  min-height:60px;font-family:var(--display);font-size:1.05rem;letter-spacing:.05em;text-transform:uppercase}
+
+@media (max-width:900px){ .scope-grid,.close-grid{grid-template-columns:1fr;gap:var(--s6)} .embar{display:block} }
 @media (max-width:620px){
   body{font-size:16px}
-  :root{--s9:64px;--s10:80px}
-  .hero h1{font-size:clamp(2.2rem,10.5vw,3.1rem)}
+  :root{--s9:64px}
+  .hero h1{font-size:clamp(2.2rem,10vw,3.2rem)}
   .hero-cta .btn{flex:1 1 100%}
-  .track{grid-template-columns:1fr}
-  .tick{border-right:0;border-bottom:1px solid var(--hair)}
-  .tick:last-child{border-bottom:0}
   .facts div{flex-direction:column;gap:2px}
   .facts dd{text-align:left}
 }
@@ -179,123 +146,88 @@ h1,h2,h3{font-family:var(--display);font-weight:700;text-transform:uppercase;let
 
 <p class="flag">Portfolio concept — Ironhide Roofing is a fictional business created to demonstrate design work.</p>
 
-<header class="top">
+<p class="proofstrip"><b>★ 4.8</b> · 240+ roofs in Travis County · <b>18 yrs</b> in business · Licensed &amp; insured · <b>Free</b> inspection in 24h</p>
+
+<header class="hero">
+  <div class="hero-media" aria-hidden="true">
+    <img src="assets/hero.jpg" alt="" width="1920" height="1080" fetchpriority="high">
+  </div>
   <div class="shell">
-    <a class="mark" href="#top">IRON<span>HIDE</span></a>
-    <nav aria-label="Primary">
-      <a href="#clock">Claim window</a>
-      <a href="#scope">What we do</a>
-      <a href="#call">Inspection</a>
-    </nav>
-    <a class="btn btn-fill" href="#call" style="min-height:44px;font-size:.86rem">Free inspection</a>
+    <p class="mark">IRON<span>HIDE</span></p>
+    <h1>The hail was in March. <span>Your clock started then.</span></h1>
+    <p class="lede">
+      Most Texas policies give you a limited window to file after the date of loss — not the
+      date you noticed. We inspect free, document properly, and file before it closes.
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn-fill" href="#close">Book free inspection</a>
+      <a class="btn btn-line" href="#clock">See the claim clock</a>
+    </div>
   </div>
 </header>
 
-<main id="top">
-
-  <section class="hero">
-    <div class="hero-media" aria-hidden="true">
-      <img src="assets/hero.jpg" alt="" width="1920" height="1080" fetchpriority="high">
-    </div>
-    <div class="shell">
-      <p class="kick">Storm damage · Greater Austin</p>
-      <h1>The hail was in March.<br><span>Your clock started then.</span></h1>
-      <p class="lede">
-        Most Texas policies give you a limited window to file after the date of loss — not the
-        date you noticed. We inspect free, document properly, and file before it closes.
-      </p>
-      <div class="hero-cta">
-        <a class="btn btn-fill" href="#call">Book free inspection</a>
-        <a class="btn btn-line" href="#clock">How the window works</a>
-      </div>
-      <ul class="creds">
-        <li><b>24h</b> Inspection turnaround</li>
-        <li><b>0</b> Cost to inspect</li>
-        <li><b>18</b> Years in Travis County</li>
-        <li><b>✓</b> Licensed &amp; insured</li>
-      </ul>
-    </div>
-  </section>
+<main>
 
   <section class="clock" id="clock">
     <div class="shell">
       <div class="clock-head">
         <p class="kick">The claim window</p>
-        <h2>Four dates decide<br>whether you <span>pay for this.</span></h2>
-        <p class="lede">
-          Almost nobody explains this before the estimate. Here it is first, because if you
-          miss the window the quality of the roof stops mattering.
-        </p>
+        <h2>Four dates decide whether <span>you pay for this.</span></h2>
+        <p>Almost nobody explains this before the estimate. Drag through it — because if you
+        miss the window, the quality of the roof stops mattering.</p>
       </div>
-      <div class="track">
-        <div class="tick">
-          <p class="tick-when">Day 0<small>Date of loss</small></p>
-          <h3>The storm</h3>
-          <p>Your window opens the day the hail or wind hit — not the day the ceiling stained.</p>
-        </div>
-        <div class="tick tick-urgent">
-          <p class="tick-when">Day 1–30<small>Inspect &amp; document</small></p>
-          <h3>Evidence</h3>
-          <p>Photographed test squares, moisture readings and a written scope. Weak documentation is the most common reason a claim is denied.</p>
-        </div>
-        <div class="tick">
-          <p class="tick-when">Day 30–60<small>File</small></p>
-          <h3>The claim</h3>
-          <p>Filed with your carrier and met on the roof for the adjuster inspection so nothing is missed.</p>
-        </div>
-        <div class="tick">
-          <p class="tick-when">Varies<small>Policy deadline</small></p>
-          <h3>The wall</h3>
-          <p>After your policy's filing deadline the loss is yours. Check your own policy — the limit differs by carrier.</p>
-        </div>
+      <p class="strip-hint shell" style="padding-inline:0">Drag →</p>
+    </div>
+    <div class="strip" tabindex="0" role="region" aria-label="Claim timeline, scrolls horizontally">
+      <div class="frame-card">
+        <p class="f-when">Day 0</p><span class="f-tag">Date of loss</span>
+        <h3>The storm</h3>
+        <p>Your window opens the day the hail or wind hit — not the day the ceiling stained.</p>
       </div>
-      <p class="clock-note">
-        <strong>Demo note:</strong> illustrative timeline only. Real filing deadlines are set by your
-        individual policy and by state law, and a live site must state the actual terms rather than
-        generic ones. Nothing here is legal or insurance advice.
-      </p>
+      <div class="frame-card urgent">
+        <p class="f-when">1–30</p><span class="f-tag">Inspect &amp; document</span>
+        <h3>Evidence</h3>
+        <p>Photographed test squares, moisture readings, a written scope. Weak documentation is the top reason claims get denied.</p>
+      </div>
+      <div class="frame-card">
+        <p class="f-when">30–60</p><span class="f-tag">File</span>
+        <h3>The claim</h3>
+        <p>Filed with your carrier — and we meet the adjuster on the roof so nothing is missed.</p>
+      </div>
+      <div class="frame-card">
+        <p class="f-when">⏱</p><span class="f-tag">Policy deadline</span>
+        <h3>The wall</h3>
+        <p>After your policy's filing deadline the loss is yours. The limit differs by carrier — check your own policy.</p>
+      </div>
+    </div>
+    <div class="shell">
+      <p class="clock-note"><strong>Demo note:</strong> illustrative timeline only. Real deadlines are
+      set by your policy and state law; a live site must state actual terms. Not legal or insurance advice.</p>
     </div>
   </section>
 
-  <section class="scope" id="scope">
+  <section class="scope">
     <div class="shell scope-grid">
       <div>
-        <p class="kick">Scope</p>
         <h2>Roofs, and the things that ruin roofs.</h2>
-        <p class="lede">
-          A leak is rarely just shingles. Everything below gets checked on the same visit
-          because water travels before it shows.
-        </p>
+        <p class="lede">A leak is rarely just shingles. Everything here gets checked on the
+        same visit, because water travels before it shows.</p>
       </div>
       <ul class="rows">
-        <li class="row">
-          <span class="row-n">01</span>
-          <div><h3>Full replacement</h3><p>Tear-off to deck, new underlayment, architectural or impact-rated shingle. Decking replaced where it is soft, priced per sheet.</p></div>
-        </li>
-        <li class="row">
-          <span class="row-n">02</span>
-          <div><h3>Storm repair</h3><p>Targeted repair where the damage is genuinely local — and an honest word when a repair is throwing money at a roof that needs replacing.</p></div>
-        </li>
-        <li class="row">
-          <span class="row-n">03</span>
-          <div><h3>Flashing &amp; penetrations</h3><p>Chimneys, valleys, vents and skylights. This is where most leaks actually start, not in the field of the roof.</p></div>
-        </li>
-        <li class="row">
-          <span class="row-n">04</span>
-          <div><h3>Gutters &amp; drainage</h3><p>Undersized or blocked gutters push water back under the shingle edge and rot the fascia from behind.</p></div>
-        </li>
+        <li class="row"><h3>Full replacement</h3><p>Tear-off to deck, new underlayment, architectural or impact-rated shingle. Soft decking replaced, priced per sheet.</p></li>
+        <li class="row"><h3>Storm repair</h3><p>Targeted repair where damage is genuinely local — and an honest word when a repair is wasting money on a roof that needs replacing.</p></li>
+        <li class="row"><h3>Flashing &amp; penetrations</h3><p>Chimneys, valleys, vents, skylights. This is where most leaks start, not the field of the roof.</p></li>
+        <li class="row"><h3>Gutters &amp; drainage</h3><p>Undersized gutters push water back under the shingle edge and rot the fascia from behind.</p></li>
       </ul>
     </div>
   </section>
 
-  <section class="band" id="call">
-    <div class="shell band-grid">
+  <section class="close" id="close">
+    <div class="shell close-grid">
       <div>
         <h2>Free inspection. Written scope. No obligation.</h2>
-        <p>
-          We photograph the roof, hand you the documentation, and you decide what to do with
-          it — including taking it to another contractor.
-        </p>
+        <p>We photograph the roof, hand you the documentation, and you decide what to do
+        with it — including taking it to another contractor.</p>
         <a class="btn" href="tel:+15125550119">Call (512) 555-0119</a>
       </div>
       <dl class="facts">
@@ -315,6 +247,10 @@ h1,h2,h3{font-family:var(--display);font-weight:700;text-transform:uppercase;let
     <p class="fine">Portfolio concept. Fictional business, illustrative timeline, AI-generated photography. Not legal or insurance advice.</p>
   </div>
 </footer>
+
+<div class="embar">
+  <a href="tel:+15125550119">Storm damage? Same-day tarping — call</a>
+</div>
 
 </body>
 </html>

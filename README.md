@@ -18,13 +18,13 @@ off it.
 
 ## The five
 
-| Folder | Trade | Signature idea | Palette / type |
+| Folder | Trade | Skeleton (each one is different on purpose) | Type (Fontshare) |
 |---|---|---|---|
-| `hill-country-exterior` | Pressure washing | Headline sits inside a "cleaned stripe" cut through grimy concrete. Publishes per-sq-ft rates instead of "call for quote" | Slate + safety orange, light page · Archivo Black + Public Sans |
-| `lumen-aesthetics` | Med spa | Treatments set as a printed book index — leader dots, ranged-right prices. No cards anywhere | Sage + porcelain · Fraunces + Karla |
-| `ironhide-roofing` | Storm restoration | The insurance claim clock as the spine of the page: date of loss → evidence → file → policy deadline | Bitumen + hazard yellow · Saira Condensed + IBM Plex Sans |
-| `hearth-and-hollow` | Steakhouse | The menu *is* the hero, typeset as a letterpress card. Food photo demoted below the fold | Charred oak + ember · Bodoni Moda + Jost |
-| `vance-and-rowe` | Injury law | A first-48-hours timeline — the part a frightened client needs — instead of a giant settlement figure | Parchment + oxblood · Newsreader + Source Sans 3 |
+| `hill-country-exterior` | Pressure washing | Split-screen hero with the quote form IN it, full-height photo proof, sticky mobile call bar | Clash Display + Archivo |
+| `lumen-aesthetics` | Med spa | Arch-cropped hero, marquee ticker, treatments on a horizontal scroll-snap shelf | Gambetta + Switzer |
+| `ironhide-roofing` | Storm restoration | Proof strip above the fold, claim clock as a draggable filmstrip, sticky emergency bar | Tanker + Ranade |
+| `hearth-and-hollow` | Steakhouse | Full-viewport photographic opening, then one centered editorial column — no sticky header, no cards | Zodiak + General Sans |
+| `vance-and-rowe` | Injury law | Fixed left sidebar rail beside a scrolling column — no hero image anywhere | Sentient + Supreme |
 
 Each has its own palette, its own type pairing, and its own structural device. No shared
 stylesheet, no shared section order — that is the whole point of the set.
@@ -51,9 +51,10 @@ All six pages, at 1280px and 375px:
 - `prefers-reduced-motion` respected; only `transform` and `opacity` animate
 - Visible `:focus-visible` on every interactive element
 
-Seen with my own eyes: the index, Hill Country, Hearth & Hollow, Ironhide. Lumen and
-Vance & Rowe passed the same automated audit but were not screenshotted — worth a look
-before you publish them.
+After the second-generation rebuild, screenshotted: index, Hill Country, Lumen, Vance & Rowe.
+Hearth & Hollow and Ironhide passed the same automated audit (no overflow, no sub-44px
+targets, fonts confirmed loading) but the new versions were not eyeballed — glance at them
+before publishing.
 
 ## Reusing these for a real client
 

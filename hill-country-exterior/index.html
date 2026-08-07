@@ -4,324 +4,227 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hill Country Exterior Co. — Pressure Washing, Austin TX</title>
-<meta name="description" content="Driveways, siding, roofs and patios cleaned across Greater Austin. Flat per-square-foot pricing, quoted from your address before we arrive.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta name="description" content="Driveways, siding, roofs and patios cleaned across Greater Austin. Published per-square-foot rates, quote back same day.">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=archivo@400,500,600,700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   HILL COUNTRY EXTERIOR CO.
-   Thesis: this trade sells one thing — the hard edge between
-   filthy and clean. So the whole page is built on that edge.
-   The hero headline sits inside a "cleaned stripe" cut through
-   grimy concrete; every rule on the page is that same edge.
-   Light page, on purpose — nothing else in the portfolio is.
+   HILL COUNTRY EXTERIOR CO. — rebuilt on the converting-trades
+   pattern: proof above the fold, ONE dominant action, and the
+   quote form IN the hero (trades sites convert on the form, not
+   the scroll). Skeleton: split-screen — left is the pitch and a
+   3-field form, right is the photographic proof, full height.
+   Sticky call bar on mobile. Nothing below the fold is required.
    ============================================================ */
 :root{
-  --slate:#1E2428;        /* wet dark concrete */
-  --grime:#5C635F;
-  --concrete:#8E948F;
-  --pale:#F2F1ED;         /* cleaned concrete */
-  --paler:#FAF9F6;
-  --orange:#D4622A;       /* the machine itself */
-  --orange-deep:#A8461A;
-  --hair:rgba(30,36,40,.14);
-
-  --display:"Archivo Black",Impact,sans-serif;
-  --text:"Public Sans",-apple-system,Arial,sans-serif;
-
-  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;
-  --s6:32px;--s7:48px;--s8:64px;--s9:96px;--s10:128px;
+  --slate:#20262B;--slate-deep:#171C20;
+  --pale:#F1F0EC;--paler:#FAF9F6;
+  --concrete:#8D938E;--grime:#5A615D;
+  --orange:#D4622A;--orange-deep:#A8461A;
+  --hair:rgba(32,38,43,.14);--hair-inv:rgba(241,240,236,.16);
+  --display:"Clash Display",Impact,sans-serif;
+  --text:"Archivo",-apple-system,Arial,sans-serif;
+  --s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;
+  --s7:48px;--s8:64px;--s9:96px;
   --ease:cubic-bezier(.22,1,.36,1);
 }
 *,*::before,*::after{box-sizing:border-box}
-body{
-  margin:0;background:var(--paler);color:var(--slate);
-  font-family:var(--text);font-size:17px;line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-}
+body{margin:0;background:var(--paler);color:var(--slate);
+  font-family:var(--text);font-size:16.5px;line-height:1.6;
+  -webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%;height:auto}
 a{color:inherit;text-decoration:none}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 :focus-visible{outline:3px solid var(--orange);outline-offset:2px}
-.shell{width:100%;max-width:1180px;margin-inline:auto;padding-inline:var(--s5)}
 
-h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.02em;line-height:.98;margin:0}
-.kick{
-  font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--orange-deep);margin:0 0 var(--s4)
-}
-.lede{max-width:48ch;color:var(--grime);margin:0}
+.flag{margin:0;padding:var(--s2) var(--s5);background:var(--slate-deep);color:var(--pale);
+  font-size:.7rem;font-weight:500;text-align:center;letter-spacing:.04em}
 
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  min-height:52px;padding:var(--s3) var(--s6);
-  font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;
-  border:2px solid var(--slate);border-radius:2px;cursor:pointer;
-  transition:transform .2s var(--ease),background-color .2s var(--ease),color .2s var(--ease);
-}
-.btn-fill{background:var(--orange);border-color:var(--orange);color:#fff}
-.btn-fill:hover{background:var(--orange-deep);border-color:var(--orange-deep);transform:translateY(-2px)}
-.btn-line{background:transparent;color:var(--slate)}
-.btn-line:hover{background:var(--slate);color:var(--paler);transform:translateY(-2px)}
-.btn:active{transform:translateY(0)}
+/* ---- Split screen ---- */
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:calc(100vh - 34px)}
 
-.flag{
-  margin:0;padding:var(--s2) var(--s5);background:var(--slate);color:var(--pale);
-  font-size:.72rem;font-weight:600;text-align:center;letter-spacing:.04em
-}
+/* left: the pitch */
+.pitch{display:flex;flex-direction:column;padding:var(--s6) clamp(var(--s5),4vw,var(--s8))}
+.brand{font-family:var(--display);font-weight:700;font-size:1.05rem;line-height:1.15;
+  text-transform:uppercase;letter-spacing:.02em}
+.brand span{color:var(--orange)}
+.pitch-body{margin:auto 0;padding:var(--s8) 0}
+.rating{display:inline-flex;align-items:center;gap:var(--s3);margin:0 0 var(--s5);
+  font-size:.82rem;font-weight:600}
+.rating .stars{color:var(--orange);letter-spacing:2px}
+.pitch h1{font-family:var(--display);font-weight:600;font-size:clamp(2.3rem,4.6vw,3.9rem);
+  line-height:1.0;letter-spacing:-.01em;margin:0 0 var(--s5);text-transform:uppercase}
+.pitch h1 em{font-style:normal;color:var(--orange)}
+.pitch .lede{max-width:44ch;color:var(--grime);margin:0 0 var(--s6)}
 
-/* ---- Header ---- */
-.top{position:sticky;top:0;z-index:50;background:var(--paler);border-bottom:2px solid var(--slate)}
-.top .shell{display:flex;align-items:center;justify-content:space-between;gap:var(--s5);padding-block:var(--s3)}
-.mark{font-family:var(--display);font-size:1.15rem;letter-spacing:-.01em;line-height:1.1}
-.mark span{color:var(--orange)}
-.top nav{display:flex;gap:var(--s6);font-size:.84rem;font-weight:600}
-.top nav a{padding-block:var(--s3)}
-.top nav a:hover{color:var(--orange-deep)}
+/* the form is the hero */
+.quote{background:var(--slate);color:var(--pale);padding:var(--s6);border-radius:6px}
+.quote h2{font-family:var(--display);font-weight:600;font-size:1.15rem;margin:0 0 var(--s2);
+  text-transform:uppercase}
+.quote p{margin:0 0 var(--s5);font-size:.85rem;color:var(--concrete)}
+.q-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3);margin-bottom:var(--s3)}
+.q-field{display:block}
+.q-field.full{grid-column:1/-1}
+.q-field span{display:block;font-size:.66rem;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--concrete);margin-bottom:var(--s2)}
+.q-field input,.q-field select{width:100%;min-height:48px;padding:var(--s3);
+  background:var(--slate-deep);border:1px solid var(--hair-inv);border-radius:4px;
+  color:var(--pale);font-family:var(--text);font-size:.95rem}
+.q-field input::placeholder{color:var(--grime)}
+.q-field input:focus,.q-field select:focus{outline:2px solid var(--orange);outline-offset:0;border-color:var(--orange)}
+.q-send{width:100%;min-height:54px;margin-top:var(--s3);
+  font-family:var(--display);font-weight:600;font-size:1rem;letter-spacing:.04em;
+  text-transform:uppercase;background:var(--orange);color:#fff;border:0;border-radius:4px;
+  cursor:pointer;transition:background-color .2s var(--ease),transform .2s var(--ease)}
+.q-send:hover{background:var(--orange-deep);transform:translateY(-1px)}
+.q-send:active{transform:translateY(0)}
+.q-fine{margin:var(--s3) 0 0;font-size:.72rem;color:var(--concrete)}
 
-/* ---- Hero: the cleaned stripe -------------------------------
-   Two copies of one photo. The bottom is grimy (desaturated and
-   darkened); the top is "cleaned" and clipped to a slanted band.
-   The headline rides inside the band. */
-.hero{position:relative;isolation:isolate;overflow:hidden;background:var(--slate)}
-.hero-media{position:absolute;inset:0;z-index:0}
-.hero-media img{width:100%;height:100%;object-fit:cover}
-.hero-dirty img{filter:grayscale(.75) brightness(.45) contrast(1.1)}
-/* The band must clear the kicker at the top and the CTAs at the
-   bottom — any type caught on the dark side is slate-on-slate. */
-.hero-clean{
-  clip-path:polygon(0 20%,100% 4%,100% 82%,0 98%);
-}
-.hero-clean img{filter:brightness(1.06) contrast(1.04) saturate(1.05)}
-.hero-clean::after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(242,241,237,.90),rgba(242,241,237,.80));
-}
-.hero-body{position:relative;z-index:2;padding-block:var(--s10)}
-.hero h1{font-size:clamp(2.5rem,8vw,5.6rem);max-width:16ch;text-transform:uppercase}
-.hero h1 .cut{color:var(--orange)}
-.hero .lede{margin:var(--s5) 0 var(--s6);font-size:1.06rem;color:var(--slate)}
-.hero-cta{display:flex;flex-wrap:wrap;gap:var(--s3)}
+.pitch-foot{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s6);padding-top:var(--s5);
+  border-top:1px solid var(--hair);font-size:.78rem;font-weight:600;color:var(--grime)}
+.pitch-foot b{color:var(--orange-deep)}
 
-/* compact credential row */
-.creds{
-  display:flex;flex-wrap:wrap;gap:var(--s3) var(--s7);
-  margin:var(--s8) 0 0;padding-top:var(--s4);border-top:2px solid var(--slate);
-  list-style:none;font-size:.84rem;font-weight:600
-}
-.creds li{display:flex;align-items:center;gap:var(--s2)}
-.creds b{color:var(--orange-deep);font-family:var(--display);font-size:1rem}
+/* right: photographic proof, full height */
+.proof{position:relative;overflow:hidden;background:var(--slate)}
+.proof img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.proof-tag{position:absolute;left:var(--s5);bottom:var(--s5);
+  background:rgba(23,28,32,.82);backdrop-filter:blur(6px);color:var(--pale);
+  padding:var(--s3) var(--s5);border-radius:4px;font-size:.78rem;font-weight:600}
+.proof-tag b{color:var(--orange)}
 
-/* ---- Price grid: the real differentiator in this trade ---- */
-.rates{padding-block:var(--s9)}
-.rates h2{font-size:clamp(2rem,4.6vw,3.2rem);text-transform:uppercase;margin-bottom:var(--s5)}
-.rate-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:var(--s7);border:2px solid var(--slate)}
-.rate{padding:var(--s6) var(--s5);border-right:2px solid var(--slate)}
-.rate:last-child{border-right:0}
-.rate-num{font-family:var(--display);font-size:2.6rem;line-height:1;color:var(--orange)}
-.rate-num small{font-family:var(--text);font-size:.8rem;font-weight:600;color:var(--grime);display:block;margin-top:var(--s2)}
-.rate h3{font-size:1rem;margin:var(--s4) 0 var(--s2);text-transform:uppercase}
-.rate p{margin:0;font-size:.92rem;color:var(--grime)}
-.rate-note{margin:var(--s5) 0 0;font-size:.86rem;color:var(--grime)}
+/* ---- Below the fold: rates as one flat table ---- */
+.rates{padding:var(--s9) 0;background:var(--pale)}
+.shell{width:100%;max-width:1100px;margin-inline:auto;padding-inline:var(--s5)}
+.kick{font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--orange-deep);margin:0 0 var(--s4)}
+.rates h2{font-family:var(--display);font-weight:600;font-size:clamp(1.9rem,4.2vw,3rem);
+  text-transform:uppercase;line-height:1.02;margin:0 0 var(--s4)}
+.rates .lede{max-width:52ch;color:var(--grime);margin:0 0 var(--s7)}
+.rate-table{margin:0;border-top:2px solid var(--slate)}
+.rate-line{display:grid;grid-template-columns:1fr auto;align-items:center;gap:var(--s5);
+  padding:var(--s5) 0;border-bottom:1px solid var(--hair)}
+.rate-line h3{font-family:var(--display);font-weight:600;font-size:1.2rem;margin:0;text-transform:uppercase}
+.rate-line p{margin:var(--s2) 0 0;font-size:.9rem;color:var(--grime)}
+.rate-num{font-family:var(--display);font-weight:700;font-size:2rem;color:var(--orange);white-space:nowrap}
+.rate-num small{font-family:var(--text);font-weight:600;font-size:.72rem;color:var(--grime);display:block;text-align:right}
+.rate-foot{margin:var(--s5) 0 0;font-size:.84rem;color:var(--grime)}
 
-/* ---- Surfaces ---- */
-.surfaces{padding-bottom:var(--s9)}
-.surf-head{border-top:2px solid var(--slate);padding-top:var(--s7);margin-bottom:var(--s7)}
-.surf-head h2{font-size:clamp(2rem,4.6vw,3.2rem);text-transform:uppercase;margin-bottom:var(--s4)}
-.surf-list{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s5)}
-.surf{
-  display:flex;gap:var(--s5);padding:var(--s5);
-  background:var(--pale);border-left:6px solid var(--orange);
-  transition:transform .25s var(--ease)
-}
-.surf:hover{transform:translateX(4px)}
-.surf-n{font-family:var(--display);font-size:1.1rem;color:var(--concrete)}
-.surf h3{font-size:1.05rem;margin-bottom:var(--s2);text-transform:uppercase}
-.surf p{margin:0;font-size:.94rem;color:var(--grime)}
+/* ---- Method strip ---- */
+.method{padding:var(--s9) 0}
+.method h2{font-family:var(--display);font-weight:600;font-size:clamp(1.9rem,4.2vw,3rem);
+  text-transform:uppercase;line-height:1.02;margin:0 0 var(--s7);max-width:20ch}
+.m-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--slate);
+  border:2px solid var(--slate)}
+.m-cell{background:var(--paler);padding:var(--s5)}
+.m-cell b{display:block;font-family:var(--display);font-weight:700;font-size:.95rem;
+  text-transform:uppercase;margin-bottom:var(--s2)}
+.m-cell p{margin:0;font-size:.88rem;color:var(--grime)}
 
-/* ---- Quote band ---- */
-.quote-band{background:var(--slate);color:var(--pale);padding-block:var(--s9)}
-.quote-band h2{font-size:clamp(2rem,5vw,3.4rem);text-transform:uppercase;max-width:18ch;margin-bottom:var(--s5)}
-.quote-band .lede{color:var(--concrete);margin-bottom:var(--s6)}
-.quote-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:var(--s8);align-items:center}
-.facts{margin:0}
-.facts div{display:flex;justify-content:space-between;gap:var(--s4);padding-block:var(--s3);border-top:1px solid rgba(242,241,237,.2)}
-.facts dt{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--concrete)}
-.facts dd{margin:0;font-weight:600;text-align:right}
+.foot{padding:var(--s7) 0 calc(var(--s7) + 70px);border-top:2px solid var(--slate)}
+.foot p{margin:0 0 var(--s2);font-size:.88rem;color:var(--grime)}
+.foot .fine{font-size:.76rem}
 
-/* ---- Footer ---- */
-.foot{padding-block:var(--s7);border-top:2px solid var(--slate)}
-.foot p{margin:0 0 var(--s2);font-size:.9rem;color:var(--grime)}
-.foot .fine{font-size:.78rem}
+/* ---- Sticky call bar: mobile's dominant CTA ---- */
+.callbar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;
+  background:var(--orange);color:#fff}
+.callbar a{display:flex;align-items:center;justify-content:center;gap:var(--s3);
+  min-height:60px;font-family:var(--display);font-weight:600;font-size:1.05rem;
+  letter-spacing:.04em;text-transform:uppercase}
 
-@media (max-width:960px){
-  .rate-grid{grid-template-columns:repeat(2,1fr)}
-  .rate{border-bottom:2px solid var(--slate)}
-  .rate:nth-child(2n){border-right:0}
-  .rate:nth-child(n+3){border-bottom:0}
-  .quote-grid{grid-template-columns:1fr;gap:var(--s7)}
+@media (max-width:920px){
+  .split{grid-template-columns:1fr;min-height:0}
+  .proof{min-height:300px;order:-1}
+  .proof img{position:static;height:300px}
+  .callbar{display:block}
 }
-@media (max-width:760px){
-  .top nav{display:none}
-  .surf-list{grid-template-columns:1fr}
+@media (max-width:560px){
+  .q-row{grid-template-columns:1fr}
+  .m-grid{grid-template-columns:1fr 1fr}
 }
-@media (max-width:620px){
-  body{font-size:16px}
-  :root{--s9:64px;--s10:80px}
-  .hero-clean{clip-path:polygon(0 22%,100% 14%,100% 82%,0 90%)}
-  .hero h1{font-size:clamp(2.1rem,10vw,3rem)}
-  .hero-cta .btn{flex:1 1 100%}
-  .rate-grid{grid-template-columns:1fr}
-  .rate{border-right:0;border-bottom:2px solid var(--slate)}
-  .rate:last-child{border-bottom:0}
-  .facts div{flex-direction:column;gap:2px}
-  .facts dd{text-align:left}
-}
-@media (prefers-reduced-motion:reduce){
-  *{transition-duration:.01ms !important;animation-duration:.01ms !important}
-}
+@media (max-width:420px){ .m-grid{grid-template-columns:1fr} }
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms !important}}
 </style>
 </head>
 <body>
 
 <p class="flag">Portfolio concept — Hill Country Exterior Co. is a fictional business created to demonstrate design work.</p>
 
-<header class="top">
-  <div class="shell">
-    <a class="mark" href="#top">HILL COUNTRY<br><span>EXTERIOR CO.</span></a>
-    <nav aria-label="Primary">
-      <a href="#rates">Rates</a>
-      <a href="#surfaces">Surfaces</a>
-      <a href="#quote">Get a quote</a>
-    </nav>
-    <a class="btn btn-fill" href="#quote">Free quote</a>
-  </div>
-</header>
+<div class="split">
 
-<main id="top">
-
-  <section class="hero">
-    <div class="hero-media hero-dirty" aria-hidden="true">
-      <img src="assets/hero.jpg" alt="" width="1920" height="1080">
-    </div>
-    <div class="hero-media hero-clean" aria-hidden="true">
-      <img src="assets/hero.jpg" alt="" width="1920" height="1080">
-    </div>
-    <div class="shell hero-body">
-      <p class="kick">Greater Austin · Residential &amp; commercial</p>
-      <h1>Your concrete isn't grey. It's <span class="cut">dirty.</span></h1>
+  <section class="pitch">
+    <p class="brand">HILL COUNTRY<br><span>EXTERIOR CO.</span></p>
+    <div class="pitch-body">
+      <p class="rating"><span class="stars">★★★★★</span> 4.9 · 180+ Austin jobs reviewed</p>
+      <h1>Your concrete isn't grey. <em>It's dirty.</em></h1>
       <p class="lede">
-        Driveways, siding, roofs, patios and fences — cleaned to the edge, not to the
-        middle. Priced per square foot from your address, before anyone turns up.
+        Driveways, siding, roofs and patios across Greater Austin — cleaned to the edge,
+        not to the middle. Published rates, measured off your plat, quoted the same day.
       </p>
-      <div class="hero-cta">
-        <a class="btn btn-fill" href="#quote">Get my quote</a>
-        <a class="btn btn-line" href="#rates">See the rates</a>
-      </div>
-      <ul class="creds">
-        <li><b>$0</b> Quotes, always</li>
-        <li><b>48h</b> Typical turnaround</li>
-        <li><b>2M+</b> Sq ft cleaned</li>
-        <li><b>✓</b> Licensed &amp; insured</li>
-      </ul>
+
+      <form class="quote" action="#" method="post">
+        <h2>Get your number</h2>
+        <p>Three fields. Quote back the same day — usually within the hour.</p>
+        <div class="q-row">
+          <label class="q-field full"><span>Property address</span>
+            <input type="text" name="address" placeholder="1200 Example Ln, Austin" autocomplete="street-address" required>
+          </label>
+          <label class="q-field"><span>Surface</span>
+            <select name="surface" required>
+              <option value="">Choose…</option>
+              <option>Driveway</option><option>House wash</option>
+              <option>Roof</option><option>Deck / patio</option><option>Several</option>
+            </select>
+          </label>
+          <label class="q-field"><span>Phone</span>
+            <input type="tel" name="phone" placeholder="(512) 555-0100" autocomplete="tel" required>
+          </label>
+        </div>
+        <button class="q-send" type="submit">Text me my quote</button>
+        <p class="q-fine">Demo form — not wired to a backend in this concept.</p>
+      </form>
     </div>
+    <p class="pitch-foot">
+      <span><b>$0</b> quotes</span><span><b>48h</b> turnaround</span>
+      <span><b>2M+</b> sq ft cleaned</span><span><b>✓</b> Licensed &amp; insured</span>
+    </p>
   </section>
+
+  <aside class="proof" aria-label="Recent work">
+    <img src="assets/hero.jpg" alt="A driveway mid-clean, a hard edge between pale washed concrete and grey grime" width="1920" height="1080" fetchpriority="high">
+    <p class="proof-tag"><b>Cedar Park</b> — driveway + walk, 2,400 sq ft</p>
+  </aside>
+
+</div>
+
+<main>
 
   <section class="rates" id="rates">
     <div class="shell">
       <p class="kick">Rates</p>
-      <h2>Published pricing.<br>No "call for quote".</h2>
+      <h2>Published pricing. No "call for quote".</h2>
       <p class="lede">
-        Most companies in this trade hide the number until they're standing in your
-        driveway. Here it is. Measure your surface, multiply, that's the job.
+        Most companies hide the number until they're standing in your driveway. Here it is.
+        Measure your surface, multiply, that's the job.
       </p>
-      <div class="rate-grid">
-        <div class="rate">
-          <p class="rate-num">$0.18<small>per sq ft</small></p>
-          <h3>Driveways</h3>
-          <p>Concrete, pavers, aggregate. Includes oil-spot treatment.</p>
-        </div>
-        <div class="rate">
-          <p class="rate-num">$0.22<small>per sq ft</small></p>
-          <h3>House wash</h3>
-          <p>Soft wash on siding, brick and render. Safe on paint.</p>
-        </div>
-        <div class="rate">
-          <p class="rate-num">$0.35<small>per sq ft</small></p>
-          <h3>Roof wash</h3>
-          <p>Low-pressure only. Kills the black streaking at the root.</p>
-        </div>
-        <div class="rate">
-          <p class="rate-num">$0.26<small>per sq ft</small></p>
-          <h3>Decks &amp; patios</h3>
-          <p>Timber, stone or composite, pressure matched to surface.</p>
-        </div>
+      <div class="rate-table">
+        <div class="rate-line"><div><h3>Driveways</h3><p>Concrete, pavers, aggregate. Oil-spot treatment included.</p></div><p class="rate-num">$0.18<small>per sq ft</small></p></div>
+        <div class="rate-line"><div><h3>House wash</h3><p>Soft wash on siding, brick and render. Safe on paint.</p></div><p class="rate-num">$0.22<small>per sq ft</small></p></div>
+        <div class="rate-line"><div><h3>Roof wash</h3><p>Low pressure only. Kills black streaking at the root.</p></div><p class="rate-num">$0.35<small>per sq ft</small></p></div>
+        <div class="rate-line"><div><h3>Decks &amp; patios</h3><p>Timber, stone or composite, pressure matched to surface.</p></div><p class="rate-num">$0.26<small>per sq ft</small></p></div>
       </div>
-      <p class="rate-note"><strong>Demo note:</strong> placeholder rates — swap in real numbers before this goes live.</p>
+      <p class="rate-foot"><strong>Demo note:</strong> placeholder rates — swap in real numbers before this goes live.</p>
     </div>
   </section>
 
-  <section class="surfaces" id="surfaces">
+  <section class="method">
     <div class="shell">
-      <div class="surf-head">
-        <p class="kick">Method</p>
-        <h2>Pressure is the wrong tool<br>for most of your house.</h2>
-        <p class="lede">
-          High pressure belongs on flatwork and almost nowhere else. Using it on a roof
-          or on siding is how you get stripped paint and voided warranties.
-        </p>
+      <p class="kick">Method</p>
+      <h2>Pressure is the wrong tool for most of your house.</h2>
+      <div class="m-grid">
+        <div class="m-cell"><b>Flatwork — high</b><p>Surface cleaner at 3,500 psi. Even passes, no striping, edges cut by hand.</p></div>
+        <div class="m-cell"><b>Siding — soft</b><p>Under 500 psi with a detergent dwell. The chemistry works, not the water.</p></div>
+        <div class="m-cell"><b>Roofs — none</b><p>Pure soft wash. Pressure lifts granules and shortens the roof's life.</p></div>
+        <div class="m-cell"><b>Plants — first</b><p>Beds pre-soaked and rinsed after. Runoff kills landscaping fastest.</p></div>
       </div>
-      <div class="surf-list">
-        <div class="surf">
-          <span class="surf-n">01</span>
-          <div>
-            <h3>Flatwork — high pressure</h3>
-            <p>Surface cleaner at 3,500 psi for concrete. Even passes, no zebra striping, edges cut by hand.</p>
-          </div>
-        </div>
-        <div class="surf">
-          <span class="surf-n">02</span>
-          <div>
-            <h3>Siding — soft wash</h3>
-            <p>Under 500 psi with a detergent dwell. The chemistry does the work, not the water.</p>
-          </div>
-        </div>
-        <div class="surf">
-          <span class="surf-n">03</span>
-          <div>
-            <h3>Roofs — no pressure</h3>
-            <p>Pure soft wash. Anything stronger lifts granules off the shingle and shortens the roof's life.</p>
-          </div>
-        </div>
-        <div class="surf">
-          <span class="surf-n">04</span>
-          <div>
-            <h3>Every job — plants first</h3>
-            <p>Beds pre-soaked and rinsed after. Detergent runoff kills landscaping faster than anything else.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="quote-band" id="quote">
-    <div class="shell quote-grid">
-      <div>
-        <p class="kick" style="color:var(--orange)">Get a quote</p>
-        <h2>Send an address. Get a number.</h2>
-        <p class="lede">
-          Measurements come off the plat, so most quotes go out the same day without
-          anyone visiting. If the job needs a look first, we'll say so.
-        </p>
-        <a class="btn btn-fill" href="tel:+15125550142">Call (512) 555-0142</a>
-      </div>
-      <dl class="facts">
-        <div><dt>Service area</dt><dd>Greater Austin</dd></div>
-        <div><dt>Phone</dt><dd>(512) 555-0142</dd></div>
-        <div><dt>Hours</dt><dd>Mon–Sat, 7am–6pm</dd></div>
-        <div><dt>Quotes</dt><dd>Same day, free</dd></div>
-      </dl>
     </div>
   </section>
 
@@ -329,10 +232,14 @@ h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.02em;line-h
 
 <footer class="foot">
   <div class="shell">
-    <p><strong>Hill Country Exterior Co.</strong> — exterior cleaning, Greater Austin.</p>
+    <p><strong>Hill Country Exterior Co.</strong> — exterior cleaning, Greater Austin · (512) 555-0142 · Mon–Sat 7–6.</p>
     <p class="fine">Portfolio concept. Fictional business, placeholder pricing, AI-generated photography.</p>
   </div>
 </footer>
+
+<div class="callbar">
+  <a href="tel:+15125550142">Call now — free same-day quote</a>
+</div>
 
 </body>
 </html>

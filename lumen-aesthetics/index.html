@@ -4,154 +4,133 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lumen Aesthetics — Injectables &amp; Skin, Austin</title>
-<meta name="description" content="A small aesthetics practice in Austin. Injectables, lasers and medical-grade skin care, delivered conservatively by one injector.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=Karla:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="description" content="A single-injector aesthetics practice in Clarksville, Austin. Conservative dosing, honest answers, plain pricing.">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=gambetta@300,400,400i&f[]=switzer@300,400,500&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   LUMEN AESTHETICS
-   Thesis: this category screams. Every med spa site is gold
-   foil, before/after grids and "GLOW UP". So this one whispers —
-   the entire page is a quiet printed index, and the single
-   signature is the treatment directory set like a book index
-   rather than a wall of pastel cards.
-   Sage + porcelain, deliberately NOT cream-and-terracotta.
+   LUMEN — rebuilt on the curated-clinic pattern: arch-cropped
+   imagery (the beauty industry's window shape), a centered
+   axis, and treatments as a horizontally scrolling shelf you
+   browse like products — not an index, not cards in a grid.
+   Skeleton: arch hero → ticker → shelf → tenets → book.
    ============================================================ */
 :root{
-  --porcelain:#EDEEF0;
-  --paper:#F7F7F6;
-  --ink:#14171A;
-  --graphite:#5A6066;
-  --sage:#7E8C7A;
-  --sage-deep:#5A6857;
-  --plaster:#E4DDD3;
-  --hair:rgba(20,23,26,.13);
-
-  --display:"Fraunces",Georgia,serif;
-  --text:"Karla",-apple-system,Arial,sans-serif;
-
-  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;
-  --s6:32px;--s7:48px;--s8:64px;--s9:96px;--s10:140px;
+  --paper:#F6F4EF;--porcelain:#EFECE4;
+  --ink:#191A17;--graphite:#585B53;
+  --sage:#8A9683;--sage-deep:#5C6B57;--clay:#C9B9A2;
+  --hair:rgba(25,26,23,.13);
+  --display:"Gambetta",Georgia,serif;
+  --text:"Switzer",-apple-system,Arial,sans-serif;
+  --s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;
+  --s7:48px;--s8:64px;--s9:96px;--s10:130px;
   --ease:cubic-bezier(.22,1,.36,1);
 }
 *,*::before,*::after{box-sizing:border-box}
-body{
-  margin:0;background:var(--paper);color:var(--ink);
-  font-family:var(--text);font-size:17px;line-height:1.7;
-  -webkit-font-smoothing:antialiased;
-}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--text);font-weight:300;font-size:17px;line-height:1.7;
+  -webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%;height:auto}
 a{color:inherit;text-decoration:none}
 :focus-visible{outline:2px solid var(--sage-deep);outline-offset:3px}
-.shell{width:100%;max-width:1120px;margin-inline:auto;padding-inline:var(--s5)}
-.narrow{max-width:760px}
-
-h1,h2,h3{font-family:var(--display);font-weight:300;letter-spacing:-.015em;line-height:1.04;margin:0}
-.kick{
-  font-size:.68rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
-  color:var(--sage-deep);margin:0 0 var(--s5)
-}
-.lede{max-width:52ch;color:var(--graphite);margin:0}
-
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  min-height:52px;padding:var(--s3) var(--s7);
-  font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
-  border:1px solid var(--ink);border-radius:0;cursor:pointer;
-  transition:background-color .3s var(--ease),color .3s var(--ease),transform .3s var(--ease);
-}
-.btn-fill{background:var(--ink);color:var(--paper)}
-.btn-fill:hover{background:var(--sage-deep);border-color:var(--sage-deep);transform:translateY(-2px)}
-.btn-line{background:transparent;color:var(--ink)}
-.btn-line:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px)}
-.btn:active{transform:translateY(0)}
+.shell{width:100%;max-width:1100px;margin-inline:auto;padding-inline:var(--s5)}
 
 .flag{margin:0;padding:var(--s2) var(--s5);background:var(--ink);color:var(--porcelain);
   font-size:.7rem;letter-spacing:.05em;text-align:center}
 
-/* ---- Header ---- */
-.top{position:sticky;top:0;z-index:50;background:rgba(247,247,246,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--hair)}
-.top .shell{display:flex;align-items:center;justify-content:space-between;gap:var(--s5);padding-block:var(--s4)}
-.mark{font-family:var(--display);font-size:1.5rem;letter-spacing:.02em}
-.mark i{font-style:normal;color:var(--sage)}
-.top nav{display:flex;gap:var(--s6);font-size:.82rem;letter-spacing:.04em}
-.top nav a{padding-block:var(--s3);border-bottom:1px solid transparent;transition:border-color .25s var(--ease)}
-.top nav a:hover{border-bottom-color:var(--sage)}
+/* ---- Slim top line, not a nav bar ---- */
+.top{display:flex;justify-content:space-between;align-items:center;
+  padding:var(--s5);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--graphite)}
+.top .mark{font-family:var(--display);font-size:1.35rem;letter-spacing:0;text-transform:none;color:var(--ink)}
+.top a{min-height:44px;display:inline-flex;align-items:center}
+.top a:hover{color:var(--sage-deep)}
 
-/* ---- Hero ---- */
-.hero{padding-block:var(--s10) var(--s9)}
-.hero h1{font-size:clamp(2.6rem,6.6vw,4.8rem);max-width:17ch}
+/* ---- Arch hero: image inside the industry's window shape ---- */
+.hero{text-align:center;padding:var(--s7) var(--s5) var(--s9)}
+.arch{width:min(420px,78vw);margin-inline:auto;overflow:hidden;
+  border-radius:calc(min(420px,78vw)/2) calc(min(420px,78vw)/2) 10px 10px}
+.arch img{width:100%;aspect-ratio:5/5.4;object-fit:cover;object-position:50% 62%}
+.hero h1{font-family:var(--display);font-weight:300;font-size:clamp(2.4rem,6.4vw,4.4rem);
+  line-height:1.05;letter-spacing:-.01em;max-width:18ch;margin:var(--s7) auto var(--s5)}
 .hero h1 em{font-style:italic;color:var(--sage-deep)}
-.hero .lede{margin:var(--s6) 0 var(--s7);font-size:1.08rem}
-.hero-cta{display:flex;flex-wrap:wrap;gap:var(--s3)}
-.hero-media{margin-top:var(--s9);overflow:hidden}
-.hero-media img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.hero .lede{max-width:50ch;margin:0 auto var(--s6);color:var(--graphite)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;
+  padding:var(--s3) var(--s7);font-size:.76rem;font-weight:500;letter-spacing:.18em;
+  text-transform:uppercase;border:1px solid var(--ink);border-radius:999px;
+  transition:background-color .3s var(--ease),color .3s var(--ease)}
+.btn-fill{background:var(--ink);color:var(--paper)}
+.btn-fill:hover{background:var(--sage-deep);border-color:var(--sage-deep)}
+.btn-line:hover{background:var(--ink);color:var(--paper)}
 
-/* ---- The index: signature element ----------------------------
-   A directory, set like the index of a book. Leader dots, prices
-   ranged right. Nothing here is a card. */
-.index-sec{padding-block:var(--s9);border-top:1px solid var(--hair)}
-.index-head{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--s6);margin-bottom:var(--s8);flex-wrap:wrap}
-.index-head h2{font-size:clamp(2rem,4.4vw,3.1rem)}
-.idx-group{margin-bottom:var(--s8)}
-.idx-group h3{
-  font-family:var(--text);font-size:.68rem;font-weight:600;letter-spacing:.24em;
-  text-transform:uppercase;color:var(--sage-deep);
-  padding-bottom:var(--s3);border-bottom:1px solid var(--ink);margin-bottom:var(--s2)
-}
-.idx-row{
-  display:grid;grid-template-columns:auto 1fr auto;align-items:baseline;gap:var(--s3);
-  padding-block:var(--s4);border-bottom:1px solid var(--hair);
-  transition:color .2s var(--ease)
-}
-.idx-row:hover{color:var(--sage-deep)}
-.idx-name{font-size:1.06rem}
-.idx-name small{display:block;font-size:.86rem;color:var(--graphite);margin-top:2px}
-.idx-lead{border-bottom:1px dotted var(--hair);transform:translateY(-4px)}
-.idx-price{font-family:var(--display);font-size:1.15rem;white-space:nowrap}
-.idx-price span{font-family:var(--text);font-size:.76rem;color:var(--graphite)}
-.idx-note{margin:var(--s5) 0 0;font-size:.84rem;color:var(--graphite)}
+/* ---- Ticker ---- */
+.ticker{border-block:1px solid var(--hair);padding:var(--s4) 0;overflow:hidden;white-space:nowrap}
+.ticker-track{display:inline-block;animation:tick 28s linear infinite;
+  font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--graphite)}
+.ticker-track span{margin-inline:var(--s6)}
+.ticker-track i{font-style:normal;color:var(--sage)}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* ---- Position ---- */
-.position{padding-block:var(--s9);background:var(--plaster)}
-.pos-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s8)}
-.pos-grid h2{font-size:clamp(1.9rem,4.2vw,2.9rem);max-width:14ch}
+/* ---- The shelf: horizontal scroll-snap treatments ---- */
+.shelf-sec{padding:var(--s9) 0}
+.shelf-head{text-align:center;max-width:620px;margin:0 auto var(--s7);padding-inline:var(--s5)}
+.kick{font-size:.68rem;font-weight:500;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--sage-deep);margin:0 0 var(--s4)}
+.shelf-head h2{font-family:var(--display);font-weight:300;font-size:clamp(2rem,4.6vw,3.2rem);
+  line-height:1.08;margin:0 0 var(--s4)}
+.shelf-head h2 em{font-style:italic;color:var(--sage-deep)}
+.shelf-head p{margin:0;color:var(--graphite)}
+.shelf{display:flex;gap:var(--s5);overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:var(--s2) max(var(--s5),calc((100vw - 1100px)/2 + var(--s5))) var(--s5);
+  scrollbar-width:thin}
+.tx{flex:0 0 min(300px,78vw);scroll-snap-align:start;
+  background:var(--porcelain);border-radius:180px 180px 16px 16px;
+  padding:var(--s7) var(--s5) var(--s6);text-align:center;
+  border:1px solid var(--hair)}
+.tx h3{font-family:var(--display);font-weight:400;font-size:1.35rem;margin:0 0 var(--s2)}
+.tx .who{margin:0 0 var(--s5);font-size:.86rem;color:var(--graphite)}
+.tx .price{font-family:var(--display);font-size:1.6rem;color:var(--sage-deep)}
+.tx .price small{font-family:var(--text);font-size:.72rem;letter-spacing:.1em;color:var(--graphite)}
+.shelf-note{text-align:center;font-size:.82rem;color:var(--graphite);margin:var(--s4) auto 0;
+  max-width:60ch;padding-inline:var(--s5)}
+.shelf-hint{text-align:center;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--sage);margin:0 0 var(--s4)}
+
+/* ---- Tenets: two-column editorial on plaster ---- */
+.tenets-sec{background:var(--porcelain);padding:var(--s9) 0}
+.tenets-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s8)}
+.tenets-grid h2{font-family:var(--display);font-weight:300;font-size:clamp(1.9rem,4.2vw,2.9rem);
+  line-height:1.1;max-width:14ch;margin:0}
+.tenets-grid h2 em{font-style:italic;color:var(--sage-deep)}
 .tenets{margin:0;padding:0;list-style:none}
-.tenet{padding-block:var(--s5);border-top:1px solid rgba(20,23,26,.16)}
-.tenet h3{font-family:var(--text);font-size:1rem;font-weight:600;margin-bottom:var(--s2)}
-.tenet p{margin:0;color:var(--graphite);font-size:.96rem}
+.tenet{padding:var(--s5) 0;border-top:1px solid var(--hair)}
+.tenet h3{font-size:.98rem;font-weight:500;margin:0 0 var(--s2)}
+.tenet p{margin:0;color:var(--graphite);font-size:.95rem}
 
-/* ---- Consult ---- */
-.consult{padding-block:var(--s9)}
-.consult-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:var(--s8);align-items:start}
-.consult h2{font-size:clamp(2rem,4.6vw,3.2rem);margin-bottom:var(--s5)}
-.consult .lede{margin-bottom:var(--s6)}
-.facts{margin:0}
-.facts div{display:flex;justify-content:space-between;gap:var(--s5);padding-block:var(--s4);border-top:1px solid var(--hair)}
-.facts dt{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--graphite)}
-.facts dd{margin:0;text-align:right;font-size:.98rem}
+/* ---- Book ---- */
+.book{text-align:center;padding:var(--s10) var(--s5)}
+.book h2{font-family:var(--display);font-weight:300;font-size:clamp(2.1rem,5vw,3.4rem);
+  margin:0 0 var(--s4)}
+.book h2 em{font-style:italic;color:var(--sage-deep)}
+.book .lede{max-width:48ch;margin:0 auto var(--s6);color:var(--graphite)}
+.book-facts{display:flex;justify-content:center;gap:var(--s3) var(--s7);flex-wrap:wrap;
+  margin:var(--s7) 0 0;padding:var(--s5) 0 0;border-top:1px solid var(--hair);
+  list-style:none;font-size:.82rem;color:var(--graphite)}
 
-/* ---- Footer ---- */
-.foot{padding-block:var(--s7);border-top:1px solid var(--hair)}
-.foot p{margin:0 0 var(--s2);font-size:.9rem;color:var(--graphite)}
-.foot .fine{font-size:.76rem}
+.foot{border-top:1px solid var(--hair);padding:var(--s7) var(--s5);text-align:center}
+.foot p{margin:0 0 var(--s2);font-size:.88rem;color:var(--graphite)}
+.foot .fine{font-size:.74rem}
 
-@media (max-width:900px){
-  .pos-grid,.consult-grid{grid-template-columns:1fr;gap:var(--s7)}
-}
-@media (max-width:700px){ .top nav{display:none} }
+@media (max-width:860px){ .tenets-grid{grid-template-columns:1fr;gap:var(--s6)} }
 @media (max-width:620px){
   body{font-size:16px}
-  :root{--s9:64px;--s10:80px}
-  .hero h1{font-size:clamp(2.1rem,9.5vw,3rem)}
-  .hero-cta .btn{flex:1 1 100%}
-  .idx-row{grid-template-columns:1fr auto;gap:var(--s4)}
-  .idx-lead{display:none}
-  .facts div{flex-direction:column;gap:2px}
-  .facts dd{text-align:left}
+  :root{--s9:64px;--s10:88px}
+  .hero h1{font-size:clamp(2rem,9vw,2.8rem)}
+  .btn{width:min(100%,340px)}
 }
-@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms !important}}
+@media (prefers-reduced-motion:reduce){
+  *{transition-duration:.01ms !important}
+  .ticker-track{animation:none}
+}
 </style>
 </head>
 <body>
@@ -159,132 +138,82 @@ h1,h2,h3{font-family:var(--display);font-weight:300;letter-spacing:-.015em;line-
 <p class="flag">Portfolio concept — Lumen Aesthetics is a fictional business created to demonstrate design work.</p>
 
 <header class="top">
-  <div class="shell">
-    <a class="mark" href="#top">Lumen<i>.</i></a>
-    <nav aria-label="Primary">
-      <a href="#index">Treatments</a>
-      <a href="#position">Approach</a>
-      <a href="#consult">Consultation</a>
-    </nav>
-    <a class="btn btn-fill" href="#consult" style="min-height:44px;padding-inline:var(--s5)">Book</a>
-  </div>
+  <a class="mark" href="#top">Lumen</a>
+  <a href="#book">Book a consultation</a>
 </header>
 
 <main id="top">
 
   <section class="hero">
-    <div class="shell narrow">
-      <p class="kick">Aesthetic medicine · Clarksville</p>
-      <h1>The best work is the work <em>nobody notices.</em></h1>
-      <p class="lede">
-        A single-injector practice. One appointment at a time, conservative dosing, and an
-        honest answer when the thing you asked for isn't the thing you need.
-      </p>
-      <div class="hero-cta">
-        <a class="btn btn-fill" href="#consult">Book a consultation</a>
-        <a class="btn btn-line" href="#index">See treatments</a>
-      </div>
-    </div>
-    <div class="shell">
-      <figure class="hero-media">
-        <img src="assets/hero.jpg" alt="A calm treatment room with soft daylight, a sage upholstered chair and a steel instrument trolley" width="1920" height="1080" fetchpriority="high">
-      </figure>
-    </div>
+    <figure class="arch" style="margin:0 auto">
+      <img src="assets/hero.jpg" alt="A calm treatment room in soft daylight with a sage chair and linen curtains" width="1920" height="1071" fetchpriority="high">
+    </figure>
+    <h1>The best work is the work <em>nobody notices.</em></h1>
+    <p class="lede">
+      A single-injector practice in Clarksville. One appointment at a time, conservative
+      dosing, and an honest answer when the thing you asked for isn't the thing you need.
+    </p>
+    <a class="btn btn-fill" href="#book">Book a consultation</a>
   </section>
 
-  <section class="index-sec" id="index">
-    <div class="shell">
-      <div class="index-head">
-        <div>
-          <p class="kick">Treatments</p>
-          <h2>Everything offered,<br>and what it costs.</h2>
-        </div>
-        <p class="lede" style="max-width:38ch">
-          Listed plainly, priced plainly. If a treatment isn't right for you it will be said
-          in the room, not after the deposit.
-        </p>
-      </div>
-
-      <div class="idx-group">
-        <h3>Injectable</h3>
-        <div class="idx-row"><span class="idx-name">Neuromodulator<small>Forehead, glabella, crow's feet</small></span><span class="idx-lead"></span><span class="idx-price">$12 <span>/ unit</span></span></div>
-        <div class="idx-row"><span class="idx-name">Dermal filler<small>Lip, cheek, chin, temple</small></span><span class="idx-lead"></span><span class="idx-price">$650 <span>/ syringe</span></span></div>
-        <div class="idx-row"><span class="idx-name">Biostimulator<small>Collagen stimulation, full face</small></span><span class="idx-lead"></span><span class="idx-price">$900 <span>/ vial</span></span></div>
-        <div class="idx-row"><span class="idx-name">Dissolving<small>Correction of previous filler</small></span><span class="idx-lead"></span><span class="idx-price">$250</span></div>
-      </div>
-
-      <div class="idx-group">
-        <h3>Energy &amp; resurfacing</h3>
-        <div class="idx-row"><span class="idx-name">Microneedling with RF<small>Texture, pores, laxity</small></span><span class="idx-lead"></span><span class="idx-price">$750 <span>/ session</span></span></div>
-        <div class="idx-row"><span class="idx-name">IPL photofacial<small>Redness and pigment</small></span><span class="idx-lead"></span><span class="idx-price">$450 <span>/ session</span></span></div>
-        <div class="idx-row"><span class="idx-name">Laser resurfacing<small>Fractional, full face</small></span><span class="idx-lead"></span><span class="idx-price">$1,200</span></div>
-      </div>
-
-      <div class="idx-group">
-        <h3>Skin</h3>
-        <div class="idx-row"><span class="idx-name">Medical facial<small>Extraction and peel</small></span><span class="idx-lead"></span><span class="idx-price">$185</span></div>
-        <div class="idx-row"><span class="idx-name">Chemical peel<small>Light to medium depth</small></span><span class="idx-lead"></span><span class="idx-price">$240</span></div>
-        <div class="idx-row"><span class="idx-name">Consultation<small>45 minutes, no treatment</small></span><span class="idx-lead"></span><span class="idx-price">Free</span></div>
-      </div>
-
-      <p class="idx-note"><strong>Demo note:</strong> placeholder pricing. Real clinics must also check state advertising and scope-of-practice rules before publishing a price list.</p>
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>Neuromodulator <i>·</i> Filler <i>·</i> Biostimulator <i>·</i> Microneedling RF <i>·</i> IPL <i>·</i> Resurfacing <i>·</i> Medical facials <i>·</i> Peels <i>·</i></span><span>Neuromodulator <i>·</i> Filler <i>·</i> Biostimulator <i>·</i> Microneedling RF <i>·</i> IPL <i>·</i> Resurfacing <i>·</i> Medical facials <i>·</i> Peels <i>·</i></span>
     </div>
+  </div>
+
+  <section class="shelf-sec" id="treatments">
+    <div class="shelf-head">
+      <p class="kick">Treatments</p>
+      <h2>Priced plainly, <em>browsed slowly.</em></h2>
+      <p>If a treatment isn't right for you it will be said in the room, not after the deposit.</p>
+    </div>
+    <p class="shelf-hint">Scroll →</p>
+    <div class="shelf" tabindex="0" role="region" aria-label="Treatment list, scrolls horizontally">
+      <div class="tx"><h3>Neuromodulator</h3><p class="who">Forehead, glabella, crow's feet</p><p class="price">$12 <small>/ unit</small></p></div>
+      <div class="tx"><h3>Dermal filler</h3><p class="who">Lip, cheek, chin, temple</p><p class="price">$650 <small>/ syringe</small></p></div>
+      <div class="tx"><h3>Biostimulator</h3><p class="who">Collagen stimulation, full face</p><p class="price">$900 <small>/ vial</small></p></div>
+      <div class="tx"><h3>Microneedling RF</h3><p class="who">Texture, pores, laxity</p><p class="price">$750 <small>/ session</small></p></div>
+      <div class="tx"><h3>IPL photofacial</h3><p class="who">Redness and pigment</p><p class="price">$450 <small>/ session</small></p></div>
+      <div class="tx"><h3>Laser resurfacing</h3><p class="who">Fractional, full face</p><p class="price">$1,200</p></div>
+      <div class="tx"><h3>Medical facial</h3><p class="who">Extraction and peel</p><p class="price">$185</p></div>
+      <div class="tx"><h3>Consultation</h3><p class="who">45 minutes, no treatment</p><p class="price">Free</p></div>
+    </div>
+    <p class="shelf-note"><strong>Demo note:</strong> placeholder pricing. A real clinic must check state advertising and scope-of-practice rules before publishing a price list.</p>
   </section>
 
-  <section class="position" id="position">
-    <div class="shell pos-grid">
-      <div>
-        <p class="kick">Approach</p>
-        <h2>Four rules that don't bend.</h2>
-      </div>
+  <section class="tenets-sec">
+    <div class="shell tenets-grid">
+      <h2>Four rules that <em>don't bend.</em></h2>
       <ul class="tenets">
-        <li class="tenet">
-          <h3>One injector, every time</h3>
-          <p>You see the same person at every appointment. Nobody inherits your face halfway through a plan.</p>
-        </li>
-        <li class="tenet">
-          <h3>Conservative first pass</h3>
-          <p>Under-treating and reviewing at two weeks costs less than dissolving. It is also the only way to stay natural.</p>
-        </li>
-        <li class="tenet">
-          <h3>No packages, no pressure</h3>
-          <p>Nothing is sold in blocks of six. You book what you need, when you need it.</p>
-        </li>
-        <li class="tenet">
-          <h3>An honest no</h3>
-          <p>Some requests are better answered by skincare, a dermatologist, or nothing at all. That answer is free.</p>
-        </li>
+        <li class="tenet"><h3>One injector, every time</h3><p>You see the same person at every appointment. Nobody inherits your face halfway through a plan.</p></li>
+        <li class="tenet"><h3>Conservative first pass</h3><p>Under-treating and reviewing at two weeks costs less than dissolving — and it is the only way to stay natural.</p></li>
+        <li class="tenet"><h3>No packages, no pressure</h3><p>Nothing is sold in blocks of six. You book what you need, when you need it.</p></li>
+        <li class="tenet"><h3>An honest no</h3><p>Some requests are better answered by skincare, a dermatologist, or nothing at all. That answer is free.</p></li>
       </ul>
     </div>
   </section>
 
-  <section class="consult" id="consult">
-    <div class="shell consult-grid">
-      <div>
-        <p class="kick">Consultation</p>
-        <h2>Start with a conversation.</h2>
-        <p class="lede">
-          Forty-five minutes, no treatment on the day, no cost. You leave with a written
-          plan and a price — and no obligation to use either.
-        </p>
-        <a class="btn btn-fill" href="tel:+15125550188">Call (512) 555-0188</a>
-      </div>
-      <dl class="facts">
-        <div><dt>Location</dt><dd>Clarksville</dd></div>
-        <div><dt>Phone</dt><dd>(512) 555-0188</dd></div>
-        <div><dt>Hours</dt><dd>Tue–Sat, by appointment</dd></div>
-        <div><dt>Consultation</dt><dd>45 min · free</dd></div>
-      </dl>
-    </div>
+  <section class="book" id="book">
+    <p class="kick">Consultation</p>
+    <h2>Start with <em>a conversation.</em></h2>
+    <p class="lede">
+      Forty-five minutes, no treatment on the day, no cost. You leave with a written plan
+      and a price — and no obligation to use either.
+    </p>
+    <a class="btn btn-fill" href="tel:+15125550188">Call (512) 555-0188</a>
+    <ul class="book-facts">
+      <li>Clarksville, Austin</li>
+      <li>Tue–Sat, by appointment</li>
+      <li>Consultation free</li>
+    </ul>
   </section>
 
 </main>
 
 <footer class="foot">
-  <div class="shell">
-    <p><strong>Lumen Aesthetics</strong> — aesthetic medicine, Clarksville.</p>
-    <p class="fine">Portfolio concept. Fictional business, placeholder pricing, AI-generated photography. Not medical advice.</p>
-  </div>
+  <p><strong>Lumen Aesthetics</strong> — aesthetic medicine, Clarksville, Austin.</p>
+  <p class="fine">Portfolio concept. Fictional business, placeholder pricing, AI-generated photography. Not medical advice.</p>
 </footer>
 
 </body>

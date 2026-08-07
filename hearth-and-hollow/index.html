@@ -4,156 +4,118 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hearth &amp; Hollow — Wood-Fire Steakhouse, Austin</title>
-<meta name="description" content="A one-room wood-fire steakhouse in Austin. Dry-aged beef over post oak, a short menu, and one seating a night.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<meta name="description" content="A fourteen-table wood-fire steakhouse in East Austin. Dry-aged beef over post oak, one seating a night.">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,400i&f[]=general-sans@300,400,500&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   HEARTH & HOLLOW
-   Thesis: every restaurant site opens with a slideshow of food.
-   This one opens with the menu — set as type, because a short
-   menu IS the argument. The photograph is demoted to a single
-   quiet plate below the fold. The signature is the menu itself,
-   typeset like a letterpress card with leader rules.
+   HEARTH & HOLLOW — rebuilt on the fine-dining pattern:
+   editorial minimalism, photography carries the page, one
+   centered axis. NO sticky header, NO cards, NO side-by-side
+   grids. The page is a sequence of centered chapters broken by
+   full-bleed photography, like a printed tasting menu.
    ============================================================ */
 :root{
-  --char:#16110E;
-  --char-lit:#1F1815;
-  --ember:#C4472A;
-  --ember-soft:#D9704F;
-  --bone:#EFE6D8;
-  --ash:#9A8D7F;
-  --ash-dim:#6B6058;
-  --hair:rgba(239,230,216,.15);
-
-  --display:"Bodoni Moda",Didot,Georgia,serif;
-  --text:"Jost",-apple-system,Arial,sans-serif;
-
-  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;
-  --s6:32px;--s7:48px;--s8:64px;--s9:96px;--s10:130px;
+  --char:#171210;--soot:#0F0C0A;
+  --bone:#EDE4D6;--ash:#9C8F80;--ash-dim:#6E6357;
+  --ember:#D2603C;
+  --hair:rgba(237,228,214,.16);
+  --display:"Zodiak",Georgia,serif;
+  --text:"General Sans",-apple-system,Arial,sans-serif;
+  --s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;
+  --s7:48px;--s8:64px;--s9:96px;--s10:150px;
   --ease:cubic-bezier(.22,1,.36,1);
 }
 *,*::before,*::after{box-sizing:border-box}
-body{
-  margin:0;background:var(--char);color:var(--bone);
-  font-family:var(--text);font-size:17px;line-height:1.65;font-weight:300;
-  -webkit-font-smoothing:antialiased;
-}
+body{margin:0;background:var(--char);color:var(--bone);
+  font-family:var(--text);font-weight:300;font-size:17px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;text-align:center}
 img{display:block;max-width:100%;height:auto}
 a{color:inherit;text-decoration:none}
-:focus-visible{outline:2px solid var(--ember-soft);outline-offset:3px}
-.shell{width:100%;max-width:1080px;margin-inline:auto;padding-inline:var(--s5)}
-.narrow{max-width:720px}
+:focus-visible{outline:2px solid var(--ember);outline-offset:4px}
 
-h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.05;margin:0}
-.kick{
-  font-size:.66rem;font-weight:400;letter-spacing:.32em;text-transform:uppercase;
-  color:var(--ember-soft);margin:0 0 var(--s5)
-}
-.lede{max-width:50ch;color:var(--ash);margin:0}
+.flag{margin:0;padding:var(--s2) var(--s5);background:var(--soot);color:var(--ash);
+  font-size:.7rem;letter-spacing:.06em}
 
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  min-height:52px;padding:var(--s3) var(--s7);
-  font-family:var(--text);font-size:.74rem;font-weight:400;letter-spacing:.24em;text-transform:uppercase;
-  border:1px solid var(--bone);cursor:pointer;
-  transition:background-color .35s var(--ease),color .35s var(--ease),transform .35s var(--ease);
-}
-.btn-fill{background:var(--bone);color:var(--char)}
-.btn-fill:hover{background:var(--ember);border-color:var(--ember);color:var(--bone);transform:translateY(-2px)}
-.btn-line{background:transparent;color:var(--bone);border-color:var(--hair)}
-.btn-line:hover{border-color:var(--bone);transform:translateY(-2px)}
-.btn:active{transform:translateY(0)}
+/* ---- Opening plate: full-viewport photograph, wordmark carved over ---- */
+.plate{position:relative;isolation:isolate;min-height:92vh;
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:var(--s6) var(--s5) var(--s8)}
+.plate-media{position:absolute;inset:0;z-index:-1}
+.plate-media img{width:100%;height:100%;object-fit:cover}
+.plate-media::after{content:"";position:absolute;inset:0;
+  background:radial-gradient(90% 90% at 50% 40%,rgba(23,18,16,.2),rgba(23,18,16,.88) 90%),
+             linear-gradient(0deg,rgba(23,18,16,.92),transparent 40%)}
+.plate-top{font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;color:var(--ash)}
+.plate-mark h1{font-family:var(--display);font-weight:400;font-size:clamp(3rem,11vw,7.5rem);
+  line-height:.95;letter-spacing:.01em;margin:0}
+.plate-mark .amp{font-style:italic;color:var(--ember)}
+.plate-mark p{margin:var(--s5) 0 0;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ash)}
+.plate-foot{font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;color:var(--ash-dim)}
 
-.flag{margin:0;padding:var(--s2) var(--s5);background:var(--char-lit);color:var(--ash);
-  font-size:.7rem;text-align:center;letter-spacing:.06em}
+/* ---- Chapters: one centered column, generous air ---- */
+.chapter{max-width:640px;margin-inline:auto;padding:var(--s10) var(--s5)}
+.ch-no{font-family:var(--display);font-style:italic;font-size:1rem;color:var(--ember);margin:0 0 var(--s4)}
+.chapter h2{font-family:var(--display);font-weight:400;font-size:clamp(2rem,5.4vw,3.4rem);
+  line-height:1.08;margin:0 0 var(--s5)}
+.chapter h2 em{font-style:italic;color:var(--ash)}
+.chapter p{margin:0 auto;max-width:46ch;color:var(--ash)}
+.chapter p+p{margin-top:var(--s4)}
 
-/* ---- Header ---- */
-.top{position:sticky;top:0;z-index:50;background:rgba(22,17,14,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--hair)}
-.top .shell{display:flex;align-items:center;justify-content:space-between;gap:var(--s5);padding-block:var(--s4)}
-.mark{font-family:var(--display);font-size:1.3rem;letter-spacing:.06em;text-transform:uppercase}
-.mark i{font-style:italic;color:var(--ember-soft);text-transform:none}
-.top nav{display:flex;gap:var(--s6);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase}
-.top nav a{padding-block:var(--s4);display:inline-flex;align-items:center;min-height:44px}
-.top nav a:hover{color:var(--ember-soft)}
+/* thin centered rule with a diamond */
+.orn{display:flex;align-items:center;justify-content:center;gap:var(--s4);
+  max-width:280px;margin:0 auto;padding:0}
+.orn::before,.orn::after{content:"";height:1px;flex:1;background:var(--hair)}
+.orn span{color:var(--ember);font-size:.7rem}
 
-/* ---- Hero: the menu is the hero ---- */
-.hero{padding-block:var(--s10) var(--s9);text-align:center}
-.hero h1{font-size:clamp(2.8rem,8vw,5.6rem);letter-spacing:-.01em}
-.hero h1 em{font-style:italic;color:var(--ember-soft)}
-.hero .lede{margin:var(--s6) auto 0;text-align:center}
-.rule-orn{display:flex;align-items:center;justify-content:center;gap:var(--s4);margin:var(--s7) 0}
-.rule-orn::before,.rule-orn::after{content:"";height:1px;width:min(140px,22vw);background:var(--hair)}
-.rule-orn span{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ash-dim)}
-
-/* the card */
+/* ---- Menu: pure typography, prices under names, no leader dots ---- */
 .menu{padding-bottom:var(--s9)}
-.card{
-  border:1px solid var(--hair);padding:clamp(var(--s6),5vw,var(--s9)) clamp(var(--s5),5vw,var(--s8));
-  background:linear-gradient(180deg,var(--char-lit),var(--char));
-}
-.course{margin-bottom:var(--s8)}
-.course:last-child{margin-bottom:0}
-.course-name{
-  font-family:var(--text);font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;
-  color:var(--ember-soft);text-align:center;margin:0 0 var(--s6)
-}
-.dish{
-  display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:var(--s4);
-  padding-block:var(--s4);border-bottom:1px solid var(--hair)
-}
-.dish:last-child{border-bottom:0}
-.dish-name{font-family:var(--display);font-size:1.35rem}
-.dish-name small{
-  display:block;font-family:var(--text);font-size:.88rem;font-weight:300;
-  color:var(--ash);margin-top:var(--s1);letter-spacing:.01em
-}
-.dish-price{font-family:var(--display);font-size:1.15rem;color:var(--ash)}
-.menu-note{margin:var(--s6) 0 0;text-align:center;font-size:.84rem;color:var(--ash-dim)}
+.course{margin:var(--s9) auto 0;max-width:520px}
+.course-h{font-size:.66rem;letter-spacing:.34em;text-transform:uppercase;color:var(--ember);margin:0 0 var(--s7)}
+.dish{margin:0 0 var(--s7)}
+.dish h3{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:0 0 var(--s2);line-height:1.2}
+.dish .desc{margin:0;font-size:.92rem;color:var(--ash)}
+.dish .price{display:block;margin-top:var(--s3);font-size:.78rem;letter-spacing:.24em;color:var(--ash-dim)}
+.menu-note{font-size:.8rem;color:var(--ash-dim);max-width:46ch;margin:var(--s8) auto 0}
 
-/* ---- The fire ---- */
-.fire{border-top:1px solid var(--hair);padding-block:var(--s9)}
-.fire-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s8);align-items:center}
-.fire h2{font-size:clamp(2rem,4.6vw,3.2rem);max-width:13ch;margin-bottom:var(--s5)}
-.fire h2 em{font-style:italic;color:var(--ember-soft)}
-.fire-media{overflow:hidden}
-.fire-media img{width:100%;aspect-ratio:4/3;object-fit:cover}
-.notes{margin:var(--s6) 0 0;padding:0;list-style:none}
-.note{padding-block:var(--s4);border-top:1px solid var(--hair);display:flex;gap:var(--s4)}
-.note b{font-family:var(--display);color:var(--ember-soft);font-weight:400}
-.note p{margin:0;font-size:.95rem;color:var(--ash)}
+/* ---- Full-bleed interlude photograph ---- */
+.interlude{position:relative;height:70vh;overflow:hidden;margin:0}
+.interlude img{width:100%;height:100%;object-fit:cover}
+.interlude::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(23,18,16,.5),transparent 30%,transparent 70%,rgba(23,18,16,.5))}
+.interlude figcaption{position:absolute;left:0;right:0;bottom:var(--s6);
+  font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--bone)}
 
-/* ---- Reserve ---- */
-.reserve{border-top:1px solid var(--hair);padding-block:var(--s9);text-align:center}
-.reserve h2{font-size:clamp(2.2rem,5.4vw,3.6rem);margin-bottom:var(--s5)}
-.reserve h2 em{font-style:italic;color:var(--ember-soft)}
-.reserve .lede{margin:0 auto var(--s7)}
-.hours{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s5);
-  max-width:720px;margin:var(--s8) auto 0;text-align:left
-}
-.hour{padding-top:var(--s4);border-top:1px solid var(--hair)}
-.hour dt{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ash-dim);margin-bottom:var(--s2)}
-.hour dd{margin:0;font-family:var(--display);font-size:1.05rem}
+/* ---- Numbers of the house ---- */
+.creed{display:flex;justify-content:center;gap:var(--s9);flex-wrap:wrap;
+  padding:0;margin:var(--s8) 0 0;list-style:none}
+.creed b{display:block;font-family:var(--display);font-weight:400;font-size:2.6rem;color:var(--ember)}
+.creed span{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ash)}
 
-/* ---- Footer ---- */
-.foot{border-top:1px solid var(--hair);padding-block:var(--s7);text-align:center}
-.foot p{margin:0 0 var(--s2);font-size:.88rem;color:var(--ash)}
-.foot .fine{font-size:.76rem;color:var(--ash-dim)}
+/* ---- Reservation close ---- */
+.reserve{border-top:1px solid var(--hair)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;
+  margin-top:var(--s6);padding:var(--s3) var(--s8);
+  font-size:.72rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;
+  border:1px solid var(--bone);color:var(--bone);
+  transition:background-color .35s var(--ease),color .35s var(--ease)}
+.btn:hover{background:var(--bone);color:var(--char)}
+.hours{margin:var(--s8) auto 0;padding:0;list-style:none;max-width:420px}
+.hours li{display:flex;justify-content:space-between;gap:var(--s5);
+  padding:var(--s4) 0;border-top:1px solid var(--hair);font-size:.9rem}
+.hours li span:first-child{color:var(--ash-dim);letter-spacing:.12em;text-transform:uppercase;font-size:.7rem;align-self:center}
+.hours li span:last-child{font-family:var(--display)}
 
-@media (max-width:880px){
-  .fire-grid{grid-template-columns:1fr;gap:var(--s7)}
-  .fire-media{order:-1}
-}
-@media (max-width:700px){ .top nav{display:none} }
+.foot{padding:var(--s8) var(--s5);border-top:1px solid var(--hair)}
+.foot p{margin:0 0 var(--s2);font-size:.85rem;color:var(--ash)}
+.foot .fine{font-size:.74rem;color:var(--ash-dim)}
+
 @media (max-width:620px){
   body{font-size:16px}
-  :root{--s9:64px;--s10:80px}
-  .hero h1{font-size:clamp(2.2rem,10vw,3.1rem)}
-  .dish-name{font-size:1.15rem}
-  .hours{grid-template-columns:1fr;gap:var(--s4)}
-  .btn{width:100%}
+  :root{--s9:64px;--s10:96px}
+  .plate{min-height:86vh}
+  .creed{gap:var(--s7)}
+  .btn{width:min(100%,360px)}
 }
 @media (prefers-reduced-motion:reduce){*{transition-duration:.01ms !important}}
 </style>
@@ -162,108 +124,85 @@ h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.05;margin:0}
 
 <p class="flag">Portfolio concept — Hearth &amp; Hollow is a fictional restaurant created to demonstrate design work.</p>
 
-<header class="top">
-  <div class="shell">
-    <a class="mark" href="#top">Hearth <i>&amp;</i> Hollow</a>
-    <nav aria-label="Primary">
-      <a href="#menu">Menu</a>
-      <a href="#fire">The fire</a>
-      <a href="#reserve">Reserve</a>
-    </nav>
-    <a class="btn btn-line" href="#reserve" style="min-height:42px;padding-inline:var(--s5)">Reserve</a>
+<header class="plate">
+  <div class="plate-media" aria-hidden="true">
+    <img src="assets/hero.jpg" alt="" width="1920" height="1080" fetchpriority="high">
   </div>
+  <p class="plate-top">East Austin · Est. 2022</p>
+  <div class="plate-mark">
+    <h1>Hearth<span class="amp"> &amp; </span>Hollow</h1>
+    <p>Wood-fire steakhouse</p>
+  </div>
+  <p class="plate-foot">Fourteen tables · One seating · Wed–Sun</p>
 </header>
 
-<main id="top">
+<main>
 
-  <section class="hero">
-    <div class="shell narrow">
-      <p class="kick">Post oak · Dry-aged · One seating</p>
-      <h1>Everything here<br>was cooked <em>over fire.</em></h1>
-      <p class="lede">
-        Fourteen tables, one seating a night, and a menu short enough to read standing up.
-        No gas, no sous-vide, no substitutions after seven.
-      </p>
-    </div>
+  <section class="chapter">
+    <p class="ch-no">i.</p>
+    <h2>Everything here was<br>cooked <em>over fire.</em></h2>
+    <p>One post-oak fire, lit at two in the afternoon and worked until the last plate
+    leaves the pass. No gas burners in the building. If the fire goes out, service is over.</p>
+    <ul class="creed">
+      <li><b>45</b><span>days dry-aged</span></li>
+      <li><b>14</b><span>tables</span></li>
+      <li><b>1</b><span>seating a night</span></li>
+    </ul>
   </section>
 
-  <section class="menu" id="menu">
-    <div class="shell">
-      <div class="rule-orn"><span>The card</span></div>
-      <div class="card">
+  <div class="orn" aria-hidden="true"><span>◆</span></div>
 
-        <div class="course">
-          <p class="course-name">To begin</p>
-          <div class="dish"><span class="dish-name">Ember leeks<small>Burnt honey, hazelnut, aged sheep's cheese</small></span><span class="dish-price">14</span></div>
-          <div class="dish"><span class="dish-name">Beef tartare<small>Cut by hand, smoked yolk, sourdough toast</small></span><span class="dish-price">21</span></div>
-          <div class="dish"><span class="dish-name">Gulf oysters<small>Half dozen, mignonette, cracked pepper</small></span><span class="dish-price">24</span></div>
-        </div>
+  <section class="chapter menu" id="menu">
+    <p class="ch-no">ii.</p>
+    <h2>The card.</h2>
+    <p>Short enough to read standing up. It changes when the market does, not when the season is announced.</p>
 
-        <div class="course">
-          <p class="course-name">From the hearth</p>
-          <div class="dish"><span class="dish-name">Bone-in ribeye<small>Dry-aged 45 days · 32oz · for two</small></span><span class="dish-price">140</span></div>
-          <div class="dish"><span class="dish-name">Filet<small>8oz, bordelaise, bone marrow</small></span><span class="dish-price">62</span></div>
-          <div class="dish"><span class="dish-name">Whole snapper<small>Gulf caught, salsa verde, charred lemon</small></span><span class="dish-price">58</span></div>
-          <div class="dish"><span class="dish-name">Hen of the woods<small>Whole roasted, brown butter, thyme</small></span><span class="dish-price">34</span></div>
-        </div>
-
-        <div class="course">
-          <p class="course-name">Alongside</p>
-          <div class="dish"><span class="dish-name">Fat potatoes<small>Cooked in beef drippings</small></span><span class="dish-price">12</span></div>
-          <div class="dish"><span class="dish-name">Bitter leaves<small>Anchovy, lemon, parmesan</small></span><span class="dish-price">11</span></div>
-          <div class="dish"><span class="dish-name">Creamed greens<small>Smoked cream, nutmeg</small></span><span class="dish-price">12</span></div>
-        </div>
-
-      </div>
-      <p class="menu-note"><strong>Demo note:</strong> placeholder menu and pricing, written for the concept.</p>
+    <div class="course">
+      <p class="course-h">To begin</p>
+      <div class="dish"><h3>Ember leeks</h3><p class="desc">Burnt honey, hazelnut, aged sheep's cheese</p><span class="price">14</span></div>
+      <div class="dish"><h3>Beef tartare</h3><p class="desc">Cut by hand, smoked yolk, sourdough toast</p><span class="price">21</span></div>
+      <div class="dish"><h3>Gulf oysters</h3><p class="desc">Half dozen, mignonette, cracked pepper</p><span class="price">24</span></div>
     </div>
+
+    <div class="course">
+      <p class="course-h">From the hearth</p>
+      <div class="dish"><h3>Bone-in ribeye</h3><p class="desc">Dry-aged 45 days · 32oz · for two</p><span class="price">140</span></div>
+      <div class="dish"><h3>Filet</h3><p class="desc">8oz, bordelaise, bone marrow</p><span class="price">62</span></div>
+      <div class="dish"><h3>Whole snapper</h3><p class="desc">Gulf caught, salsa verde, charred lemon</p><span class="price">58</span></div>
+      <div class="dish"><h3>Hen of the woods</h3><p class="desc">Whole roasted, brown butter, thyme</p><span class="price">34</span></div>
+    </div>
+
+    <div class="course">
+      <p class="course-h">Alongside</p>
+      <div class="dish"><h3>Fat potatoes</h3><p class="desc">Cooked in beef drippings</p><span class="price">12</span></div>
+      <div class="dish"><h3>Bitter leaves</h3><p class="desc">Anchovy, lemon, parmesan</p><span class="price">11</span></div>
+    </div>
+
+    <p class="menu-note"><strong>Demo note:</strong> placeholder menu and pricing, written for the concept.</p>
   </section>
 
-  <section class="fire" id="fire">
-    <div class="shell fire-grid">
-      <div>
-        <p class="kick">The fire</p>
-        <h2>One fire. <em>Lit at two.</em></h2>
-        <p class="lede">
-          Post oak, burned down to coals before service and worked all night. Every plate that
-          leaves the pass has been over it — including the bread and most of the vegetables.
-        </p>
-        <ul class="notes">
-          <li class="note"><b>45</b><p>Days minimum on the dry-aging of every cut of beef we serve.</p></li>
-          <li class="note"><b>14</b><p>Tables. One seating. The room turns once, so the table is yours all night.</p></li>
-          <li class="note"><b>0</b><p>Gas burners in the building. If the fire goes out, service is over.</p></li>
-        </ul>
-      </div>
-      <figure class="fire-media">
-        <img src="assets/hero.jpg" alt="A charred bone-in ribeye resting on a cast-iron plate, glowing embers behind" width="1920" height="1080" loading="lazy">
-      </figure>
-    </div>
-  </section>
+  <figure class="interlude">
+    <img src="assets/hero.jpg" alt="A charred bone-in ribeye resting on cast iron, embers glowing behind" loading="lazy">
+    <figcaption>From the hearth, nightly</figcaption>
+  </figure>
 
-  <section class="reserve" id="reserve">
-    <div class="shell narrow">
-      <p class="kick">Reserve</p>
-      <h2>The book opens <em>thirty days out.</em></h2>
-      <p class="lede">
-        Fourteen tables go quickly. Cancellations are released back at noon each day, so it is
-        worth looking again the morning of.
-      </p>
-      <a class="btn btn-fill" href="tel:+15125550164">Call (512) 555-0164</a>
-      <dl class="hours">
-        <div class="hour"><dt>Wednesday – Saturday</dt><dd>One seating, 7pm</dd></div>
-        <div class="hour"><dt>Sunday</dt><dd>Lunch, 1pm</dd></div>
-        <div class="hour"><dt>Where</dt><dd>East Austin</dd></div>
-      </dl>
-    </div>
+  <section class="chapter reserve" id="reserve">
+    <p class="ch-no">iii.</p>
+    <h2>The book opens<br><em>thirty days out.</em></h2>
+    <p>Cancellations are released back at noon each day — worth looking again the morning of.</p>
+    <a class="btn" href="tel:+15125550164">Call (512) 555-0164</a>
+    <ul class="hours">
+      <li><span>Wed – Sat</span><span>One seating, 7pm</span></li>
+      <li><span>Sunday</span><span>Lunch, 1pm</span></li>
+      <li><span>Where</span><span>East Austin</span></li>
+    </ul>
   </section>
 
 </main>
 
 <footer class="foot">
-  <div class="shell">
-    <p><strong>Hearth &amp; Hollow</strong> — wood-fire steakhouse, Austin.</p>
-    <p class="fine">Portfolio concept. Fictional restaurant, placeholder menu, AI-generated photography.</p>
-  </div>
+  <p><strong>Hearth &amp; Hollow</strong> — wood-fire steakhouse, East Austin.</p>
+  <p class="fine">Portfolio concept. Fictional restaurant, placeholder menu, AI-generated photography.</p>
 </footer>
 
 </body>

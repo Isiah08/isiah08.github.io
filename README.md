@@ -20,7 +20,7 @@ off it.
 
 | Folder | Trade | Signature idea | Palette / type |
 |---|---|---|---|
-| `gulf-coast-exterior` | Pressure washing | Headline sits inside a "cleaned stripe" cut through grimy concrete. Publishes per-sq-ft rates instead of "call for quote" | Slate + safety orange, light page · Archivo Black + Public Sans |
+| `hill-country-exterior` | Pressure washing | Headline sits inside a "cleaned stripe" cut through grimy concrete. Publishes per-sq-ft rates instead of "call for quote" | Slate + safety orange, light page · Archivo Black + Public Sans |
 | `lumen-aesthetics` | Med spa | Treatments set as a printed book index — leader dots, ranged-right prices. No cards anywhere | Sage + porcelain · Fraunces + Karla |
 | `ironhide-roofing` | Storm restoration | The insurance claim clock as the spine of the page: date of loss → evidence → file → policy deadline | Bitumen + hazard yellow · Saira Condensed + IBM Plex Sans |
 | `hearth-and-hollow` | Steakhouse | The menu *is* the hero, typeset as a letterpress card. Food photo demoted below the fold | Charred oak + ember · Bodoni Moda + Jost |
@@ -51,7 +51,7 @@ All six pages, at 1280px and 375px:
 - `prefers-reduced-motion` respected; only `transform` and `opacity` animate
 - Visible `:focus-visible` on every interactive element
 
-Seen with my own eyes: the index, Gulf Coast, Hearth & Hollow, Ironhide. Lumen and
+Seen with my own eyes: the index, Hill Country, Hearth & Hollow, Ironhide. Lumen and
 Vance & Rowe passed the same automated audit but were not screenshotted — worth a look
 before you publish them.
 

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Send — Waco 12</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Phone-first send sheet. Tap a button, Messages opens with the number and the
+   message already in it. Nothing sends on its own — you press send. */
+:root{
+  --bg:#0C0D0F; --card:#141619; --card-2:#1B1E22;
+  --fg:#F2F0EC; --mid:#A2A8AF; --dim:#6B7178;
+  --go:#3B8E5A; --go-2:#2E7047;
+  --wait:#B8853A;
+  --line:rgba(242,240,236,.12);
+  --s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font-family:"Inter Tight",-apple-system,system-ui,sans-serif;
+  font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;
+  padding:0 0 env(safe-area-inset-bottom)}
+.wrap{max-width:640px;margin-inline:auto;padding:var(--s5) var(--s4) 64px}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--go);outline-offset:3px}
+
+header{padding-block:var(--s4) var(--s5);border-bottom:1px solid var(--line);margin-bottom:var(--s5)}
+h1{margin:0 0 var(--s2);font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.sub{margin:0;color:var(--mid);font-size:.92rem}
+.count{display:inline-flex;align-items:center;gap:6px;margin-top:var(--s3);
+  padding:4px 10px;border:1px solid var(--line);border-radius:999px;
+  font-size:.75rem;color:var(--mid)}
+.count b{color:var(--go)}
+
+.group{margin-bottom:var(--s6)}
+.group-h{display:flex;align-items:center;gap:var(--s3);margin:0 0 var(--s3);
+  font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.group-h::after{content:"";flex:1;height:1px;background:var(--line)}
+.group.hold .group-h{color:var(--wait)}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:var(--s4);margin-bottom:var(--s3)}
+.card.done{opacity:.45}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--s3)}
+.name{font-weight:600;font-size:1.02rem;line-height:1.25}
+.meta{margin:4px 0 0;font-size:.82rem;color:var(--mid)}
+.stars{color:#E4B15A}
+.num{margin:var(--s3) 0 0;font-size:.86rem;color:var(--dim);
+  font-variant-numeric:tabular-nums}
+
+.actions{display:flex;gap:var(--s2);margin-top:var(--s4)}
+.btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  min-height:50px;border-radius:8px;font-size:.92rem;font-weight:600;
+  border:1px solid transparent;cursor:pointer;font-family:inherit;
+  -webkit-tap-highlight-color:transparent}
+.btn-send{background:var(--go);color:#fff}
+.btn-send:active{background:var(--go-2)}
+.btn-copy{flex:0 0 92px;background:transparent;color:var(--mid);border-color:var(--line)}
+.btn-copy:active{color:var(--fg)}
+.btn-copy.ok{color:var(--go);border-color:var(--go)}
+
+.preview{margin:var(--s3) 0 0;padding:var(--s3);background:var(--card-2);
+  border-radius:8px;font-size:.84rem;color:var(--mid);white-space:pre-wrap;
+  max-height:0;overflow:hidden;padding-top:0;padding-bottom:0;
+  transition:max-height .25s ease,padding .25s ease}
+.card.open .preview{max-height:420px;padding-top:var(--s3);padding-bottom:var(--s3)}
+.toggle{margin-top:var(--s3);font-size:.8rem;color:var(--dim);background:none;
+  border:0;padding:0;cursor:pointer;font-family:inherit}
+
+.note{margin:0 0 var(--s5);padding:var(--s4);background:var(--card);
+  border-left:3px solid var(--wait);border-radius:6px;font-size:.88rem;color:var(--mid)}
+.note b{color:var(--fg)}
+footer{margin-top:var(--s6);padding-top:var(--s4);border-top:1px solid var(--line);
+  font-size:.8rem;color:var(--dim)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Waco — 12 to send</h1>
+  <p class="sub">Tap Send. Messages opens with the number and message filled in. You press send.</p>
+  <span class="count"><b id="left">12</b> left today</span>
+</header>
+
+<p class="note">
+  <b>Restaurants are on hold</b> until your dad fixes “fully custom — not a template”
+  and the “AI appointment booker” line on the pitch pages. Salons and barbers don’t
+  touch those claims — send those now.
+</p>
+
+<div class="group" id="ready">
+  <p class="group-h">Send now — salons &amp; barbers</p>
+</div>
+
+<div class="group hold" id="hold">
+  <p class="group-h">Hold — restaurants, waiting on copy fix</p>
+</div>
+
+<footer>
+  Tapped businesses stay dimmed on this phone so you don’t double-text.
+  <br>One follow-up after 3 days. Never two.
+</footer>
+
+</div>
+
+<script>
+const BIZ = [
+  // ---- safe to send: nothing in these messages repeats the disputed claims
+  {g:"ready", n:"Colt The Barber", t:"Barber · 336 reviews", s:"5.0", p:"+12547493421",
+   m:"Hey — built you a site so people can book without DMing you.\n\nhttps://radius-prospects-sites.web.app/pitch/colt-the-barber-iwrsrx/\n\n336 five-star reviews on there already. Free to look at, no catch."},
+  {g:"ready", n:"Oasis Nails & Spa", t:"Nails · 540 reviews", s:"5.0", p:"+12546662122",
+   m:"Hey — I build websites for salons in Waco. Made you a booking page so clients can grab a slot without DMing you back and forth.\n\nAlready built with your real reviews: https://radius-prospects-sites.web.app/pitch/oasis-nails-spa-phmffx/\n\nFree to look. If it's not for you no hard feelings."},
+  {g:"ready", n:"Regal Nails", t:"Nails · 546 reviews", s:"5.0", p:"+12544204153",
+   m:"Hey — built Regal Nails a website with online booking so people stop calling during appointments to ask about openings.\n\nhttps://radius-prospects-sites.web.app/pitch/regal-nails-ch8blx/\n\n546 reviews on there already. Free to look at."},
+  {g:"ready", n:"MAXIMILLION Posh Nail Lounge", t:"Nails · 199 reviews", s:"5.0", p:"+12548365059",
+   m:"Hey — I make websites for Waco salons. Built one for Maximillion Posh — your services, your reviews, and a booking button.\n\nhttps://radius-prospects-sites.web.app/pitch/maximillion-posh-nail-lounge-hkbauu/\n\nAlready live, free to look. Just say the word if you want it."},
+  {g:"ready", n:"Pivotal Pathway Massage", t:"Massage · 118 reviews", s:"5.0", p:"+12542246115",
+   m:"Hey — I build websites for wellness businesses in Waco. Made one for Pivotal Pathway with your services and online booking:\n\nhttps://radius-prospects-sites.web.app/pitch/pivotal-pathway-massage-therapy-and-well-mxr5sv/\n\nAlready live and free to look at. Let me know if you'd like it."},
+
+  // ---- hold until the pitch-page copy is corrected
+  {g:"hold", n:"Papa Jack's BBQ", t:"Barbecue · 1,126 reviews", s:"5.0", p:"+12543004161",
+   m:"Hey — I build websites for Waco businesses. Papa Jack's has 1,126 five-star reviews and I couldn't find a proper site anywhere, so I built you one with your menu and direct ordering. Every order through it skips the delivery app cut.\n\nAlready live, free to look: https://radius-prospects-sites.web.app/pitch/papa-jack-s-bbq-spffdu/\n\nIf you want it, it's yours. If not, no worries at all."},
+  {g:"hold", n:"Jimenez Bakery", t:"Bakery · 1,138 reviews", s:"5.0", p:"+12542351010",
+   m:"Hey — I build websites for local businesses here in Texas. Jimenez has 1,138 reviews, which is more than almost anyone in Waco, and no real website.\n\nBuilt you one already — your name, your reviews, online ordering:\nhttps://radius-prospects-sites.web.app/pitch/jimenez-bakery-ibldxv/\n\nFree to look at. Let me know either way."},
+  {g:"hold", n:"Jasper's BBQ", t:"Barbecue · 596 reviews", s:"5.0", p:"+12547320899",
+   m:"Hey — built a website for Jasper's, already live:\nhttps://radius-prospects-sites.web.app/pitch/jasper-s-bbq-jprx5q/\n\n596 reviews and nowhere for people to order direct seemed like money left on the table. Menu and ordering are on there. Free to look, no catch."},
+  {g:"hold", n:"Huaco Eatery", t:"Restaurant · 415 reviews", s:"5.0", p:"+12542246575",
+   m:"Hey — I make websites for Waco spots. Built one for Huaco with your menu and a direct order button so you're not paying the app fee on every ticket.\n\nLive here: https://radius-prospects-sites.web.app/pitch/huaco-eatery-85jhmg/\n\nFree to look. Tell me if it's not for you and I'll leave you alone."},
+  {g:"hold", n:"Route 77 Food Park & Bar", t:"Restaurant · 332 reviews", s:"5.0", p:"+12542188817",
+   m:"Hey — built Route 77 a website. Events, vendors and hours all in one place instead of people digging through Facebook posts.\n\nhttps://radius-prospects-sites.web.app/pitch/route-77-food-park-bar-emppxa/\n\nAlready live, free to look at."},
+  {g:"hold", n:"SISON TACOS", t:"Mexican · 320 reviews", s:"5.0", p:"+12542929206",
+   m:"Hey — I build websites for Waco restaurants. Made one for Sison with your menu and direct ordering:\n\nhttps://radius-prospects-sites.web.app/pitch/sison-tacos-38skxr/\n\n320 five-star reviews and no site felt like a waste. Free to look, no pressure."},
+  {g:"hold", n:"Un Taco Màs", t:"Taco · 152 reviews", s:"5.0", p:"+12543399665",
+   m:"Hey — built a site for Un Taco Màs, already live:\nhttps://radius-prospects-sites.web.app/pitch/un-taco-m-s-ng3lpt/\n\nMenu and ordering on there so orders come to you instead of through the apps. Free to look at, let me know either way."},
+];
+
+const KEY = "waco-sent-v1";
+const sent = new Set(JSON.parse(localStorage.getItem(KEY) || "[]"));
+
+function pretty(p){ const d=p.replace(/\D/g,"").slice(-10);
+  return `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`; }
+
+function card(b){
+  const el = document.createElement("div");
+  el.className = "card" + (sent.has(b.p) ? " done" : "");
+  el.innerHTML = `
+    <div class="top">
+      <div>
+        <div class="name">${b.n}</div>
+        <p class="meta"><span class="stars">★ ${b.s}</span> · ${b.t}</p>
+      </div>
+    </div>
+    <p class="num">${pretty(b.p)}</p>
+    <div class="actions">
+      <a class="btn btn-send" href="sms:${b.p}&body=${encodeURIComponent(b.m)}">Send</a>
+      <button class="btn btn-copy" type="button">Copy</button>
+    </div>
+    <button class="toggle" type="button">Show message</button>
+    <div class="preview">${b.m.replace(/</g,"&lt;")}</div>`;
+
+  el.querySelector(".btn-send").addEventListener("click", () => {
+    sent.add(b.p);
+    localStorage.setItem(KEY, JSON.stringify([...sent]));
+    el.classList.add("done");
+    tally();
+  });
+  el.querySelector(".btn-copy").addEventListener("click", async (e) => {
+    try { await navigator.clipboard.writeText(b.m); } catch { }
+    e.target.textContent = "Copied"; e.target.classList.add("ok");
+    setTimeout(() => { e.target.textContent = "Copy"; e.target.classList.remove("ok"); }, 1600);
+  });
+  el.querySelector(".toggle").addEventListener("click", (e) => {
+    el.classList.toggle("open");
+    e.target.textContent = el.classList.contains("open") ? "Hide message" : "Show message";
+  });
+  return el;
+}
+
+function tally(){
+  document.getElementById("left").textContent = BIZ.filter(b => !sent.has(b.p)).length;
+}
+
+BIZ.forEach(b => document.getElementById(b.g).appendChild(card(b)));
+tally();
+</script>
+</body>
+</html>

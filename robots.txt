@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /send/
+Disallow: /posts/
 
 Sitemap: https://isiahbuilds.com/sitemap.xml

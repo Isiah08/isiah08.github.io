@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Send — Waco 12</title>
+<title>Send queue</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* Phone-first send sheet. Tap a button, Messages opens with the number and the
-   message already in it. Nothing sends on its own — you press send. */
+/* Rolling send queue. Shows the next few unsent leads; tap Send and it drops off
+   and the next slides up. Nothing sends on its own — you press send in Messages. */
 :root{
   --bg:#0C0D0F; --card:#141619; --card-2:#1B1E22;
   --fg:#F2F0EC; --mid:#A2A8AF; --dim:#6B7178;
@@ -31,21 +31,22 @@ a{color:inherit;text-decoration:none}
 header{padding-block:var(--s4) var(--s5);border-bottom:1px solid var(--line);margin-bottom:var(--s5)}
 h1{margin:0 0 var(--s2);font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
 .sub{margin:0;color:var(--mid);font-size:.92rem}
-.count{display:inline-flex;align-items:center;gap:6px;margin-top:var(--s3);
-  padding:4px 10px;border:1px solid var(--line);border-radius:999px;
-  font-size:.75rem;color:var(--mid)}
-.count b{color:var(--go)}
+.bar{display:flex;gap:var(--s3);margin-top:var(--s4);flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;
+  border:1px solid var(--line);border-radius:999px;font-size:.75rem;color:var(--mid);
+  font-variant-numeric:tabular-nums}
+.pill b{color:var(--fg);font-weight:600}
+.pill.sent b{color:var(--go)}
 
-.group{margin-bottom:var(--s6)}
-.group-h{display:flex;align-items:center;gap:var(--s3);margin:0 0 var(--s3);
-  font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
-.group-h::after{content:"";flex:1;height:1px;background:var(--line)}
-.group.hold .group-h{color:var(--wait)}
+.track{height:4px;background:var(--card-2);border-radius:999px;overflow:hidden;
+  margin-top:var(--s4)}
+.track i{display:block;height:100%;background:var(--go);width:0;
+  transition:width .3s ease}
 
 .card{background:var(--card);border:1px solid var(--line);border-radius:10px;
   padding:var(--s4);margin-bottom:var(--s3)}
-.card.done{opacity:.45}
-.top{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--s3)}
+.card.going{opacity:0;transform:translateY(-6px);
+  transition:opacity .22s ease,transform .22s ease}
 .name{font-weight:600;font-size:1.02rem;line-height:1.25}
 .meta{margin:4px 0 0;font-size:.82rem;color:var(--mid)}
 .stars{color:#E4B15A}
@@ -67,110 +68,789 @@ h1{margin:0 0 var(--s2);font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
   border-radius:8px;font-size:.84rem;color:var(--mid);white-space:pre-wrap;
   max-height:0;overflow:hidden;padding-top:0;padding-bottom:0;
   transition:max-height .25s ease,padding .25s ease}
-.card.open .preview{max-height:420px;padding-top:var(--s3);padding-bottom:var(--s3)}
+.card.open .preview{max-height:460px;padding-top:var(--s3);padding-bottom:var(--s3)}
 .toggle{margin-top:var(--s3);font-size:.8rem;color:var(--dim);background:none;
   border:0;padding:0;cursor:pointer;font-family:inherit}
 
-.note{margin:0 0 var(--s5);padding:var(--s4);background:var(--card);
-  border-left:3px solid var(--wait);border-radius:6px;font-size:.88rem;color:var(--mid)}
-.note b{color:var(--fg)}
+.note,.ask{margin:0 0 var(--s5);padding:var(--s4);background:var(--card);
+  border-radius:6px;font-size:.88rem;color:var(--mid)}
+.ask{border-left:3px solid var(--go)}
+.note{border-left:3px solid var(--wait)}
+.note b,.ask b{color:var(--fg)}
+.note p{margin:0 0 var(--s2)}
+.note p:last-child{margin:0}
+
+.undo{position:fixed;left:50%;transform:translateX(-50%);
+  bottom:calc(20px + env(safe-area-inset-bottom));z-index:20;
+  display:none;align-items:center;gap:var(--s3);
+  background:var(--card-2);border:1px solid var(--line);border-radius:999px;
+  padding:10px 10px 10px var(--s4);font-size:.85rem;color:var(--mid);
+  box-shadow:0 10px 30px rgba(0,0,0,.55)}
+.undo.show{display:flex}
+.undo button{min-height:36px;padding:0 14px;border-radius:999px;border:0;
+  background:var(--go);color:#fff;font-family:inherit;font-weight:600;
+  font-size:.85rem;cursor:pointer}
+
+.more{width:100%;min-height:48px;margin-top:var(--s3);background:transparent;
+  color:var(--mid);border:1px dashed var(--line);border-radius:8px;
+  font-family:inherit;font-size:.88rem;cursor:pointer}
+.more:active{color:var(--fg)}
+.empty{padding:var(--s6) var(--s4);text-align:center;color:var(--mid)}
+.empty b{display:block;color:var(--fg);font-size:1.1rem;margin-bottom:var(--s2)}
+.reset{margin-top:var(--s4);background:none;border:0;color:var(--dim);
+  font-family:inherit;font-size:.8rem;text-decoration:underline;cursor:pointer}
 footer{margin-top:var(--s6);padding-top:var(--s4);border-top:1px solid var(--line);
   font-size:.8rem;color:var(--dim)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <header>
-  <h1>Waco — 12 to send</h1>
-  <p class="sub">Tap Send. Messages opens with the number and message filled in. You press send.</p>
-  <span class="count"><b id="left">12</b> left today</span>
+  <h1>Send queue</h1>
+  <p class="sub">Tap Send. Messages opens with the number and text filled in — you press send. Sent ones drop off and the next slides up.</p>
+  <div class="bar">
+    <span class="pill sent"><b id="n-sent">0</b> sent</span>
+    <span class="pill"><b id="n-left">0</b> still to go</span>
+  </div>
+  <div class="track"><i id="prog"></i></div>
 </header>
 
-<p class="note">
-  <b>Restaurants are on hold</b> until your dad fixes “fully custom — not a template”
-  and the “AI appointment booker” line on the pitch pages. Salons and barbers don’t
-  touch those claims — send those now.
-</p>
-
-<div class="group" id="ready">
-  <p class="group-h">Send now — salons &amp; barbers</p>
+<div class="ask">
+  <b>Worked warmest first.</b> The booking-page leads come up before anything else —
+  they already pay Vagaro, Booksy, Square or GlossGenius every month, so they're
+  proven buyers, and the page they pay for carries the platform's name instead of
+  theirs. After those, no-presence-at-all by review count, then social-only.
 </div>
 
-<div class="group hold" id="hold">
-  <p class="group-h">Hold — restaurants, waiting on copy fix</p>
+<div class="note">
+  <p><b>Price is $297.</b> The pitch page shows $499 crossed out to $297, so that's
+  what they see while reading you. Don't quote $97.</p>
+  <p><b>Don't repeat the "AI booker" line.</b> It's on the page but there's no booker
+  in it. None of these messages mention it — keep it that way if they ask.</p>
+  <p><b>If they tap "Claim This Site"</b> it emails your dad's inbox, not you. Every
+  message says "reply here" for that reason.</p>
 </div>
+
+<div id="list"></div>
+<button class="more" id="more" type="button">Show more</button>
 
 <footer>
-  Tapped businesses stay dimmed on this phone so you don’t double-text.
-  <br>One follow-up after 3 days. Never two.
+  Sent state is saved on this phone. Salons and barbers: any time. Restaurants: 2–4pm.
+  <br>One follow-up after 3 days — never two.
 </footer>
 
 </div>
 
+<div class="undo" id="undo">
+  <span id="undo-text">Marked sent</span>
+  <button type="button" id="undo-btn">Undo</button>
+</div>
+
 <script>
 const BIZ = [
-  // ---- safe to send: nothing in these messages repeats the disputed claims
-  {g:"ready", n:"Colt The Barber", t:"Barber · 336 reviews", s:"5.0", p:"+12547493421",
-   m:"Hey — built you a site so people can book without DMing you.\n\nhttps://radius-prospects-sites.web.app/pitch/colt-the-barber-iwrsrx/\n\n336 five-star reviews on there already. Free to look at, no catch."},
-  {g:"ready", n:"Oasis Nails & Spa", t:"Nails · 540 reviews", s:"5.0", p:"+12546662122",
-   m:"Hey — I build websites for salons in Waco. Made you a booking page so clients can grab a slot without DMing you back and forth.\n\nAlready built with your real reviews: https://radius-prospects-sites.web.app/pitch/oasis-nails-spa-phmffx/\n\nFree to look. If it's not for you no hard feelings."},
-  {g:"ready", n:"Regal Nails", t:"Nails · 546 reviews", s:"5.0", p:"+12544204153",
-   m:"Hey — built Regal Nails a website with online booking so people stop calling during appointments to ask about openings.\n\nhttps://radius-prospects-sites.web.app/pitch/regal-nails-ch8blx/\n\n546 reviews on there already. Free to look at."},
-  {g:"ready", n:"MAXIMILLION Posh Nail Lounge", t:"Nails · 199 reviews", s:"5.0", p:"+12548365059",
-   m:"Hey — I make websites for Waco salons. Built one for Maximillion Posh — your services, your reviews, and a booking button.\n\nhttps://radius-prospects-sites.web.app/pitch/maximillion-posh-nail-lounge-hkbauu/\n\nAlready live, free to look. Just say the word if you want it."},
-  {g:"ready", n:"Pivotal Pathway Massage", t:"Massage · 118 reviews", s:"5.0", p:"+12542246115",
-   m:"Hey — I build websites for wellness businesses in Waco. Made one for Pivotal Pathway with your services and online booking:\n\nhttps://radius-prospects-sites.web.app/pitch/pivotal-pathway-massage-therapy-and-well-mxr5sv/\n\nAlready live and free to look at. Let me know if you'd like it."},
-
-  // ---- hold until the pitch-page copy is corrected
-  {g:"hold", n:"Papa Jack's BBQ", t:"Barbecue · 1,126 reviews", s:"5.0", p:"+12543004161",
-   m:"Hey — I build websites for Waco businesses. Papa Jack's has 1,126 five-star reviews and I couldn't find a proper site anywhere, so I built you one with your menu and direct ordering. Every order through it skips the delivery app cut.\n\nAlready live, free to look: https://radius-prospects-sites.web.app/pitch/papa-jack-s-bbq-spffdu/\n\nIf you want it, it's yours. If not, no worries at all."},
-  {g:"hold", n:"Jimenez Bakery", t:"Bakery · 1,138 reviews", s:"5.0", p:"+12542351010",
-   m:"Hey — I build websites for local businesses here in Texas. Jimenez has 1,138 reviews, which is more than almost anyone in Waco, and no real website.\n\nBuilt you one already — your name, your reviews, online ordering:\nhttps://radius-prospects-sites.web.app/pitch/jimenez-bakery-ibldxv/\n\nFree to look at. Let me know either way."},
-  {g:"hold", n:"Jasper's BBQ", t:"Barbecue · 596 reviews", s:"5.0", p:"+12547320899",
-   m:"Hey — built a website for Jasper's, already live:\nhttps://radius-prospects-sites.web.app/pitch/jasper-s-bbq-jprx5q/\n\n596 reviews and nowhere for people to order direct seemed like money left on the table. Menu and ordering are on there. Free to look, no catch."},
-  {g:"hold", n:"Huaco Eatery", t:"Restaurant · 415 reviews", s:"5.0", p:"+12542246575",
-   m:"Hey — I make websites for Waco spots. Built one for Huaco with your menu and a direct order button so you're not paying the app fee on every ticket.\n\nLive here: https://radius-prospects-sites.web.app/pitch/huaco-eatery-85jhmg/\n\nFree to look. Tell me if it's not for you and I'll leave you alone."},
-  {g:"hold", n:"Route 77 Food Park & Bar", t:"Restaurant · 332 reviews", s:"5.0", p:"+12542188817",
-   m:"Hey — built Route 77 a website. Events, vendors and hours all in one place instead of people digging through Facebook posts.\n\nhttps://radius-prospects-sites.web.app/pitch/route-77-food-park-bar-emppxa/\n\nAlready live, free to look at."},
-  {g:"hold", n:"SISON TACOS", t:"Mexican · 320 reviews", s:"5.0", p:"+12542929206",
-   m:"Hey — I build websites for Waco restaurants. Made one for Sison with your menu and direct ordering:\n\nhttps://radius-prospects-sites.web.app/pitch/sison-tacos-38skxr/\n\n320 five-star reviews and no site felt like a waste. Free to look, no pressure."},
-  {g:"hold", n:"Un Taco Màs", t:"Taco · 152 reviews", s:"5.0", p:"+12543399665",
-   m:"Hey — built a site for Un Taco Màs, already live:\nhttps://radius-prospects-sites.web.app/pitch/un-taco-m-s-ng3lpt/\n\nMenu and ordering on there so orders come to you instead of through the apps. Free to look at, let me know either way."},
+ {
+  "n": "Colt The Barber",
+  "p": "+12547493421",
+  "rev": 342,
+  "g": "booking",
+  "t": "Barber Shop · 342 reviews · pays for a booking page",
+  "s": "5",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses in Texas. Noticed Colt The Barber sends people to a Square page. That works fine for booking, but it's Square's name on it, not yours, and you're paying them every month for it.\n\nBuilt you your own site instead:\n\nhttps://radius-prospects-sites.web.app/pitch/colt-the-barber-iwrsrx/\n\nFree to look. Reply here if you want it and I'll get it on your own domain."
+ },
+ {
+  "n": "Beauty and the Blade",
+  "p": "+12542628009",
+  "rev": 163,
+  "g": "booking",
+  "t": "Hair Salon · 163 reviews · pays for a booking page",
+  "s": "5",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses in Texas. Noticed Beauty and the Blade sends people to a Vagaro page. That works fine for booking, but it's Vagaro's name on it, not yours, and you're paying them every month for it.\n\nBuilt you your own site instead:\n\nhttps://radius-prospects-sites.web.app/pitch/beauty-and-the-blade-j3ytak/\n\nFree to look. Reply here if you want it and I'll get it on your own domain."
+ },
+ {
+  "n": "Bridge Street Barbershop",
+  "p": "+12542652136",
+  "rev": 121,
+  "g": "booking",
+  "t": "Barber Shop · 121 reviews · pays for a booking page",
+  "s": "4.9",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses in Texas. Noticed Bridge Street Barbershop sends people to a Booksy page. That works fine for booking, but it's Booksy's name on it, not yours, and you're paying them every month for it.\n\nBuilt you your own site instead:\n\nhttps://radius-prospects-sites.web.app/pitch/bridge-street-barbershop-bgmzgi/\n\nFree to look. Reply here if you want it and I'll get it on your own domain."
+ },
+ {
+  "n": "Pivotal Pathway Massage",
+  "p": "+12542246115",
+  "rev": 118,
+  "g": "booking",
+  "t": "Massage · 118 reviews · pays for a booking page",
+  "s": "4.9",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses in Texas. Noticed Pivotal Pathway Massage sends people to a Vagaro page. That works fine for booking, but it's Vagaro's name on it, not yours, and you're paying them every month for it.\n\nBuilt you your own site instead:\n\nhttps://radius-prospects-sites.web.app/pitch/pivotal-pathway-massage-therapy-and-well-mxr5sv/\n\nFree to look. Reply here if you want it and I'll get it on your own domain."
+ },
+ {
+  "n": "She Slays You Beauty Bar",
+  "p": "+12543623022",
+  "rev": 99,
+  "g": "booking",
+  "t": "Hair Salon · 99 reviews · pays for a booking page",
+  "s": "4.8",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses in Texas. Noticed She Slays You Beauty Bar sends people to a Booksy page. That works fine for booking, but it's Booksy's name on it, not yours, and you're paying them every month for it.\n\nBuilt you your own site instead:\n\nhttps://radius-prospects-sites.web.app/pitch/she-slays-you-beauty-bar-llc-aixqqx/\n\nFree to look. Reply here if you want it and I'll get it on your own domain."
+ },
+ {
+  "n": "Next Generation Downtown",
+  "p": "+12548781721",
+  "rev": 95,
+  "g": "booking",
+  "t": "Barber Shop · 95 reviews · pays for a booking page",
+  "s": "4.9",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses in Texas. Noticed Next Generation Downtown sends people to a Booksy page. That works fine for booking, but it's Booksy's name on it, not yours, and you're paying them every month for it.\n\nBuilt you your own site instead:\n\nhttps://radius-prospects-sites.web.app/pitch/next-generation-downtown-bewpua/\n\nFree to look. Reply here if you want it and I'll get it on your own domain."
+ },
+ {
+  "n": "The Hairitage Salon",
+  "p": "+12544578456",
+  "rev": 90,
+  "g": "booking",
+  "t": "Hair Salon · 90 reviews · pays for a booking page",
+  "s": "5",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses in Texas. Noticed The Hairitage Salon sends people to a GlossGenius page. That works fine for booking, but it's GlossGenius's name on it, not yours, and you're paying them every month for it.\n\nBuilt you your own site instead:\n\nhttps://radius-prospects-sites.web.app/pitch/the-hairitage-salon-waco-aboryj/\n\nFree to look. Reply here if you want it and I'll get it on your own domain."
+ },
+ {
+  "n": "Pop's Lemonade Company",
+  "p": "+12542248081",
+  "rev": 90,
+  "g": "booking",
+  "t": "Restaurant · 90 reviews · pays for a booking page",
+  "s": "4.9",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses in Texas. Noticed Pop's Lemonade Company sends people to a Square page. That works fine for booking, but it's Square's name on it, not yours, and you're paying them every month for it.\n\nBuilt you your own site instead:\n\nhttps://radius-prospects-sites.web.app/pitch/pop-s-lemonade-company-eh434j/\n\nFree to look. Reply here if you want it and I'll get it on your own domain."
+ },
+ {
+  "n": "Shear Shenanigans Salon",
+  "p": "+12542246722",
+  "rev": 90,
+  "g": "booking",
+  "t": "Hair Salon · 90 reviews · pays for a booking page",
+  "s": "4.6",
+  "c": "Hewitt",
+  "m": "Hey — I'm Isiah, I build websites for local businesses in Texas. Noticed Shear Shenanigans Salon sends people to a Vagaro page. That works fine for booking, but it's Vagaro's name on it, not yours, and you're paying them every month for it.\n\nBuilt you your own site instead:\n\nhttps://radius-prospects-sites.web.app/pitch/shear-shenanigans-salon-zeadgb/\n\nFree to look. Reply here if you want it and I'll get it on your own domain."
+ },
+ {
+  "n": "Days Ease Massage",
+  "p": "+12542273587",
+  "rev": 79,
+  "g": "booking",
+  "t": "Massage · 79 reviews · pays for a booking page",
+  "s": "5",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses in Texas. Noticed Days Ease Massage sends people to a GlossGenius page. That works fine for booking, but it's GlossGenius's name on it, not yours, and you're paying them every month for it.\n\nBuilt you your own site instead:\n\nhttps://radius-prospects-sites.web.app/pitch/days-ease-massage-8ctgg4/\n\nFree to look. Reply here if you want it and I'll get it on your own domain."
+ },
+ {
+  "n": "Karla's Therapeutic Touch",
+  "p": "+18325314685",
+  "rev": 76,
+  "g": "booking",
+  "t": "Massage · 76 reviews · pays for a booking page",
+  "s": "5",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses in Texas. Noticed Karla's Therapeutic Touch sends people to a GlossGenius page. That works fine for booking, but it's GlossGenius's name on it, not yours, and you're paying them every month for it.\n\nBuilt you your own site instead:\n\nhttps://radius-prospects-sites.web.app/pitch/karla-s-therapeutic-touch-szupx5/\n\nFree to look. Reply here if you want it and I'll get it on your own domain."
+ },
+ {
+  "n": "Blessed Spa",
+  "p": "+12543046963",
+  "rev": 59,
+  "g": "booking",
+  "t": "Nail Salon · 59 reviews · pays for a booking page",
+  "s": "5",
+  "c": "Woodway",
+  "m": "Hey — I'm Isiah, I build websites for local businesses in Texas. Noticed Blessed Spa sends people to a Square page. That works fine for booking, but it's Square's name on it, not yours, and you're paying them every month for it.\n\nBuilt you your own site instead:\n\nhttps://radius-prospects-sites.web.app/pitch/blessed-spa-lvjnua/\n\nFree to look. Reply here if you want it and I'll get it on your own domain."
+ },
+ {
+  "n": "G's Barber Shop",
+  "p": "+12544986791",
+  "rev": 57,
+  "g": "booking",
+  "t": "Barber Shop · 57 reviews · pays for a booking page",
+  "s": "4.9",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses in Texas. Noticed G's Barber Shop sends people to a Square page. That works fine for booking, but it's Square's name on it, not yours, and you're paying them every month for it.\n\nBuilt you your own site instead:\n\nhttps://radius-prospects-sites.web.app/pitch/g-s-barber-shop-wzjs8y/\n\nFree to look. Reply here if you want it and I'll get it on your own domain."
+ },
+ {
+  "n": "The Ranchito #5",
+  "p": "+12542359470",
+  "rev": 1430,
+  "g": "nothing",
+  "t": "Mexican Restaurant · 1430 reviews · nothing online",
+  "s": "4.2",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. The Ranchito #5 has 1430 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/the-ranchito-5-waco-hgx72x/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Taqueria Zacatecas",
+  "p": "+12547531665",
+  "rev": 1356,
+  "g": "nothing",
+  "t": "Mexican Restaurant · 1356 reviews · nothing online",
+  "s": "4.3",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Taqueria Zacatecas has 1356 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/taqueria-zacatecas-rvbtxq/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Jimenez Bakery",
+  "p": "+12542351010",
+  "rev": 1140,
+  "g": "nothing",
+  "t": "Bakery · 1140 reviews · nothing online",
+  "s": "4.6",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Jimenez Bakery has 1140 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/jimenez-bakery-ibldxv/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Papa Jack's BBQ",
+  "p": "+12543004161",
+  "rev": 1131,
+  "g": "nothing",
+  "t": "Barbecue Restaurant · 1131 reviews · nothing online",
+  "s": "4.9",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Papa Jack's BBQ has 1131 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/papa-jack-s-bbq-spffdu/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Abuelita's Mexican Restaurant",
+  "p": "+12543996371",
+  "rev": 1077,
+  "g": "nothing",
+  "t": "Mexican Restaurant · 1077 reviews · nothing online",
+  "s": "4.3",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Abuelita's Mexican Restaurant has 1077 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/abuelita-s-mexican-restaurant-qy9w7y/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Frenkie's Pasta & Pizza",
+  "p": "+12545821230",
+  "rev": 779,
+  "g": "nothing",
+  "t": "Italian Restaurant · 779 reviews · nothing online",
+  "s": "4.4",
+  "c": "Hillsboro",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Frenkie's Pasta & Pizza has 779 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/frenkie-s-pasta-pizza-y4s0ta/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Harold Waite's Pancake & Steakhouse",
+  "p": "+12547729970",
+  "rev": 742,
+  "g": "nothing",
+  "t": "Breakfast Diner · 742 reviews · nothing online",
+  "s": "4.2",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Harold Waite's Pancake & Steakhouse has 742 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/harold-waite-s-pancake-steakhouse-re2fhk/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Jasper's BBQ",
+  "p": "+12547320899",
+  "rev": 596,
+  "g": "nothing",
+  "t": "Barbecue Restaurant · 596 reviews · nothing online",
+  "s": "4.6",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Jasper's BBQ has 596 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/jasper-s-bbq-jprx5q/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Regal Nails",
+  "p": "+12544204153",
+  "rev": 546,
+  "g": "nothing",
+  "t": "Nail Salon · 546 reviews · nothing online",
+  "s": "4.8",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Regal Nails has 546 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/regal-nails-ch8blx/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Oasis Nails & Spa",
+  "p": "+12546662122",
+  "rev": 541,
+  "g": "nothing",
+  "t": "Nail Salon · 541 reviews · nothing online",
+  "s": "4.6",
+  "c": "Hewitt",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Oasis Nails & Spa has 541 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/oasis-nails-spa-phmffx/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Taqueria La Milpa",
+  "p": "+12547176809",
+  "rev": 461,
+  "g": "nothing",
+  "t": "Mexican Restaurant · 461 reviews · nothing online",
+  "s": "4.5",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Taqueria La Milpa has 461 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/taqueria-la-milpa-fbxxvr/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Huaco Eatery",
+  "p": "+12542246575",
+  "rev": 425,
+  "g": "nothing",
+  "t": "Restaurant · 425 reviews · nothing online",
+  "s": "4.7",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Huaco Eatery has 425 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/huaco-eatery-85jhmg/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "SAGRADO COCINA AND BAR",
+  "p": "+12543004100",
+  "rev": 390,
+  "g": "nothing",
+  "t": "Restaurant · 390 reviews · nothing online",
+  "s": "4.3",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. SAGRADO COCINA AND BAR has 390 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/sagrado-cocina-and-bar-lta22v/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Waco Fades Barber Shop",
+  "p": "+12547320056",
+  "rev": 353,
+  "g": "nothing",
+  "t": "Barber Shop · 353 reviews · nothing online",
+  "s": "4",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Waco Fades Barber Shop has 353 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/waco-fades-barber-shop-vu8x4v/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Route 77 Food Park & Bar",
+  "p": "+12542188817",
+  "rev": 331,
+  "g": "nothing",
+  "t": "Restaurant · 331 reviews · nothing online",
+  "s": "4.6",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Route 77 Food Park & Bar has 331 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/route-77-food-park-bar-emppxa/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Uncle Worm's Texas Cuisine",
+  "p": "+12547321108",
+  "rev": 310,
+  "g": "nothing",
+  "t": "Restaurant · 310 reviews · nothing online",
+  "s": "4.5",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Uncle Worm's Texas Cuisine has 310 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/uncle-worm-s-texas-cuisine-ztdwim/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Taqueria Mis Marias",
+  "p": "+12542293075",
+  "rev": 282,
+  "g": "nothing",
+  "t": "Mexican Restaurant · 282 reviews · nothing online",
+  "s": "4.7",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Taqueria Mis Marias has 282 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/taqueria-mis-marias-ylnz3p/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Skyline Nail and Spa",
+  "p": "+12544002025",
+  "rev": 277,
+  "g": "nothing",
+  "t": "Nail Salon · 277 reviews · nothing online",
+  "s": "4.2",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Skyline Nail and Spa has 277 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/skyline-nail-and-spa-skzxzr/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "A Taste Of Laos",
+  "p": "+12542948889",
+  "rev": 267,
+  "g": "nothing",
+  "t": "Restaurant · 267 reviews · nothing online",
+  "s": "4.5",
+  "c": "Hewitt",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. A Taste Of Laos has 267 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/a-taste-of-laos-kticcg/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Mexican Taco Taqueria",
+  "p": "+12542357046",
+  "rev": 244,
+  "g": "nothing",
+  "t": "Mexican Restaurant · 244 reviews · nothing online",
+  "s": "4.3",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Mexican Taco Taqueria has 244 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/mexican-taco-taqueria-fuh10x/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "El Arriero Taqueria",
+  "p": "+12542142891",
+  "rev": 221,
+  "g": "nothing",
+  "t": "Mexican Restaurant · 221 reviews · nothing online",
+  "s": "4.2",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. El Arriero Taqueria has 221 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/el-arriero-taqueria-fha3lu/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "MAXIMILLION POSH NAIL LOUNGE",
+  "p": "+12548365059",
+  "rev": 200,
+  "g": "nothing",
+  "t": "Nail Salon · 200 reviews · nothing online",
+  "s": "4.8",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. MAXIMILLION POSH NAIL LOUNGE has 200 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/maximillion-posh-nail-lounge-hkbauu/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Celine Nails",
+  "p": "+12543391079",
+  "rev": 199,
+  "g": "nothing",
+  "t": "Nail Salon · 199 reviews · nothing online",
+  "s": "4.7",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Celine Nails has 199 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/celine-nails-vhu8c3/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Look At Me Now Barbershop",
+  "p": "+12542357172",
+  "rev": 190,
+  "g": "nothing",
+  "t": "Barber Shop · 190 reviews · nothing online",
+  "s": "4.6",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Look At Me Now Barbershop has 190 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/look-at-me-now-barbershop-zxu9t8/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Melody Ranch",
+  "p": "+12546626172",
+  "rev": 177,
+  "g": "nothing",
+  "t": "Night Club · 177 reviews · nothing online",
+  "s": "3.4",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Melody Ranch has 177 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/melody-ranch-caihx0/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Be yoU! Nails",
+  "p": "+12547321300",
+  "rev": 162,
+  "g": "nothing",
+  "t": "Nail Salon · 162 reviews · nothing online",
+  "s": "4.8",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Be yoU! Nails has 162 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/be-you-nails-ksecxx/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Club Sandwich Food Truck",
+  "p": "+12543049424",
+  "rev": 161,
+  "g": "nothing",
+  "t": "Caterer · 161 reviews · nothing online",
+  "s": "4.9",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Club Sandwich Food Truck has 161 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/club-sandwich-food-truck-jwlyyw/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "LUXURY NAILS & SPA",
+  "p": "+12543131050",
+  "rev": 160,
+  "g": "nothing",
+  "t": "Beauty Salon · 160 reviews · nothing online",
+  "s": "4.7",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. LUXURY NAILS & SPA has 160 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/luxury-nails-spa-leu8p1/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Just Wingin' It",
+  "p": "+12542653128",
+  "rev": 140,
+  "g": "nothing",
+  "t": "Restaurant · 140 reviews · nothing online",
+  "s": "4.9",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Just Wingin' It has 140 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/just-wingin-it-3tqzxl/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Heads Up",
+  "p": "+12542358430",
+  "rev": 132,
+  "g": "nothing",
+  "t": "Barber Shop · 132 reviews · nothing online",
+  "s": "4.8",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Heads Up has 132 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/heads-up-zurh27/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "University Barber Shop",
+  "p": "+12547539305",
+  "rev": 121,
+  "g": "nothing",
+  "t": "Barber Shop · 121 reviews · nothing online",
+  "s": "4.7",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. University Barber Shop has 121 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/university-barber-shop-jucuyk/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Agaves Mexican Kitchen",
+  "p": "+12543004107",
+  "rev": 110,
+  "g": "nothing",
+  "t": "Mexican Restaurant · 110 reviews · nothing online",
+  "s": "4",
+  "c": "Hewitt",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Agaves Mexican Kitchen has 110 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/agaves-mexican-kitchen-hkpojl/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Braids & Fades",
+  "p": "+12547557529",
+  "rev": 108,
+  "g": "nothing",
+  "t": "Beauty Salon · 108 reviews · nothing online",
+  "s": "4.7",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Braids & Fades has 108 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/braids-fades-imleel/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "The Trompo King",
+  "p": "+12544610468",
+  "rev": 101,
+  "g": "nothing",
+  "t": "Mexican Restaurant · 101 reviews · nothing online",
+  "s": "4.7",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. The Trompo King has 101 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/the-trompo-king-taqueria-grill-wgvepd/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Parkdale",
+  "p": "+12547760762",
+  "rev": 99,
+  "g": "nothing",
+  "t": "Barber Shop · 99 reviews · nothing online",
+  "s": "4.8",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Parkdale has 99 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/parkdale-c3s7z7/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Muchos Tacos",
+  "p": "+12543072961",
+  "rev": 93,
+  "g": "nothing",
+  "t": "Mexican Restaurant · 93 reviews · nothing online",
+  "s": "4.9",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Muchos Tacos has 93 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/muchos-tacos-waco-downtown-farmer-s-mark-7xmce0/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Le's Kitchen",
+  "p": "+12544006134",
+  "rev": 90,
+  "g": "nothing",
+  "t": "Vietnamese Restaurant · 90 reviews · nothing online",
+  "s": "4.6",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Le's Kitchen has 90 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/le-s-kitchen-qhzoav/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Un je ne sais Quoi",
+  "p": "+12546406364",
+  "rev": 81,
+  "g": "nothing",
+  "t": "Pastry Shop · 81 reviews · nothing online",
+  "s": "4.7",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Un je ne sais Quoi has 81 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/un-je-ne-sais-quoi-shv1qb/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Jessie Nails Spa",
+  "p": "+12547323594",
+  "rev": 75,
+  "g": "nothing",
+  "t": "Nail Salon · 75 reviews · nothing online",
+  "s": "4.7",
+  "c": "Hewitt",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Jessie Nails Spa has 75 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/jessie-nails-spa-xollms/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Big Dawg's Tattoo & Piercing",
+  "p": "+12544051338",
+  "rev": 72,
+  "g": "nothing",
+  "t": "Tattoo · 72 reviews · nothing online",
+  "s": "4.9",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Big Dawg's Tattoo & Piercing has 72 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/big-dawg-s-tattoo-piercing-owjjzf/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Fur The Love Of Pets",
+  "p": "+12547092844",
+  "rev": 62,
+  "g": "nothing",
+  "t": "Pet Care · 62 reviews · nothing online",
+  "s": "4.8",
+  "c": "Robinson",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Fur The Love Of Pets has 62 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/fur-the-love-of-pets-prngv9/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Laura's Nails",
+  "p": "+12543004545",
+  "rev": 61,
+  "g": "nothing",
+  "t": "Nail Salon · 61 reviews · nothing online",
+  "s": "4.8",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Laura's Nails has 61 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/laura-s-nails-4sc2ql/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Beyond the Chair",
+  "p": "+12549810265",
+  "rev": 35,
+  "g": "nothing",
+  "t": "Hair Salon · 35 reviews · nothing online",
+  "s": "4.9",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Beyond the Chair has 35 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/beyond-the-chair-wksuic/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Salon Posh",
+  "p": "+12542351412",
+  "rev": 28,
+  "g": "nothing",
+  "t": "Hair Salon · 28 reviews · nothing online",
+  "s": "5",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Salon Posh has 28 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/salon-posh-497ys3/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Baki's Hair Salon",
+  "p": "+12547523300",
+  "rev": 13,
+  "g": "nothing",
+  "t": "Hair Salon · 13 reviews · nothing online",
+  "s": "4.7",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for local businesses here in Texas. Baki's Hair Salon has 13 reviews and nothing comes up when I google you, so I went ahead and built you a site. Free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/baki-s-hair-salon-tnuor4/\n\nIf you want it it's yours — just reply here and I'll walk you through it. If not, no worries at all."
+ },
+ {
+  "n": "Familia Ink Tattoo Co.",
+  "p": "+12542459522",
+  "rev": 1015,
+  "g": "social",
+  "t": "Tattoo · 1015 reviews · social only",
+  "s": "4.8",
+  "c": "Killeen",
+  "m": "Hey — I'm Isiah, I build websites for Texas businesses. Familia Ink Tattoo Co. has 1015 reviews and a Facebook page, but nothing comes up when someone googles you — and that's where people look first when they don't already know you.\n\nBuilt you a site already, free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/familia-ink-tattoo-co-mcht16/\n\nJust reply here if you want it."
+ },
+ {
+  "n": "Waco Nail",
+  "p": "+12547320037",
+  "rev": 404,
+  "g": "social",
+  "t": "Nail Salon · 404 reviews · social only",
+  "s": "4.5",
+  "c": "Hewitt",
+  "m": "Hey — I'm Isiah, I build websites for Texas businesses. Waco Nail has 404 reviews and a Facebook page, but nothing comes up when someone googles you — and that's where people look first when they don't already know you.\n\nBuilt you a site already, free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/waco-nail-syyt2p/\n\nJust reply here if you want it."
+ },
+ {
+  "n": "Star Ink Tattoos & Piercings",
+  "p": "+12547570737",
+  "rev": 345,
+  "g": "social",
+  "t": "Tattoo · 345 reviews · social only",
+  "s": "4.8",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for Texas businesses. Star Ink Tattoos & Piercings has 345 reviews and a Facebook page, but nothing comes up when someone googles you — and that's where people look first when they don't already know you.\n\nBuilt you a site already, free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/star-ink-tattoos-piercings-hgtkpy/\n\nJust reply here if you want it."
+ },
+ {
+  "n": "SISON TACOS",
+  "p": "+12542929206",
+  "rev": 324,
+  "g": "social",
+  "t": "Mexican Restaurant · 324 reviews · social only",
+  "s": "4.9",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for Texas businesses. SISON TACOS has 324 reviews and a Instagram page, but nothing comes up when someone googles you — and that's where people look first when they don't already know you.\n\nBuilt you a site already, free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/sison-tacos-38skxr/\n\nJust reply here if you want it."
+ },
+ {
+  "n": "La Hacienda Restaurante",
+  "p": "+12546528906",
+  "rev": 292,
+  "g": "social",
+  "t": "Mexican Restaurant · 292 reviews · social only",
+  "s": "4.5",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for Texas businesses. La Hacienda Restaurante has 292 reviews and a Facebook page, but nothing comes up when someone googles you — and that's where people look first when they don't already know you.\n\nBuilt you a site already, free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/la-hacienda-san-diego-llc-dba-la-haciend-07cnoh/\n\nJust reply here if you want it."
+ },
+ {
+  "n": "Poppa Bear Boba",
+  "p": "+12543437643",
+  "rev": 278,
+  "g": "social",
+  "t": "Tea House · 278 reviews · social only",
+  "s": "4.8",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for Texas businesses. Poppa Bear Boba has 278 reviews and a Instagram page, but nothing comes up when someone googles you — and that's where people look first when they don't already know you.\n\nBuilt you a site already, free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/poppa-bear-boba-b9oqu6/\n\nJust reply here if you want it."
+ },
+ {
+  "n": "Emerald Nail Spa",
+  "p": "+12542355344",
+  "rev": 159,
+  "g": "social",
+  "t": "Nail Salon · 159 reviews · social only",
+  "s": "4.5",
+  "c": "Waco",
+  "m": "Hey — I'm Isiah, I build websites for Texas businesses. Emerald Nail Spa has 159 reviews and a Instagram page, but nothing comes up when someone googles you — and that's where people look first when they don't already know you.\n\nBuilt you a site already, free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/emerald-nail-spa-waco-76706-9y5vct/\n\nJust reply here if you want it."
+ },
+ {
+  "n": "INKFLO TATTOO & PIERCING",
+  "p": "+12543278187",
+  "rev": 149,
+  "g": "social",
+  "t": "Tattoo · 149 reviews · social only",
+  "s": "4.8",
+  "c": "Beverly Hills",
+  "m": "Hey — I'm Isiah, I build websites for Texas businesses. INKFLO TATTOO & PIERCING has 149 reviews and a Facebook page, but nothing comes up when someone googles you — and that's where people look first when they don't already know you.\n\nBuilt you a site already, free to look:\n\nhttps://radius-prospects-sites.web.app/pitch/inkflo-tattoo-piercing-jlwhph/\n\nJust reply here if you want it."
+ }
 ];
+const KEY = "send-queue-v2";
+let SHOW = 13;
 
-const KEY = "waco-sent-v1";
 const sent = new Set(JSON.parse(localStorage.getItem(KEY) || "[]"));
+const save = () => localStorage.setItem(KEY, JSON.stringify([...sent]));
 
-function pretty(p){ const d=p.replace(/\D/g,"").slice(-10);
+const list  = document.getElementById("list");
+const moreB = document.getElementById("more");
+const undo  = document.getElementById("undo");
+let undoTimer = null;
+
+function pretty(p){ const d = p.replace(/\D/g,"").slice(-10);
   return `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`; }
+
+function pending(){ return BIZ.filter(b => !sent.has(b.p)); }
 
 function card(b){
   const el = document.createElement("div");
-  el.className = "card" + (sent.has(b.p) ? " done" : "");
+  el.className = "card";
   el.innerHTML = `
-    <div class="top">
-      <div>
-        <div class="name">${b.n}</div>
-        <p class="meta"><span class="stars">★ ${b.s}</span> · ${b.t}</p>
-      </div>
-    </div>
-    <p class="num">${pretty(b.p)}</p>
+    <div class="name"></div>
+    <p class="meta"><span class="stars"></span><span class="rest"></span></p>
+    <p class="num"></p>
     <div class="actions">
       <a class="btn btn-send" href="sms:${b.p}&body=${encodeURIComponent(b.m)}">Send</a>
       <button class="btn btn-copy" type="button">Copy</button>
     </div>
     <button class="toggle" type="button">Show message</button>
-    <div class="preview">${b.m.replace(/</g,"&lt;")}</div>`;
+    <div class="preview"></div>`;
 
-  el.querySelector(".btn-send").addEventListener("click", () => {
-    sent.add(b.p);
-    localStorage.setItem(KEY, JSON.stringify([...sent]));
-    el.classList.add("done");
-    tally();
-  });
+  el.querySelector(".name").textContent  = b.n;
+  el.querySelector(".stars").textContent = b.s ? "★ " + b.s : "";
+  el.querySelector(".rest").textContent  = (b.s ? " · " : "") + b.t
+                                         + (b.c ? " · " + b.c : "");
+  el.querySelector(".num").textContent   = pretty(b.p);
+  el.querySelector(".preview").textContent = b.m;
+
+  el.querySelector(".btn-send").addEventListener("click", () => markSent(b));
   el.querySelector(".btn-copy").addEventListener("click", async (e) => {
-    try { await navigator.clipboard.writeText(b.m); } catch { }
+    try { await navigator.clipboard.writeText(b.m); } catch {}
     e.target.textContent = "Copied"; e.target.classList.add("ok");
     setTimeout(() => { e.target.textContent = "Copy"; e.target.classList.remove("ok"); }, 1600);
   });
@@ -181,12 +861,47 @@ function card(b){
   return el;
 }
 
-function tally(){
-  document.getElementById("left").textContent = BIZ.filter(b => !sent.has(b.p)).length;
+function markSent(b){
+  sent.add(b.p); save();
+  document.getElementById("undo-text").textContent = b.n.slice(0,26) + " — sent";
+  undo.classList.add("show");
+  clearTimeout(undoTimer);
+  undoTimer = setTimeout(() => undo.classList.remove("show"), 6000);
+  // let the tap open Messages before the list reshuffles under the thumb
+  setTimeout(render, 700);
+  document.getElementById("undo-btn").onclick = () => {
+    sent.delete(b.p); save(); undo.classList.remove("show"); render();
+  };
 }
 
-BIZ.forEach(b => document.getElementById(b.g).appendChild(card(b)));
-tally();
+function render(){
+  const left = pending();
+  list.replaceChildren();
+
+  if (!left.length){
+    const d = document.createElement("div");
+    d.className = "empty";
+    d.innerHTML = `<b>Queue clear.</b>All ${BIZ.length} sent. Follow up on anything from three days ago, then run the finder for a new batch.`;
+    const r = document.createElement("button");
+    r.className = "reset"; r.type = "button"; r.textContent = "Reset sent list";
+    r.onclick = () => { if (confirm("Clear all sent marks?")) { sent.clear(); save(); render(); } };
+    d.appendChild(r);
+    list.appendChild(d);
+    moreB.style.display = "none";
+  } else {
+    left.slice(0, SHOW).forEach(b => list.appendChild(card(b)));
+    const hidden = left.length - SHOW;
+    moreB.style.display = hidden > 0 ? "" : "none";
+    moreB.textContent = hidden > 0 ? `Show ${Math.min(hidden, 10)} more (${hidden} waiting)` : "";
+  }
+
+  document.getElementById("n-sent").textContent = sent.size;
+  document.getElementById("n-left").textContent = left.length;
+  document.getElementById("prog").style.width = (BIZ.length ? sent.size / BIZ.length * 100 : 0) + "%";
+}
+
+moreB.addEventListener("click", () => { SHOW += 10; render(); });
+render();
 </script>
 </body>
 </html>

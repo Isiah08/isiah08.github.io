@@ -10,7 +10,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* Rolling send queue. Shows the next few unsent leads; tap Send and it drops off
-   and the next slides up. Nothing sends on its own — you press send in Messages. */
+   and the next slides up. Nothing sends on its own — you press send in Messages.
+
+   The send link MUST be sms:<number>?&body=... — note the "?".
+   Without it, iOS treats everything after "sms:" up to the first "?" as the
+   recipient, so the whole message text gets folded into the phone number. The
+   carrier then bounces "Error Invalid Number" and the thread shows a mangled
+   recipient. The "?&" form (rather than plain "?") is the one that works on both
+   iOS and Android. */
 :root{
   --bg:#0C0D0F; --card:#141619; --card-2:#1B1E22;
   --fg:#F2F0EC; --mid:#A2A8AF; --dim:#6B7178;
@@ -2145,7 +2152,7 @@ function card(b){
     <p class="meta"><span class="stars"></span><span class="rest"></span></p>
     <p class="num"></p>
     <div class="actions">
-      <a class="btn btn-send" href="sms:${b.p}&body=${encodeURIComponent(b.m)}">Send</a>
+      <a class="btn btn-send" href="sms:${b.p}?&body=${encodeURIComponent(b.m)}">Send</a>
       <button class="btn btn-copy" type="button">Copy</button>
     </div>
     <button class="toggle" type="button">Show message</button>

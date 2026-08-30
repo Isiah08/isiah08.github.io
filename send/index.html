@@ -102,6 +102,19 @@ h1{margin:0 0 var(--s2);font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
   color:var(--mid);border:1px dashed var(--line);border-radius:8px;
   font-family:inherit;font-size:.88rem;cursor:pointer}
 .more:active{color:var(--fg)}
+.test{margin:0 0 var(--s5);padding:var(--s4);background:var(--card);
+  border-left:3px solid var(--go);border-radius:6px;font-size:.88rem;color:var(--mid)}
+.test b{color:var(--fg)}
+.test-row{display:flex;gap:var(--s2);margin-top:var(--s3)}
+#mynum{flex:1;min-width:0;min-height:46px;padding:0 var(--s3);border-radius:8px;
+  background:var(--card-2);border:1px solid var(--line);color:var(--fg);
+  font-family:inherit;font-size:1rem}
+#mynum::placeholder{color:var(--dim)}
+.btn-test{flex:0 0 auto;padding:0 var(--s4);min-height:46px;border-radius:8px;
+  background:var(--go);color:#fff;font-weight:600;font-size:.88rem;
+  display:inline-flex;align-items:center;text-decoration:none}
+.btn-test.off{background:var(--card-2);color:var(--dim)}
+.test-note{margin:var(--s2) 0 0;font-size:.8rem;color:var(--dim)}
 .empty{padding:var(--s6) var(--s4);text-align:center;color:var(--mid)}
 .empty b{display:block;color:var(--fg);font-size:1.1rem;margin-bottom:var(--s2)}
 .reset{margin-top:var(--s4);background:none;border:0;color:var(--dim);
@@ -124,11 +137,21 @@ footer{margin-top:var(--s6);padding-top:var(--s4);border-top:1px solid var(--lin
   <div class="track"><i id="prog"></i></div>
 </header>
 
+<div class="test">
+  <b>Test it first.</b> Sends the real message to your own phone, so you can see
+  exactly what a business receives.
+  <div class="test-row">
+    <input id="mynum" type="tel" inputmode="tel" placeholder="your number"
+           aria-label="Your own phone number">
+    <a class="btn btn-test" id="test-send" href="#">Text me one</a>
+  </div>
+  <p class="test-note" id="test-note"></p>
+</div>
+
 <div class="ask">
-  <b>Worked warmest first.</b> The booking-page leads come up before anything else —
-  they already pay Vagaro, Booksy, Square or GlossGenius every month, so they're
-  proven buyers, and the page they pay for carries the platform's name instead of
-  theirs. After those, no-presence-at-all by review count, then social-only.
+  <b>Biggest first.</b> Every one of these has no website at all and a phone
+  number on their Google listing. Worked in review order, so the businesses with
+  the most to lose from being unfindable come up first.
 </div>
 
 <div class="note">
@@ -1388,7 +1411,35 @@ function render(){
 }
 
 moreB.addEventListener("click", () => { SHOW += 10; render(); });
+
+// Test send. Uses a real queued message so what lands on your phone is byte for
+// byte what a business gets — including the link. Does NOT mark anything sent.
+const NUMKEY = "my-test-number";
+const numIn = document.getElementById("mynum");
+const testA = document.getElementById("test-send");
+const testNote = document.getElementById("test-note");
+numIn.value = localStorage.getItem(NUMKEY) || "";
+
+function syncTest(){
+  const digits = numIn.value.replace(/\D/g, "").slice(-10);
+  const ok = digits.length === 10;
+  const first = pending()[0] || BIZ[0];
+  if (ok && first){
+    localStorage.setItem(NUMKEY, numIn.value);
+    testA.href = `sms:+1${digits}?&body=${encodeURIComponent(first.m)}`;
+    testA.classList.remove("off");
+    testNote.textContent = `will send you the ${first.n} message`;
+  } else {
+    testA.removeAttribute("href");
+    testA.classList.add("off");
+    testNote.textContent = "enter your 10 digit number";
+  }
+}
+numIn.addEventListener("input", syncTest);
+testA.addEventListener("click", e => { if (!testA.getAttribute("href")) e.preventDefault(); });
+
 render();
+syncTest();
 </script>
 </body>
 </html>

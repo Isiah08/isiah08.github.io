@@ -1335,6 +1335,10 @@ let undoTimer = null;
 function pretty(p){ const d = p.replace(/\D/g,"").slice(-10);
   return `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`; }
 
+// Bare 10 digits for the dialler. +1 is the canonical form and parses fine, but
+// the stored key keeps the +1 so sent-state and the reply desk still match.
+function dial(p){ return p.replace(/\D/g,"").slice(-10); }
+
 function pending(){ return BIZ.filter(b => !sent.has(b.p)); }
 
 function card(b){
@@ -1345,7 +1349,7 @@ function card(b){
     <p class="meta"><span class="stars"></span><span class="rest"></span></p>
     <p class="num"></p>
     <div class="actions">
-      <a class="btn btn-send" href="sms:${b.p}?&body=${encodeURIComponent(b.m)}">Send</a>
+      <a class="btn btn-send" href="sms:${dial(b.p)}?&body=${encodeURIComponent(b.m)}">Send</a>
       <button class="btn btn-copy" type="button">Copy</button>
     </div>
     <button class="toggle" type="button">Show message</button>
@@ -1426,7 +1430,7 @@ function syncTest(){
   const first = pending()[0] || BIZ[0];
   if (ok && first){
     localStorage.setItem(NUMKEY, numIn.value);
-    testA.href = `sms:+1${digits}?&body=${encodeURIComponent(first.m)}`;
+    testA.href = `sms:${digits}?&body=${encodeURIComponent(first.m)}`;
     testA.classList.remove("off");
     testNote.textContent = `will send you the ${first.n} message`;
   } else {

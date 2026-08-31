@@ -81,6 +81,8 @@ h1{margin:0 0 var(--s2);font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
 .card.open .preview{max-height:460px;padding-top:var(--s3);padding-bottom:var(--s3)}
 .toggle{margin-top:var(--s3);font-size:.8rem;color:var(--dim);background:none;
   border:0;padding:0;cursor:pointer;font-family:inherit}
+.bounce{margin:var(--s2) 0 0;font-size:.8rem;color:var(--wait);background:none;
+  border:0;padding:0;cursor:pointer;font-family:inherit;display:block}
 
 .note,.ask{margin:0 0 var(--s5);padding:var(--s4);background:var(--card);
   border-radius:6px;font-size:.88rem;color:var(--mid)}
@@ -191,26 +193,6 @@ footer{margin-top:var(--s6);padding-top:var(--s4);border-top:1px solid var(--lin
 <script>
 const BIZ = [
  {
-  "n": "El Roble",
-  "p": "+15125043705",
-  "rev": 666,
-  "g": "nothing",
-  "t": "Taqueria · 666 reviews · nothing online",
-  "s": "4.6",
-  "c": "Kyle",
-  "m": "hey there\n\ni'm isiah, i do websites for small businesses here in Kyle. went looking for yall online and couldnt find a website anywhere, which is wild for 666 reviews, put one together for you\n\nhttps://isiahbuilds.com/s/el-roble\n\nfree to look. if its not for you no worries. happy to come by and show you in person"
- },
- {
-  "n": "Sarena's Breakfast & Donuts",
-  "p": "+15122386601",
-  "rev": 598,
-  "g": "nothing",
-  "t": "Bakery · 598 reviews · nothing online",
-  "s": "4.7",
-  "c": "Round Rock",
-  "m": "hi, is this Sarena's Breakfast & Donuts?. isiah here, i build websites around Round Rock\n\nyou've got 598 reviews and no site, that seems like a lot of people googling you and finding nothing. put one together for you:\n\nhttps://isiahbuilds.com/s/sarenas-breakfast\n\nno catch, just reply here if you want it. happy to come by and show you in person"
- },
- {
   "n": "Abby's Mexican Food",
   "p": "+15122957632",
   "rev": 511,
@@ -241,36 +223,6 @@ const BIZ = [
   "m": "hi, is this Salon Central Nails?\n\ni'm isiah, i do websites for local places in texas. yall are the one on N LBJ right? you've got 479 reviews and no site, that seems like a lot of people googling you and finding nothing\n\nso i went ahead and made one, heres what it looks like:\n\nhttps://isiahbuilds.com/s/central-nails\n\nno catch, just reply here if you want it"
  },
  {
-  "n": "T&S Nails",
-  "p": "+15122334788",
-  "rev": 447,
-  "g": "nothing",
-  "t": "Nail Salon · 447 reviews · nothing online",
-  "s": "4.4",
-  "c": "Buda",
-  "m": "hey is this the owner?\n\nwas reading your reviews, seems like people come for the pedicure\n\nanyway i build websites and couldnt find one for yall, made you one already, took me an afternoon:\n\nhttps://isiahbuilds.com/s/nails-2\n\nfree to look. if its not for you no worries. im up in austin but im out that way pretty often, happy to swing by"
- },
- {
-  "n": "Cure Bakery Coffee",
-  "p": "+15124284007",
-  "rev": 442,
-  "g": "nothing",
-  "t": "Bakery · 442 reviews · nothing online",
-  "s": "4.7",
-  "c": "Cedar Park",
-  "m": "hey, quick question\n\ni'm isiah, i build websites for local spots around Cedar Park. noticed theres no website when i looked you up. 442 reviews though, thats a lot, so i went ahead and made one\n\nhttps://isiahbuilds.com/s/cure-bakery\n\nno catch, just reply here if you want it. happy to come by and show you in person"
- },
- {
-  "n": "EL ARCO PUPUSAS Restaurant",
-  "p": "+15122108005",
-  "rev": 388,
-  "g": "nothing",
-  "t": "Taqueria · 388 reviews · nothing online",
-  "s": "4.5",
-  "c": "San Marcos",
-  "m": "hi, is this EL ARCO PUPUSAS Restaurant?\n\ni'm isiah, i make websites for local spots. went looking for yall online and couldnt find a website anywhere, which is wild for 388 reviews, put one together for you\n\nhttps://isiahbuilds.com/s/el-arco\n\nno catch, just reply here if you want it"
- },
- {
   "n": "Chapala Restaurant & Fruit Cup",
   "p": "+15122187900",
   "rev": 387,
@@ -279,16 +231,6 @@ const BIZ = [
   "s": "4.6",
   "c": "Round Rock",
   "m": "hey, quick question\n\ni'm isiah, i build websites for local spots around Round Rock. noticed theres no website when i looked you up. 387 reviews though, thats a lot, made you one already, took me an afternoon\n\nhttps://isiahbuilds.com/s/chapala-fruit\n\nno catch, just reply here if you want it. im up in austin but im out that way pretty often, happy to swing by"
- },
- {
-  "n": "Linda's Nails",
-  "p": "+15122405924",
-  "rev": 368,
-  "g": "nothing",
-  "t": "Nail Salon · 368 reviews · nothing online",
-  "s": "4.5",
-  "c": "Georgetown",
-  "m": "hi, is this Linda's Nails?\n\ni'm isiah, i build websites for local spots around Georgetown. noticed theres no website when i looked you up. 368 reviews though, thats a lot, so i built one to see how it'd look\n\nhttps://isiahbuilds.com/s/lindas-nails\n\ntake a look whenever. reply here if you like it. im up in austin but im out that way pretty often, happy to swing by"
  },
  {
   "n": "Pan Tostado Cafe",
@@ -311,16 +253,6 @@ const BIZ = [
   "m": "hey is this the owner?\n\ni'm isiah, i build websites for local spots around Round Rock. you've got 351 reviews and no site, that seems like a lot of people googling you and finding nothing, put one together for you\n\nhttps://isiahbuilds.com/s/fresh-brew\n\nhave a look, costs nothing. just reply here if you want it. happy to come by and show you in person"
  },
  {
-  "n": "Monster Donuts",
-  "p": "+15123375396",
-  "rev": 328,
-  "g": "nothing",
-  "t": "Bakery · 328 reviews · nothing online",
-  "s": "4.7",
-  "c": "Leander",
-  "m": "hey there\n\nisiah here, i build websites around Leander. yall are the one on Crystal Falls right? noticed theres no website when i looked you up. 328 reviews though, thats a lot\n\nmade you one already, took me an afternoon, heres what it looks like:\n\nhttps://isiahbuilds.com/s/monster-donuts\n\nfree to look. if its not for you no worries. im up in austin but im out that way pretty often, happy to swing by"
- },
- {
   "n": "Taqueria BRIANAS'S",
   "p": "+15129215826",
   "rev": 321,
@@ -329,16 +261,6 @@ const BIZ = [
   "s": "4.2",
   "c": "Kyle",
   "m": "hey there. i'm isiah, i make websites for places around here\n\nyou've got 321 reviews and no site, that seems like a lot of people googling you and finding nothing. put one together for you:\n\nhttps://isiahbuilds.com/s/taqueria-brianass\n\ntake a look whenever. reply here if you like it. happy to come by and show you in person"
- },
- {
-  "n": "TJ Nails Spa Leander",
-  "p": "+15123377377",
-  "rev": 300,
-  "g": "nothing",
-  "t": "Nail Salon · 300 reviews · nothing online",
-  "s": "4.8",
-  "c": "Leander",
-  "m": "hey, quick question\n\ni'm isiah, i do websites for small businesses here in Leander. went looking for yall online and couldnt find a website anywhere, which is wild for 300 reviews, so i built one to see how it'd look\n\nhttps://isiahbuilds.com/s/tj-nails\n\nno charge to look at it. lmk either way. happy to come by and show you in person"
  },
  {
   "n": "AT Nails and Spa",
@@ -371,26 +293,6 @@ const BIZ = [
   "m": "hey there\n\ni'm isiah, i do websites for small businesses here in Cedar Park. went looking for yall online and couldnt find a website anywhere, which is wild for 255 reviews, so i went ahead and made one\n\nhttps://isiahbuilds.com/s/lan-foot\n\nfree to look. if its not for you no worries. happy to come by and show you in person"
  },
  {
-  "n": "Great Nails & Spa",
-  "p": "+15122600117",
-  "rev": 253,
-  "g": "nothing",
-  "t": "Nail Salon · 253 reviews · nothing online",
-  "s": "4.6",
-  "c": "Cedar Park",
-  "m": "hey there\n\nwas reading your reviews, seems like people come for the pedicure\n\nanyway i build websites and couldnt find one for yall, so i built one to see how it'd look:\n\nhttps://isiahbuilds.com/s/great-nails\n\nhave a look, costs nothing. just reply here if you want it. im up in austin but im out that way pretty often, happy to swing by"
- },
- {
-  "n": "Pflugerville Donuts",
-  "p": "+15122527028",
-  "rev": 233,
-  "g": "nothing",
-  "t": "Bakery · 233 reviews · nothing online",
-  "s": "4.8",
-  "c": "Pflugerville",
-  "m": "hi, is this Pflugerville Donuts?\n\nwas reading your reviews, seems like people come for the kolaches\n\ni build websites though and couldnt find one for you anywhere, so i went ahead and made one:\n\nhttps://isiahbuilds.com/s/pflugerville-donuts\n\nfree to look. if its not for you no worries. im up in austin but im out that way pretty often, happy to swing by"
- },
- {
   "n": "Taquitos La Chula",
   "p": "+17373731831",
   "rev": 210,
@@ -399,16 +301,6 @@ const BIZ = [
   "s": "4.3",
   "c": "San Marcos",
   "m": "hey, quick question\n\ni'm isiah, i make websites for local spots. noticed theres no website when i looked you up. 210 reviews though, thats a lot, so i went ahead and made one\n\nhttps://isiahbuilds.com/s/taquitos-la\n\ntake a look whenever. reply here if you like it"
- },
- {
-  "n": "Yuliana's",
-  "p": "+15126676636",
-  "rev": 209,
-  "g": "nothing",
-  "t": "Taqueria · 209 reviews · nothing online",
-  "s": "4.5",
-  "c": "San Marcos",
-  "m": "hey is this the owner?\n\nwas reading your reviews, seems like people come for the tortillas\n\nanyway i build websites and couldnt find one for yall, put one together for you:\n\nhttps://isiahbuilds.com/s/yulianas\n\nno charge to look at it. lmk either way"
  },
  {
   "n": "Beautiful Scars Tattoo Shop",
@@ -431,16 +323,6 @@ const BIZ = [
   "m": "hi, is this The Native Blends?\n\ni'm isiah, i make websites for places around here. noticed theres no website when i looked you up. 203 reviews though, thats a lot, made you one already, took me an afternoon\n\nhttps://isiahbuilds.com/s/native-blends\n\ntake a look whenever. reply here if you like it. happy to come by and show you in person"
  },
  {
-  "n": "Donut Palace",
-  "p": "+15122957315",
-  "rev": 201,
-  "g": "nothing",
-  "t": "Bakery · 201 reviews · nothing online",
-  "s": "4.7",
-  "c": "Buda",
-  "m": "hey, quick question\n\nwas reading your reviews, seems like people come for the kolaches\n\nanyway, i build websites and yall dont have one that i could find, so i built one to see how it'd look:\n\nhttps://isiahbuilds.com/s/donut-palace\n\nno charge to look at it. lmk either way. im up in austin but im out that way pretty often, happy to swing by"
- },
- {
   "n": "Tacos al Pastor “El Paisa”",
   "p": "+15127756361",
   "rev": 200,
@@ -451,16 +333,6 @@ const BIZ = [
   "m": "hey, quick question. i'm isiah, i do websites for small businesses here in Round Rock\n\nyou've got 200 reviews and no site, that seems like a lot of people googling you and finding nothing. made you one already, took me an afternoon:\n\nhttps://isiahbuilds.com/s/tacos-al\n\nhave a look, costs nothing. just reply here if you want it. im up in austin but im out that way pretty often, happy to swing by"
  },
  {
-  "n": "Babe's Doughnut and Coffee",
-  "p": "+15122166217",
-  "rev": 199,
-  "g": "nothing",
-  "t": "Bakery · 199 reviews · nothing online",
-  "s": "4.7",
-  "c": "San Marcos",
-  "m": "hey there. i'm isiah, i do websites for local places in texas\n\nwent looking for yall online and couldnt find a website anywhere, which is wild for 199 reviews. put one together for you:\n\nhttps://isiahbuilds.com/s/babes-doughnut\n\nno catch, just reply here if you want it"
- },
- {
   "n": "Yen Nails N Spa",
   "p": "+15128692620",
   "rev": 194,
@@ -469,26 +341,6 @@ const BIZ = [
   "s": "4.5",
   "c": "Georgetown",
   "m": "hey there\n\nread through some of your reviews, people keep bringing up the pedicure\n\nanyway, i build websites and yall dont have one that i could find, made you one already, took me an afternoon:\n\nhttps://isiahbuilds.com/s/yen-nails\n\nno catch, just reply here if you want it. happy to come by and show you in person"
- },
- {
-  "n": "Divine Nails and Spa",
-  "p": "+15122185965",
-  "rev": 186,
-  "g": "nothing",
-  "t": "Nail Salon · 186 reviews · nothing online",
-  "s": "4.4",
-  "c": "Round Rock",
-  "m": "hi, is this Divine Nails and Spa?\n\nwas reading your reviews, seems like people come for the manicure\n\ni build websites though and couldnt find one for you anywhere, so i went ahead and made one:\n\nhttps://isiahbuilds.com/s/divine-nails\n\nfree to look. if its not for you no worries. im up in austin but im out that way pretty often, happy to swing by"
- },
- {
-  "n": "Taqueria Huentitan",
-  "p": "+15125238551",
-  "rev": 184,
-  "g": "nothing",
-  "t": "Taqueria · 184 reviews · nothing online",
-  "s": "4.2",
-  "c": "Kyle",
-  "m": "hi, is this Taqueria Huentitan?\n\ni'm isiah, i make websites for places around here. noticed theres no website when i looked you up. 184 reviews though, thats a lot, made you one already, took me an afternoon\n\nhttps://isiahbuilds.com/s/taqueria-huentitan\n\nno catch, just reply here if you want it. im up in austin but im out that way pretty often, happy to swing by"
  },
  {
   "n": "Cheers Donuts",
@@ -551,36 +403,6 @@ const BIZ = [
   "m": "hey is this the owner?. isiah here, i build websites around Pflugerville\n\nnoticed theres no website when i looked you up. 167 reviews though, thats a lot. so i built one to see how it'd look:\n\nhttps://isiahbuilds.com/s/countryside-donuts\n\ntake a look whenever. reply here if you like it. im up in austin but im out that way pretty often, happy to swing by"
  },
  {
-  "n": "Annie's Nails & Spa",
-  "p": "+15129891161",
-  "rev": 165,
-  "g": "nothing",
-  "t": "Nail Salon · 165 reviews · nothing online",
-  "s": "4.3",
-  "c": "Pflugerville",
-  "m": "hey, quick question\n\nwas reading your reviews, seems like people come for the pedicure\n\nanyway i build websites and couldnt find one for yall, put one together for you:\n\nhttps://isiahbuilds.com/s/annies-nails\n\ntake a look whenever. reply here if you like it. im up in austin but im out that way pretty often, happy to swing by"
- },
- {
-  "n": "Quarter to Ten",
-  "p": "+15122166646",
-  "rev": 162,
-  "g": "nothing",
-  "t": "Hair Salon · 162 reviews · nothing online",
-  "s": "4.3",
-  "c": "San Marcos",
-  "m": "hey is this the owner?. i'm isiah, i make websites for local spots\n\nyou've got 162 reviews and no site, that seems like a lot of people googling you and finding nothing. so i built one to see how it'd look:\n\nhttps://isiahbuilds.com/s/quarter-to\n\nno charge to look at it. lmk either way"
- },
- {
-  "n": "Cosmo SPA & Nails",
-  "p": "+15122552200",
-  "rev": 158,
-  "g": "nothing",
-  "t": "Nail Salon · 158 reviews · nothing online",
-  "s": "4.7",
-  "c": "Round Rock",
-  "m": "hey there\n\nyour reviews are full of people talking about the pedicure\n\nanyway, i build websites and yall dont have one that i could find, so i went ahead and made one:\n\nhttps://isiahbuilds.com/s/cosmo-nails\n\ntake a look whenever. reply here if you like it. im up in austin but im out that way pretty often, happy to swing by"
- },
- {
   "n": "Un Taco Mas",
   "p": "+12543399665",
   "rev": 156,
@@ -599,16 +421,6 @@ const BIZ = [
   "s": "5",
   "c": "Round Rock",
   "m": "hey, quick question\n\ni'm isiah, i make websites for places around here. went looking for yall online and couldnt find a website anywhere, which is wild for 156 reviews, made you one already, took me an afternoon\n\nhttps://isiahbuilds.com/s/super-duper\n\nno catch, just reply here if you want it. happy to come by and show you in person"
- },
- {
-  "n": "Happy Nails",
-  "p": "+12546620304",
-  "rev": 154,
-  "g": "nothing",
-  "t": "Nail Salon · 154 reviews · nothing online",
-  "s": "4.1",
-  "c": "Waco",
-  "m": "hi, is this Happy Nails?\n\ni'm isiah, i build websites for small businesses around texas. you've got 154 reviews and no site, that seems like a lot of people googling you and finding nothing, put one together for you\n\nhttps://isiahbuilds.com/s/happy-nails\n\nno catch, just reply here if you want it"
  },
  {
   "n": "Baklava House Bakery & Creamery",
@@ -641,26 +453,6 @@ const BIZ = [
   "m": "hey, quick question. i'm isiah, i make websites for places around here\n\nyou've got 147 reviews and no site, that seems like a lot of people googling you and finding nothing. so i built one to see how it'd look:\n\nhttps://isiahbuilds.com/s/vickys-hair\n\nfree to look. if its not for you no worries. im up in austin but im out that way pretty often, happy to swing by"
  },
  {
-  "n": "Salon V",
-  "p": "+15122516624",
-  "rev": 146,
-  "g": "nothing",
-  "t": "Hair Salon · 146 reviews · nothing online",
-  "s": "4.6",
-  "c": "Pflugerville",
-  "m": "hi, is this Salon V?\n\nread through some of your reviews, people keep bringing up the perm\n\ni build websites though and couldnt find one for you anywhere, so i went ahead and made one:\n\nhttps://isiahbuilds.com/s/salon\n\ntake a look whenever. reply here if you like it. im up in austin but im out that way pretty often, happy to swing by"
- },
- {
-  "n": "Grand donut",
-  "p": "+15122607117",
-  "rev": 146,
-  "g": "nothing",
-  "t": "Bakery · 146 reviews · nothing online",
-  "s": "4.7",
-  "c": "Leander",
-  "m": "hi, is this Grand donut?\n\nisiah here, i build websites around Leander. noticed theres no website when i looked you up. 146 reviews though, thats a lot, so i built one to see how it'd look\n\nhttps://isiahbuilds.com/s/grand-donut\n\ntake a look whenever. reply here if you like it. im up in austin but im out that way pretty often, happy to swing by"
- },
- {
   "n": "Bella's Tacos",
   "p": "+15127623965",
   "rev": 142,
@@ -669,36 +461,6 @@ const BIZ = [
   "s": "4.8",
   "c": "Cedar Park",
   "m": "hey is this the owner?\n\ni'm isiah, i do websites for small businesses here in Cedar Park. yall are the one on S Bell right? you've got 142 reviews and no site, that seems like a lot of people googling you and finding nothing\n\nso i went ahead and made one, heres what it looks like:\n\nhttps://isiahbuilds.com/s/bellas-tacos\n\nno charge to look at it. lmk either way. happy to come by and show you in person"
- },
- {
-  "n": "NT Hair Salon",
-  "p": "+15128637929",
-  "rev": 134,
-  "g": "nothing",
-  "t": "Hair Salon · 134 reviews · nothing online",
-  "s": "4.5",
-  "c": "Georgetown",
-  "m": "hey, quick question\n\ni'm isiah, i do websites for small businesses here in Georgetown. you've got 134 reviews and no site, that seems like a lot of people googling you and finding nothing, so i built one to see how it'd look\n\nhttps://isiahbuilds.com/s/nt-hair\n\nno catch, just reply here if you want it. im up in austin but im out that way pretty often, happy to swing by"
- },
- {
-  "n": "Courtyard Salon Suites",
-  "p": "+15125205300",
-  "rev": 130,
-  "g": "nothing",
-  "t": "Hair Salon · 130 reviews · nothing online",
-  "s": "4.6",
-  "c": "Round Rock",
-  "m": "hey, quick question. i'm isiah, i make websites for places around here\n\nwent looking for yall online and couldnt find a website anywhere, which is wild for 130 reviews. so i went ahead and made one:\n\nhttps://isiahbuilds.com/s/courtyard-suites\n\nno catch, just reply here if you want it. happy to come by and show you in person"
- },
- {
-  "n": "Pretty Nails",
-  "p": "+15128680850",
-  "rev": 128,
-  "g": "nothing",
-  "t": "Nail Salon · 128 reviews · nothing online",
-  "s": "4.3",
-  "c": "Georgetown",
-  "m": "hey is this the owner?. i'm isiah, i build websites for local spots around Georgetown\n\nwent looking for yall online and couldnt find a website anywhere, which is wild for 128 reviews. so i built one to see how it'd look:\n\nhttps://isiahbuilds.com/s/pretty-nails\n\nfree to look. if its not for you no worries. im up in austin but im out that way pretty often, happy to swing by"
  },
  {
   "n": "Juanito’s Tacos y Mas",
@@ -731,16 +493,6 @@ const BIZ = [
   "m": "hi, is this Sophia Hair Salon?. i'm isiah, i make websites for local spots\n\nwent looking for yall online and couldnt find a website anywhere, which is wild for 124 reviews. made you one already, took me an afternoon:\n\nhttps://isiahbuilds.com/s/sophia-hair\n\ntake a look whenever. reply here if you like it"
  },
  {
-  "n": "Renew Med Spa",
-  "p": "+15124137960",
-  "rev": 123,
-  "g": "nothing",
-  "t": "Massage Spa · 123 reviews · nothing online",
-  "s": "4.6",
-  "c": "Georgetown",
-  "m": "hey, quick question\n\ni'm isiah, i build websites for local spots around Georgetown. yall are the one on Williams #111 right? you've got 123 reviews and no site, that seems like a lot of people googling you and finding nothing\n\nmade you one already, took me an afternoon, heres what it looks like:\n\nhttps://isiahbuilds.com/s/renew-med\n\nfree to look. if its not for you no worries. happy to come by and show you in person"
- },
- {
   "n": "Mithashcake LLC",
   "p": "+18605340793",
   "rev": 121,
@@ -749,26 +501,6 @@ const BIZ = [
   "s": "4.9",
   "c": "Georgetown",
   "m": "hey, quick question\n\nisiah here, i build websites around Georgetown. went looking for yall online and couldnt find a website anywhere, which is wild for 121 reviews, so i built one to see how it'd look\n\nhttps://isiahbuilds.com/s/mithashcake\n\nhave a look, costs nothing. just reply here if you want it. im up in austin but im out that way pretty often, happy to swing by"
- },
- {
-  "n": "Johnny G's Barber Shop",
-  "p": "+15125238110",
-  "rev": 121,
-  "g": "nothing",
-  "t": "Barber Shop · 121 reviews · nothing online",
-  "s": "4.5",
-  "c": "Kyle",
-  "m": "hey, quick question. i'm isiah, i build websites for local spots around Kyle\n\nnoticed theres no website when i looked you up. 121 reviews though, thats a lot. so i went ahead and made one:\n\nhttps://isiahbuilds.com/s/johnny-gs\n\nfree to look. if its not for you no worries. happy to come by and show you in person"
- },
- {
-  "n": "David's Barber Shop",
-  "p": "+15129301870",
-  "rev": 118,
-  "g": "nothing",
-  "t": "Barber Shop · 118 reviews · nothing online",
-  "s": "4.6",
-  "c": "Georgetown",
-  "m": "hi, is this David's Barber Shop?\n\ni'm isiah, i build websites for local spots around Georgetown. went looking for yall online and couldnt find a website anywhere, which is wild for 118 reviews, put one together for you\n\nhttps://isiahbuilds.com/s/davids-barber\n\nno charge to look at it. lmk either way. happy to come by and show you in person"
  },
  {
   "n": "El campechano taco",
@@ -789,16 +521,6 @@ const BIZ = [
   "s": "4.6",
   "c": "Pflugerville",
   "m": "hey, quick question\n\nsaw a bunch of people in your reviews going on about the fade\n\nanyway, i build websites and yall dont have one that i could find, made you one already, took me an afternoon:\n\nhttps://isiahbuilds.com/s/ab-fadez\n\ntake a look whenever. reply here if you like it. happy to come by and show you in person"
- },
- {
-  "n": "Modern Hair Salon",
-  "p": "+15122578830",
-  "rev": 114,
-  "g": "nothing",
-  "t": "Hair Salon · 114 reviews · nothing online",
-  "s": "4.5",
-  "c": "Cedar Park",
-  "m": "hey there\n\ni'm isiah, i make websites for places around here. yall are the one on Cypress Creek right? went looking for yall online and couldnt find a website anywhere, which is wild for 114 reviews\n\nput one together for you, heres what it looks like:\n\nhttps://isiahbuilds.com/s/modern-hair\n\nno catch, just reply here if you want it. im up in austin but im out that way pretty often, happy to swing by"
  },
  {
   "n": "Talisman Coffee Trailer",
@@ -829,16 +551,6 @@ const BIZ = [
   "s": "4.3",
   "c": "Georgetown",
   "m": "hey is this the owner?. i'm isiah, i make websites for places around here\n\nyou've got 111 reviews and no site, that seems like a lot of people googling you and finding nothing. so i built one to see how it'd look:\n\nhttps://isiahbuilds.com/s/happy-feet\n\ntake a look whenever. reply here if you like it. happy to come by and show you in person"
- },
- {
-  "n": "TX Nails & Spa",
-  "p": "+15122497929",
-  "rev": 110,
-  "g": "nothing",
-  "t": "Nail Salon · 110 reviews · nothing online",
-  "s": "4.5",
-  "c": "Cedar Park",
-  "m": "hi, is this TX Nails & Spa?\n\neveryone in your reviews mentions the color lol\n\nanyway, i build websites and yall dont have one that i could find, so i built one to see how it'd look:\n\nhttps://isiahbuilds.com/s/tx-nails\n\nfree to look. if its not for you no worries. im up in austin but im out that way pretty often, happy to swing by"
  },
  {
   "n": "What A Dog Grooming",
@@ -881,16 +593,6 @@ const BIZ = [
   "m": "hey is this the owner?\n\ni'm isiah, i build websites for small businesses around texas. yall are the one on North right? you've got 104 reviews and no site, that seems like a lot of people googling you and finding nothing\n\nso i went ahead and made one, heres what it looks like:\n\nhttps://isiahbuilds.com/s/cortado\n\nfree to look. if its not for you no worries"
  },
  {
-  "n": "Regal Nails, Salon & Spa",
-  "p": "+15123534747",
-  "rev": 102,
-  "g": "nothing",
-  "t": "Nail Salon · 102 reviews · nothing online",
-  "s": "4.2",
-  "c": "San Marcos",
-  "m": "hey is this the owner?\n\ni'm isiah, i make websites for local spots. yall are the one on TX-80 right? couldnt find a site for yall. 102 reviews and nothing to send people to\n\nmade you one already, took me an afternoon, heres what it looks like:\n\nhttps://isiahbuilds.com/s/regal-nails-2\n\nno charge to look at it. lmk either way"
- },
- {
   "n": "Angel Ventana",
   "p": "+15123931707",
   "rev": 100,
@@ -899,26 +601,6 @@ const BIZ = [
   "s": "4.9",
   "c": "San Marcos",
   "m": "hey is this the owner?\n\nsaw a bunch of people in your reviews going on about the layers\n\nanyway, i build websites and yall dont have one that i could find, so i built one to see how it'd look:\n\nhttps://isiahbuilds.com/s/angel-ventana\n\nfree to look. if its not for you no worries"
- },
- {
-  "n": "Kyle Donuts",
-  "p": "+15125043588",
-  "rev": 99,
-  "g": "nothing",
-  "t": "Bakery · 99 reviews · nothing online",
-  "s": "4.7",
-  "c": "Kyle",
-  "m": "hey there\n\nread through some of your reviews, people keep bringing up the kolaches\n\nanyway, i build websites and yall dont have one that i could find, made you one already, took me an afternoon:\n\nhttps://isiahbuilds.com/s/kyle-donuts\n\nhave a look, costs nothing. just reply here if you want it. happy to come by and show you in person"
- },
- {
-  "n": "X O Nails & Spa",
-  "p": "+15122597170",
-  "rev": 99,
-  "g": "nothing",
-  "t": "Nail Salon · 99 reviews · nothing online",
-  "s": "4.4",
-  "c": "Cedar Park",
-  "m": "hey is this the owner?. i'm isiah, i make websites for places around here\n\ncouldnt find a site for yall. 99 reviews and nothing to send people to. put one together for you:\n\nhttps://isiahbuilds.com/s/nails-3\n\ntake a look whenever. reply here if you like it. im up in austin but im out that way pretty often, happy to swing by"
  },
  {
   "n": "New Images Hair Salon|Barber Shop",
@@ -941,16 +623,6 @@ const BIZ = [
   "m": "hey is this the owner?\n\ni'm isiah, i build websites for local spots around Kyle. yall are the one on Hall Professional right? couldnt find a site for yall. 99 reviews and nothing to send people to\n\nput one together for you, heres what it looks like:\n\nhttps://isiahbuilds.com/s/us-nails\n\nno charge to look at it. lmk either way. happy to come by and show you in person"
  },
  {
-  "n": "Angels Nails Spa",
-  "p": "+15123315316",
-  "rev": 98,
-  "g": "nothing",
-  "t": "Nail Salon · 98 reviews · nothing online",
-  "s": "4.6",
-  "c": "Cedar Park",
-  "m": "hey there\n\nisiah here, i build websites around Cedar Park. couldnt find a site for yall. 98 reviews and nothing to send people to, so i went ahead and made one\n\nhttps://isiahbuilds.com/s/angels-nails\n\nfree to look. if its not for you no worries. im up in austin but im out that way pretty often, happy to swing by"
- },
- {
   "n": "DON MIGUEL TAQUERIAS GEORGETOWN",
   "p": "+15125211216",
   "rev": 97,
@@ -959,16 +631,6 @@ const BIZ = [
   "s": "4.9",
   "c": "Georgetown",
   "m": "hey there. isiah here, i build websites around Georgetown\n\nwent looking for yall online and couldnt find a website anywhere, which is wild for 97 reviews. so i built one to see how it'd look:\n\nhttps://isiahbuilds.com/s/don-miguel\n\nhave a look, costs nothing. just reply here if you want it. happy to come by and show you in person"
- },
- {
-  "n": "La Texanita #2",
-  "p": "+15123581115",
-  "rev": 95,
-  "g": "nothing",
-  "t": "Taqueria · 95 reviews · nothing online",
-  "s": "4.7",
-  "c": "Round Rock",
-  "m": "hi, is this La Texanita #2?. i'm isiah, i make websites for places around here\n\ncouldnt find a site for yall. 95 reviews and nothing to send people to. so i built one to see how it'd look:\n\nhttps://isiahbuilds.com/s/la-texanita\n\nhave a look, costs nothing. just reply here if you want it. im up in austin but im out that way pretty often, happy to swing by"
  },
  {
   "n": "Refresh Salon",
@@ -1011,16 +673,6 @@ const BIZ = [
   "m": "hey, quick question\n\ni'm isiah, i build websites for local spots around Buda. went looking for yall online and couldnt find a website anywhere, which is wild for 82 reviews, so i built one to see how it'd look\n\nhttps://isiahbuilds.com/s/sherryls\n\nno charge to look at it. lmk either way. im up in austin but im out that way pretty often, happy to swing by"
  },
  {
-  "n": "Dragon Nails",
-  "p": "+15122188818",
-  "rev": 80,
-  "g": "nothing",
-  "t": "Nail Salon · 80 reviews · nothing online",
-  "s": "5",
-  "c": "Round Rock",
-  "m": "hey there\n\nwas reading your reviews, seems like people come for the pedicure\n\nanyway, i build websites and yall dont have one that i could find, so i built one to see how it'd look:\n\nhttps://isiahbuilds.com/s/dragon-nails\n\nno charge to look at it. lmk either way. happy to come by and show you in person"
- },
- {
   "n": "El Almendron Cuban Bakery",
   "p": "+17372706975",
   "rev": 79,
@@ -1041,36 +693,6 @@ const BIZ = [
   "m": "hey, quick question\n\neveryone in your reviews mentions the manicure lol\n\ni build websites though and couldnt find one for you anywhere, so i built one to see how it'd look:\n\nhttps://isiahbuilds.com/s/ad-nail\n\nfree to look. if its not for you no worries. im up in austin but im out that way pretty often, happy to swing by"
  },
  {
-  "n": "Red Nails & Lash",
-  "p": "+15128471855",
-  "rev": 77,
-  "g": "nothing",
-  "t": "Nail Salon · 77 reviews · nothing online",
-  "s": "4.8",
-  "c": "San Marcos",
-  "m": "hey, quick question. isiah here, i build websites for small businesses\n\nnoticed theres no website when i looked you up. 77 reviews though, thats a lot. so i built one to see how it'd look:\n\nhttps://isiahbuilds.com/s/red-nails\n\ntake a look whenever. reply here if you like it"
- },
- {
-  "n": "Maggie's",
-  "p": "+15128639082",
-  "rev": 76,
-  "g": "nothing",
-  "t": "Hair Salon · 76 reviews · nothing online",
-  "s": "4.9",
-  "c": "Georgetown",
-  "m": "hey, quick question\n\nread through some of your reviews, people keep bringing up the color\n\ni build websites though and couldnt find one for you anywhere, put one together for you:\n\nhttps://isiahbuilds.com/s/maggies\n\nno charge to look at it. lmk either way. happy to come by and show you in person"
- },
- {
-  "n": "Joe's Barber Shop",
-  "p": "+15123538994",
-  "rev": 75,
-  "g": "nothing",
-  "t": "Barber Shop · 75 reviews · nothing online",
-  "s": "4.6",
-  "c": "San Marcos",
-  "m": "hi, is this Joe's Barber Shop?\n\ni'm isiah, i make websites for local spots. you've got 75 reviews and no site, that seems like a lot of people googling you and finding nothing, so i went ahead and made one\n\nhttps://isiahbuilds.com/s/joes-barber\n\ntake a look whenever. reply here if you like it"
- },
- {
   "n": "Rose and Dagger Coffee Company",
   "p": "+15129663529",
   "rev": 71,
@@ -1079,16 +701,6 @@ const BIZ = [
   "s": "4.8",
   "c": "Georgetown",
   "m": "hey there\n\ni'm isiah, i do websites for small businesses here in Georgetown. went looking for yall online and couldnt find a website anywhere, which is wild for 71 reviews, so i went ahead and made one\n\nhttps://isiahbuilds.com/s/rose-dagger\n\nfree to look. if its not for you no worries. happy to come by and show you in person"
- },
- {
-  "n": "Grand Donuts",
-  "p": "+15122762573",
-  "rev": 68,
-  "g": "nothing",
-  "t": "Bakery · 68 reviews · nothing online",
-  "s": "4.6",
-  "c": "Georgetown",
-  "m": "hey there\n\nyour reviews are full of people talking about the croissant\n\ni build websites though and couldnt find one for you anywhere, so i went ahead and made one:\n\nhttps://isiahbuilds.com/s/grand-donuts\n\ntake a look whenever. reply here if you like it. im up in austin but im out that way pretty often, happy to swing by"
  },
  {
   "n": "Lavish",
@@ -1332,6 +944,7 @@ const BIZ = [
  }
 ];
 const KEY = "send-queue-v2";
+const DEADKEY = "landlines-v1";
 let SHOW = 13;
 
 const sent = new Set(JSON.parse(localStorage.getItem(KEY) || "[]"));
@@ -1349,7 +962,10 @@ function pretty(p){ const d = p.replace(/\D/g,"").slice(-10);
 // the stored key keeps the +1 so sent-state and the reply desk still match.
 function dial(p){ return p.replace(/\D/g,"").slice(-10); }
 
-function pending(){ return BIZ.filter(b => !sent.has(b.p)); }
+function pending(){
+  const dead = new Set(JSON.parse(localStorage.getItem(DEADKEY) || "[]"));
+  return BIZ.filter(b => !sent.has(b.p) && !dead.has(b.p));
+}
 
 function card(b){
   const el = document.createElement("div");
@@ -1364,6 +980,7 @@ function card(b){
       <button class="btn btn-copy" type="button">Copy</button>
     </div>
     <button class="toggle" type="button">Show message</button>
+    <button class="bounce" type="button">Text bounced — landline</button>
     <div class="preview"></div>`;
 
   el.querySelector(".name").textContent  = b.n;
@@ -1374,6 +991,14 @@ function card(b){
   el.querySelector(".preview").textContent = b.m;
 
   el.querySelector(".btn-send").addEventListener("click", () => markSent(b));
+  el.querySelector(".btn-call").addEventListener("click", () => markSent(b));
+  // Records it locally so it never comes back. Add it to BOUNCED.txt to make
+  // the exclusion permanent for future rebuilds.
+  el.querySelector(".bounce").addEventListener("click", () => {
+    const dead = JSON.parse(localStorage.getItem(DEADKEY) || "[]");
+    if (!dead.includes(b.p)) { dead.push(b.p); localStorage.setItem(DEADKEY, JSON.stringify(dead)); }
+    markSent(b);
+  });
   el.querySelector(".btn-copy").addEventListener("click", async (e) => {
     try { await navigator.clipboard.writeText(b.m); } catch {}
     e.target.textContent = "Copied"; e.target.classList.add("ok");

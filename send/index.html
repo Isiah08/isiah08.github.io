@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Send queue</title>
+<title>Call queue</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -65,9 +65,12 @@ h1{margin:0 0 var(--s2);font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
   min-height:50px;border-radius:8px;font-size:.92rem;font-weight:600;
   border:1px solid transparent;cursor:pointer;font-family:inherit;
   -webkit-tap-highlight-color:transparent}
-.btn-send{background:var(--go);color:#fff}
+.btn-call{background:var(--go);color:#fff;flex:1.4}
+.btn-call:active{background:var(--go-2)}
+.btn-send{background:transparent;color:var(--mid);border-color:var(--line)}
+.btn-send:active{color:var(--fg)}
 .btn-send:active{background:var(--go-2)}
-.btn-copy{flex:0 0 92px;background:transparent;color:var(--mid);border-color:var(--line)}
+.btn-copy{flex:0 0 74px;background:transparent;color:var(--mid);border-color:var(--line)}
 .btn-copy:active{color:var(--fg)}
 .btn-copy.ok{color:var(--go);border-color:var(--go)}
 
@@ -128,14 +131,39 @@ footer{margin-top:var(--s6);padding-top:var(--s4);border-top:1px solid var(--lin
 <div class="wrap">
 
 <header>
-  <h1>Send queue</h1>
-  <p class="sub">Tap Send. Messages opens with the number and text filled in — you press send. Sent ones drop off and the next slides up.</p>
+  <h1>Call queue</h1>
+  <p class="sub">Tap Call. Marks it done and the next slides up. Text is a fallback for the ones that are mobiles.</p>
   <div class="bar">
-    <span class="pill sent"><b id="n-sent">0</b> sent</span>
-    <span class="pill"><b id="n-left">0</b> still to go</span>
+    <span class="pill sent"><b id="n-sent">0</b> done</span>
+    <span class="pill"><b id="n-left">0</b> left to call</span>
   </div>
   <div class="track"><i id="prog"></i></div>
 </header>
+
+<div class="note">
+  <p><b>Call these, don't text them.</b> 39 of 39 texts bounced with "re-send
+  using a valid 10 digit mobile number" — these are landlines, and a landline
+  cannot receive SMS. Your phone shows them as sent; the rejection comes back
+  separately from the carrier.</p>
+  <p><b>Text is still there</b> as the second button, for the few that turn out
+  to be mobiles. If it bounces, call instead — don't retry.</p>
+  <p><b>Price is $297.</b> The page shows $499 crossed to $297. Don't quote $97,
+  and don't mention an "AI booker" — the page claims one but there isn't one.</p>
+</div>
+
+<div class="ask">
+  <b>On the phone, ask for the owner and keep it to 20 seconds:</b>
+  <p style="margin:8px 0 0">"Hey, is the owner around? … Hi, I'm Isiah, I build
+  websites for local businesses. I noticed yall don't have a website, so I went
+  ahead and built one to show you what it'd look like. Can I text or email you
+  the link? Takes ten seconds to look at."</p>
+  <p style="margin:8px 0 0;color:var(--dim)">Getting a mobile number or an email
+  off that call is the whole win. That is the number that can actually receive
+  the link.</p>
+</div>
+
+<div id="list"></div>
+<button class="more" id="more" type="button">Show more</button>
 
 <div class="test">
   <b>Test it first.</b> Sends the real message to your own phone, so you can see
@@ -147,24 +175,6 @@ footer{margin-top:var(--s6);padding-top:var(--s4);border-top:1px solid var(--lin
   </div>
   <p class="test-note" id="test-note"></p>
 </div>
-
-<div class="ask">
-  <b>Biggest first.</b> Every one of these has no website at all and a phone
-  number on their Google listing. Worked in review order, so the businesses with
-  the most to lose from being unfindable come up first.
-</div>
-
-<div class="note">
-  <p><b>Price is $297.</b> The pitch page shows $499 crossed out to $297, so that's
-  what they see while reading you. Don't quote $97.</p>
-  <p><b>Don't repeat the "AI booker" line.</b> It's on the page but there's no booker
-  in it. None of these messages mention it — keep it that way if they ask.</p>
-  <p><b>If they tap "Claim This Site"</b> it emails your dad's inbox, not you. Every
-  message says "reply here" for that reason.</p>
-</div>
-
-<div id="list"></div>
-<button class="more" id="more" type="button">Show more</button>
 
 <footer>
   Sent state is saved on this phone. Salons and barbers: any time. Restaurants: 2–4pm.
@@ -1349,7 +1359,8 @@ function card(b){
     <p class="meta"><span class="stars"></span><span class="rest"></span></p>
     <p class="num"></p>
     <div class="actions">
-      <a class="btn btn-send" href="sms:${dial(b.p)}?&body=${encodeURIComponent(b.m)}">Send</a>
+      <a class="btn btn-call" href="tel:${dial(b.p)}">Call</a>
+      <a class="btn btn-send" href="sms:${dial(b.p)}?&body=${encodeURIComponent(b.m)}">Text</a>
       <button class="btn btn-copy" type="button">Copy</button>
     </div>
     <button class="toggle" type="button">Show message</button>
@@ -1432,7 +1443,7 @@ function syncTest(){
     localStorage.setItem(NUMKEY, numIn.value);
     testA.href = `sms:${digits}?&body=${encodeURIComponent(first.m)}`;
     testA.classList.remove("off");
-    testNote.textContent = `will send you the ${first.n} message`;
+    testNote.textContent = `test message uses ${first.n}`;
   } else {
     testA.removeAttribute("href");
     testA.classList.add("off");

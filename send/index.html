@@ -49,6 +49,9 @@ h1{margin:0 0 var(--s2);font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
   margin-top:var(--s4)}
 .track i{display:block;height:100%;background:var(--go);width:0;
   transition:width .3s ease}
+.hidden-note{margin:var(--s3) 0 0;font-size:.8rem;color:var(--dim)}
+.hidden-note button{background:none;border:0;padding:0;font-family:inherit;
+  font-size:.8rem;color:var(--go);text-decoration:underline;cursor:pointer}
 
 .card{background:var(--card);border:1px solid var(--line);border-radius:10px;
   padding:var(--s4);margin-bottom:var(--s3)}
@@ -142,6 +145,7 @@ footer{margin-top:var(--s6);padding-top:var(--s4);border-top:1px solid var(--lin
     <span class="pill"><b id="n-left">0</b> left to call</span>
   </div>
   <div class="track"><i id="prog"></i></div>
+  <p class="hidden-note" id="hidden-note"></p>
 </header>
 
 <div class="note">
@@ -1208,6 +1212,20 @@ function render(){
     moreB.style.display = hidden > 0 ? "" : "none";
     moreB.textContent = hidden > 0 ? `Show ${Math.min(hidden, 10)} more (${hidden} waiting)` : "";
   }
+
+  const note = document.getElementById("hidden-note");
+  const hiddenCount = BIZ.length - left.length;
+  if (hiddenCount > 0) {
+    note.textContent = `${hiddenCount} hidden because you tapped them earlier. `;
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = "bring them all back";
+    b.onclick = () => {
+      if (confirm("Un-hide all " + hiddenCount + "? Landline bounces stay excluded.")) {
+        sent.clear(); save(); render();
+      }
+    };
+    note.appendChild(b);
+  } else note.textContent = "";
 
   document.getElementById("n-sent").textContent = sent.size;
   document.getElementById("n-left").textContent = left.length;
